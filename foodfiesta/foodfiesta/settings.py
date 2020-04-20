@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     #Restaurant view#
     'accounts',
     'restaurantview.apps.RestaurantviewConfig',
-    'Admin',
+    'adminview',
     
 ]
 

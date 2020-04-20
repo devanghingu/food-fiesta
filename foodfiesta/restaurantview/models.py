@@ -1,5 +1,5 @@
 from django.db import models
-from Admin.models import City,Fooditem,Category
+from adminview.models import City,Fooditem,Category
 from accounts.models import User
 
 class Restaurant(models.Model):
