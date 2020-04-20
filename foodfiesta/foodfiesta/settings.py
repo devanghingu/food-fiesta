@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #Restaurant view#
     'restaurantview.apps.RestaurantviewConfig',
+    'Admin',
 ]
 
 MIDDLEWARE = [
