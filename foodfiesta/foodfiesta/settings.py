@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Restaurant view#
+    'accounts',
     'restaurantview.apps.RestaurantviewConfig',
     'Admin',
+    
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'foodfiesta.urls'
+AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {
