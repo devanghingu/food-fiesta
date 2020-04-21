@@ -50,3 +50,9 @@ class RestaurantDetail(View):
 
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/restaurantdetail.html')
+
+class Customer(View):
+
+    def get(self,request,*args, **kwargs):
+        return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
+        

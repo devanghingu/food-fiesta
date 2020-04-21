@@ -1,6 +1,8 @@
 from django.urls import path
 from django.conf.urls import url
-from restaurantview.views import Home,Profile,Menu,AddFood,FoodDetail,Order,Invoice,Restaurant,EditRestaurant,RestaurantDetail
+from restaurantview.views import (Home,Profile,Menu,AddFood,FoodDetail,Order,
+                                  Invoice,Restaurant,EditRestaurant,RestaurantDetail,
+                                  Customer)
 
 app_name = 'restaurantview'
 urlpatterns = [
@@ -24,7 +26,7 @@ urlpatterns = [
     path('restaurantdetail',RestaurantDetail.as_view(),name='restaurantdetail'),
 
     #customer
-    # path('customer',Customer.as_view(),name='customer')
+    path('customer',Customer.as_view(),name='customer')
 ]
 
 
