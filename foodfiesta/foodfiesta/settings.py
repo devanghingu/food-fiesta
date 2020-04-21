@@ -37,22 +37,27 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'accounts',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-    #Providers
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'django.contrib.sites',
+
+    'restaurantview.apps.RestaurantviewConfig',
+    'accounts.apps.AccountsConfig',
+    'adminview.apps.AdminviewConfig',
+    'cart.apps.CartConfig',
+    'cardview.apps.CardviewConfig',
 ]
 
 AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +70,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'foodfiesta.urls'
+AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
     {
@@ -128,7 +134,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-SITE_ID = 1
 
 LOGIN_REDIRECT_URL="accounts/"
 
