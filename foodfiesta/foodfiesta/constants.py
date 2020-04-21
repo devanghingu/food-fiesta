@@ -38,6 +38,6 @@ ACTIVE   = True
 DEACTIVE = False
 
 ACTIVE_STATUS = (
-    (ACTIVE,'Open'),
-    (DEACTIVE,'Close'),
+    (ACTIVE,'Active'),
+    (DEACTIVE,'Deactive'),
 )
