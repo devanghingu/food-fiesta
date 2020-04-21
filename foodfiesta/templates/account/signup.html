@@ -1,0 +1,91 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block extra_head %}
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'assets/css/icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1></h1>
+<main>
+<div class="bread-crumbs-wrapper">
+  <div class="container">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="" title="" itemprop="url">Home</a></li>
+          <li class="breadcrumb-item active">Login & Register</li>
+      </ol>
+  </div>
+</div>
+
+<section>
+  <div class="block top-padd30">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                  <div class="login-register-wrapper">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                          <div class="sign-popup-wrapper brd-rd5">
+                              <div class="sign-popup-inner brd-rd5">
+                                  <div class="sign-popup-title text-center">
+                                      <h4 itemprop="headline">{% trans "Sign Up" %}</h4>
+                                      <span>with your social network</span>
+                                  </div>
+                                  <div class="popup-social text-center">
+                                      <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                                      <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i> Google</a>
+                                  </div>
+                                  <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
+                                  <form class="sign-form">
+                                      <div class="row">
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <input class="brd-rd3" type="text" placeholder="Username">
+                                          </div>
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <input class="brd-rd3" type="email" placeholder="Email">
+                                          </div>
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <input class="brd-rd3" type="password" placeholder="Password">
+                                          </div>
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
+                                          </div>
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <a class="sign-btn" href="#" title="" itemprop="url">Already Registered? Sign in</a>
+                                              <a class="recover-btn" href="#" title="" itemprop="url">Recover my password</a>
+                                          </div>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</section>
+</main>
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+</form>
+
+{% endblock %}
