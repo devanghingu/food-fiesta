@@ -4,4 +4,5 @@ from django.urls import path,include
 urlpatterns = [
     path('restaurant/',include('restaurantview.urls')),
     path('admin/', admin.site.urls),
+    path('adminview/',include('adminview.urls')),
 ]
