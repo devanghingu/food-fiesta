@@ -1,7 +1,7 @@
 from django.db import models
 from adminview.models import City,Fooditem
 from accounts.models import User
-# Create your models here.
+from foodfiesta.constants import DELIVERY_STATUS,OPEN_STATUS,ACTIVE_STATUS
 
 class Restaurant(models.Model):
     user        = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -11,8 +11,8 @@ class Restaurant(models.Model):
     address     = models.TextField(max_length=255)
     city        = models.ForeignKey(City,on_delete=models.CASCADE)
     contact     = models.CharField(max_length=13)
-    open        = models.BooleanField(default=False)
-    active      = models.BooleanField(default=False)
+    open        = models.BooleanField(choices=OPEN_STATUS,default=False)
+    active      = models.BooleanField(choices=ACTIVE_STATUS,default=False)
     pic         = models.ImageField(upload_to='restaurant/')
 
     def __str__(self):
@@ -30,7 +30,7 @@ class Menu(models.Model):
 class Delivery(models.Model):
     user       = models.OneToOneField(User,on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete=models.CASCADE)
-    status     = models.BooleanField(default=False)
+    status     = models.BooleanField(choices=DELIVERY_STATUS,default=False)
 
     def __str__(self):
         return self.user
