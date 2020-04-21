@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from restaurantview.views import Home,Profile,Menu,AddFood,FoodDetail,Order,Invoice
+from restaurantview.views import Home,Profile,Menu,AddFood,FoodDetail,Order,Invoice,Restaurant,EditRestaurant,RestaurantDetail
 
 app_name = 'restaurantview'
 urlpatterns = [
@@ -17,6 +17,15 @@ urlpatterns = [
 
     #invoice 
     path('invoice',Invoice.as_view(),name='invoice'),
+
+    #restaurant
+    path('restaurant',Restaurant.as_view(),name='restaurant'),
+    path('editrestaurant',EditRestaurant.as_view(),name='editrestaurant'),
+    path('restaurantdetail',RestaurantDetail.as_view(),name='restaurantdetail'),
+
+    #customer
+    # path('customer',Customer.as_view(),name='customer')
 ]
+
 
 

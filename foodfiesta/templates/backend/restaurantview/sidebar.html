@@ -3,7 +3,7 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="index.html"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:home' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
@@ -40,9 +40,9 @@
         </a>
         <ul id="restaurant" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
-          <li> <a href="pages/product/restaurantlist.html">Restaurants List</a> </li>
-          <li> <a href="pages/product/addrestaurant.html">Add Restaurant</a> </li>
-          <li> <a href="pages/product/restaurantdetail.html">Restaurant Detail</a> </li>
+          <li> <a href="{% url 'restaurantview:restaurant' %}">Restaurants List</a> </li>
+          <li> <a href="{% url 'restaurantview:editrestaurant' %}">Edit Restaurant</a> </li>
+          <li> <a href="{% url 'restaurantview:restaurantdetail' %}">Restaurant Detail</a> </li>
         </ul>
       </li>
       <!-- restaurants end -->

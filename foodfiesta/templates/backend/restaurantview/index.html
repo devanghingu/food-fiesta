@@ -1,6 +1,13 @@
 {% extends 'backend/restaurantview/base.html' %}
 
 {% load static %}
+
+
+{% block psstyle %}
+  <link href="{% static 'backend/restaurantview/assets/css/slick.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/restaurantview/assets/css/datatables.min.css' %}" rel="stylesheet">
+{% endblock psstyle %}
+  
 {% block main %}
 
 <!-- Main Content -->
