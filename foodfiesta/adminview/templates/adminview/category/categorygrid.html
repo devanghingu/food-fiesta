@@ -1,0 +1,52 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+<div class="ms-content-wrapper">
+
+    <div class="row">
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb" class="new">
+          <ol class="breadcrumb pl-0">
+            <li class="breadcrumb-item"><a href="{% url 'adminview:adminview_home' %}"><i class="material-icons">home</i> Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Category Grid</li>
+          </ol>
+        </nav>
+        
+        
+            
+        {% if object_list %}
+          <div class="row">
+            {% for cat in object_list  %}
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <div class="ms-card">
+                  <div class="ms-card-img">
+                    <img src="{{ cat.pic.url }}" alt="card_img">
+                  </div>
+                  <div class="ms-card-body">
+
+                    <div class="new">
+                      <h6 class="mb-0">{{ cat.name }} </h6>
+                    </div>
+                    <p style="width: 200px; height: 170px;">{{ cat.description }}</p>
+                    <div class="new mb-0">
+                      <a class="btn grid-btn mt-0 btn-sm btn-success" href="{{ cat.get_absolute_url }}">View</a>
+                      <a class="btn grid-btn mt-0 btn-sm btn-secondary" href="{% url 'adminview:category_update' pk=cat.pk %}">Edit</a>
+                      <a class="btn grid-btn mt-0 btn-sm btn-primary" href="{% url 'adminview:category_delete' pk=cat.pk %}">Delete</a>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              </div>
+              {% endif %}
+              </div>
+              
+              
+            </div>
+    </div>
+        
+
+{% endblock content %}
+    
