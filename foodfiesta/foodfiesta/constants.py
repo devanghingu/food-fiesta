@@ -6,7 +6,7 @@ ACCEPTED  = 1
 REJECTED  = 2
 DELIVERED = 3
 
-ORDER_STATES =(
+ORDER_STATUS =(
     
     (PENDING,'Pending'),
     (ACCEPTED,'Accepted'),
