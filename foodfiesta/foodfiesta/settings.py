@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'cart.apps.CartConfig',
+    'userrestaurnt.apps.UserrestaurntConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

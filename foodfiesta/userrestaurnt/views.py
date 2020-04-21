@@ -6,3 +6,10 @@ class cart(View):
         return render(request,'frontend/user_cart.html')
     def post(self,request,*args, **kwargs):
         pass
+
+class restaurant(View):
+    def get(self,request,*args, **kwargs):
+        return render(request,'frontend/user_restaurant.html')
+
+    def post(self,request,*args, **kwargs):
+        pass
