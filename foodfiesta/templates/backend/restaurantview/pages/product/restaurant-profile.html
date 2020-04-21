@@ -1,0 +1,87 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+<main class="body-content">
+
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+
+  <!-- Body Content Wrapper -->
+  <div class="ms-content-wrapper">
+
+    <div class="ms-profile-overview">
+      <div class="ms-profile-cover">
+        <img class="ms-profile-img" src="{% static 'backend/restaurantview/assets/img/costic/customer-5.jpg' %}" alt="people">
+        <div class="ms-profile-user-info">
+          <h4 class="ms-profile-username text-white">Chihoo Hwang</h4>
+          <h2 class="ms-profile-role">Professional Cheff</h2>
+        </div>
+      </div>
+      <ul class="ms-profile-navigation nav nav-tabs tabs-bordered" role="tablist">
+        <li role="presentation"><a href="#tab1" aria-controls="tab1" class="active show" role="tab" data-toggle="tab"> Overview </a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <div class="col-xl-7 col-md-12">
+        <div class="ms-panel ms-panel-fh">
+          <div class="ms-panel-body">
+            <h2 class="section-title">About Me</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
+            </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
+            </p>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xl-5 col-md-12">
+        <div class="ms-panel ms-panel-fh">
+          <div class="ms-panel-body">
+            <h2 class="section-title">Basic Information</h2>
+            <table class="table ms-profile-information">
+              <tbody>
+                <tr>
+                  <th scope="row">Full Name</th>
+                  <td>Chihoo Hwang</td>
+                </tr>
+                <tr>
+                  <th scope="row">Birthday</th>
+                  <td>January 25th, 1996</td>
+                </tr>
+                <tr>
+                  <th scope="row">Language</th>
+                  <td>English (US)</td>
+                </tr>
+                <tr>
+                  <th scope="row">Website</th>
+                  <td>www.example.com</td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number</th>
+                  <td>+123 456 789</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email Address</th>
+                  <td>example@mail.com</td>
+                </tr>
+                <tr>
+                  <th scope="row">Location</th>
+                  <td>New York, USA</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+  {% endblock main%}
