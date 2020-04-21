@@ -1,3 +1,6 @@
 from django.contrib import admin
+from restaurantview.models import Restaurant,Menu,Delivery
 
-# Register your models here.
+admin.site.register(Restaurant)
+admin.site.register(Menu)
+admin.site.register(Delivery)
