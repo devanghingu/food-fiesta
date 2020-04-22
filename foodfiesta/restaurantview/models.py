@@ -25,7 +25,7 @@ class Menu(models.Model):
     available   = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.id)
+        return self.fooditem.name
 
 class Delivery(models.Model):
     user       = models.OneToOneField(User,on_delete=models.CASCADE)
@@ -33,4 +33,4 @@ class Delivery(models.Model):
     status     = models.BooleanField(choices=DELIVERY_STATUS,default=False)
 
     def __str__(self):
-        return self.user
+        return self.user.username
