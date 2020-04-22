@@ -58,7 +58,11 @@
                         </select>
                     </div>
                     <div class="topbar-register">
-                        <a class="" href="accounts/login" title="Login" itemprop="url">LOGIN</a> / <a class="" href="accounts/signup" title="Register" itemprop="url">REGISTER</a>
+                        {% if not user.is_authenticated %}
+                            <a class="" href="accounts/login" title="Login" itemprop="url">LOGIN</a> / <a class="" href="accounts/signup" title="Register" itemprop="url">REGISTER</a>
+                        {%else%}
+                            <a class="" href="accounts/logout" title="Login" itemprop="url">LOGOUT</a>
+                        {%endif%}
                     </div>
                     <div class="social1">
                         <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
