@@ -1,10 +1,9 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
-from accounts.models import User, Address
-from restaurantview.models import Restaurant
+from accounts.models import User
+from restaurantview.models import Restaurant, Delivery
 from adminview.models import Fooditem
+from accounts.models import Address
+from foodfiesta.constants import ORDER_STATUS
 
 
 class Order(models.Model):
@@ -12,13 +11,12 @@ class Order(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    total_price = models.PositiveIntegerField(default=0)
-    status = models.SmallIntegerField(default=0)
-    # delivery=models.OneToOneField(,on_delete=models.CASCADE)
-    delivery_status = models.BooleanField(default=False)
+    total_price = models.PositiveIntegerField()
+    status = models.SmallIntegerField(choices=ORDER_STATUS)
+    delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.user) + ' ' + str(self.restaurant) + str(self.total_price)
+        return self.restaurant
 
 
 class Orderitem(models.Model):
@@ -28,4 +26,4 @@ class Orderitem(models.Model):
     price = models.PositiveIntegerField()
 
     def __str__(self):
-        return str(self.order) + str(self.food)
+        return self.id

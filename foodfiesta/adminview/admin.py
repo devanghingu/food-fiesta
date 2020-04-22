@@ -1,8 +1,6 @@
 from django.contrib import admin
+from adminview.models import Fooditem,Category,City
 
-# Register your models here.
-from .models import City, Category, Fooditem
-
-admin.site.register(City)
-admin.site.register(Category)
 admin.site.register(Fooditem)
+admin.site.register(Category)
+admin.site.register(City)
