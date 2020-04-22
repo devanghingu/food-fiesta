@@ -70,6 +70,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'foodfiesta.urls'
+
 AUTH_USER_MODEL = 'accounts.User'
 
 TEMPLATES = [
@@ -135,14 +136,22 @@ USE_L10N = True
 USE_TZ = True
 
 
-LOGIN_REDIRECT_URL="accounts/"
+
+
+LOGIN_REDIRECT_URL="/"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'accounts.forms.SignupForm'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # static_root="" # Will use in production and live Env
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

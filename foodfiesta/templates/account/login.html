@@ -1,18 +1,83 @@
 {% extends "account/base.html" %}
 {% load i18n %}
+{% load static%}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
+{% block extra_head %}
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'assets/css/icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+{% endblock %}
+
+{% block body %}
+
 {% block content %}
+<main>
+<section>
+  <div class="block top-padd30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12">
+                <div class="login-register-wrapper">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <div class="sign-popup-wrapper brd-rd5">
+                                <div class="sign-popup-inner brd-rd5">
+                                    <div class="sign-popup-title text-center">
+                                        <h4 itemprop="headline">{% trans "Sign In" %}</h4>
+                                        <span>with your social network</span>
+                                    </div>
+                                    <div class="popup-social text-center">
+                                        <!-- <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a> -->
+                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                    </div>
+                                    <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
+                                    <form class="sign-form login" method="POST" action="{% url 'account_login' %}">
+                                      {% csrf_token %}
+                                        <div class="row">
+                                          {% for field in form %}
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                            {{field}}
+                                          </div>
+                                          {% endfor %}
+                                          {% if redirect_field_value %}
+                                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                          {% endif %}
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <button class="red-bg brd-rd3 primaryAction" type="submit">{% trans "SIGN IN" %}</button>
+                                          </div>
+                                          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                              <a class="sign-btn" href="{{ signup_url }}" title="" itemprop="url">Not a member? Sign up</a>
+                                              <a class="recover-btn secondaryAction" href="{% url 'account_reset_password' %}" title="" itemprop="url">{% trans "Forgot Password?" %}</a>
+                                          </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+  </section>
 
-<div class="container">
+</main>
 
-<div class="col-sm-6 col-sm-offset-3 text-center">
 
-<h1>{% trans "Sign In" %}</h1>
 
-{% get_providers as socialaccount_providers %}
+
+
+<!-- <h1>{% trans "Sign In" %}</h1> -->
+
+<!-- {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
@@ -45,10 +110,9 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   {% endif %}
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
-</form>
+</form> -->
 
-</div>
-
-</div>
 
 {% endblock %}
+{% endblock %}
+

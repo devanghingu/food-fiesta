@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from adminview.models import City
 
 class User(AbstractUser):
-    profile=models.ImageField(upload_to='profile/')
+    profile=models.ImageField(upload_to='profile/',default='profile/user_default.jpg')
 
     def __str__(self):
         return self.username
