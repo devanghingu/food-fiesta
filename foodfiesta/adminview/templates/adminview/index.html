@@ -60,12 +60,12 @@
       <!-- category -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#category" aria-expanded="false" aria-controls="product">
-             <span><i class="fa fa-archive fs-16"></i>Categoies </span>
+             <span><i class="fa fa-archive fs-16"></i>Categories </span>
          </a>
         <ul id="category" class="collapse" aria-labelledby="category" data-parent="#side-nav-accordion">
             
-              <li> <a href="{% url 'adminview:allcategory' %}">Categories Grid</a> </li>
-              <li> <a href="{% url 'adminview:category_create' %}">Add category Item</a> </li>
+              <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allcategory' %}">&nbsp;&nbsp;Categories Grid</a> </li>
+              <li><a class="fa fa-plus-circle fs-16" href="{% url 'adminview:category_create' %}">&nbsp;&nbsp; Add category Item</a></li>
               
         </ul>
       </li>
@@ -78,8 +78,8 @@
            </a>
           <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
               
-                <li> <a href="{% url 'adminview:allfooditem' %}">Food Items Grid</a> </li>
-                <li> <a href="{% url 'adminview:fooditem_create' %}">Add Food Item</a> </li>
+                <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allfooditem' %}">&nbsp;&nbsp;Food Items Grid</a> </li>
+                <li> <a class="fa fa-plus-circle fs-16" href="{% url 'adminview:fooditem_create' %}">&nbsp;&nbsp; Add Food Item</a> </li>
                 
           </ul>
       </li>
@@ -124,9 +124,8 @@
                     <span><i class="fa fa-archive fs-16"></i>Citys </span>
                 </a>
                 <ul id="city" class="collapse" aria-labelledby="city" data-parent="#side-nav-accordion">
-                      <li> <a href="#">Citys Grid</a> </li>
-                      <li> <a href="#">Add city Item</a> </li>
-                      <li> <a href="#">city Detail</a> </li>
+                      <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allcity' %}">&nbsp;&nbsp; Citys List</a> </li>
+                      <li> <a class="fa fa-plus-circle fs-16" href="{% url 'adminview:city_create' %}">&nbsp;&nbsp; Add City</a> </li>
                 </ul>
               </li>
             <!-- category end --> 

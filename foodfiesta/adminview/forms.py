@@ -21,3 +21,12 @@ class FoodItemCreateForm(forms.ModelForm):
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'FoodItem Description'}),
             'pic' : forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image Of Fooditem'}),
         }
+        
+class CityCreateForm(forms.ModelForm):
+    class Meta:
+        model = City
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City name'}),
+            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City Description'}),
+        }

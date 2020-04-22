@@ -18,4 +18,10 @@ urlpatterns = [
     path('fooditem/<int:pk>/delete',views.FoodItemDelete.as_view(),name='fooditem_delete'),
     path('fooditemlist/',views.FoodItemList.as_view(),name='allfooditem'),
     path('fooditem/create/',views.FoodItemCreate.as_view(),name='fooditem_create'),
+    #City
+    path('citylist/',views.CityList.as_view(),name='allcity'),
+    path('city/create/',views.CityCreate.as_view(),name='city_create'),
+    path('city/<int:pk>/update',views.CityUpdate.as_view(),name='city_update'),
+    path('city/<int:pk>/delete',views.CityDelete.as_view(),name='city_delete'),
+
 ]

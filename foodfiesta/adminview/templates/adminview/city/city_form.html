@@ -9,8 +9,8 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-arrow has-gap has-bg">
             <li class="breadcrumb-item"><a href="{% url 'adminview:adminview_home' %}"><i class="material-icons">home</i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'adminview:allfooditem' %}">FoodItem Grid</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Add FoodItem</li>
+            <li class="breadcrumb-item"><a href="{% url 'adminview:allcity' %}">City List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add City</li>
           </ol>
         </nav>
 
@@ -32,7 +32,7 @@
         <div class="ms-panel">
           <div class="ms-panel-header">
             <center>
-            <h6>Add Fooditem</h6>
+            <h6>Add City</h6>
         </center>
           </div>
           <div class="ms-panel-body">
@@ -51,7 +51,7 @@
             </div>
             {% endfor %}
 
-            <button class="btn btn-primary mt-4 d-block w-100" type="submit">Create FoodItem</button>
+            <button class="btn btn-primary mt-4 d-block w-100" type="submit">Create City</button>
         </div>
         </form>
         </div>

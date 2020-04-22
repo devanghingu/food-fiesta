@@ -24,6 +24,9 @@ class FoodItemDetail(DetailView):
     model = Fooditem
     template_name = 'adminview/fooditem/fooditem_detail.html'
 
+class CityList(ListView):
+    model = City
+    template_name = 'adminview/city/citylist.html'
 
 
 #Category CRUD
@@ -64,3 +67,24 @@ class FoodItemDelete(DeleteView):
     template_name = 'adminview/fooditem/fooditem_confirm_delete.html'
     def get_success_url(self):
             return reverse('adminview:allfooditem')
+
+#FoodItem CRUD
+class CityCreate(CreateView):
+    model = City
+    form_class = CityCreateForm
+    template_name = 'adminview/city/city_form.html'
+    def get_success_url(self):
+            return reverse('adminview:allcity')
+
+class CityUpdate(UpdateView):
+    model = City
+    form_class = CityCreateForm
+    template_name = 'adminview/city/city_update.html'
+    def get_success_url(self):
+            return reverse('adminview:allcity')
+
+class CityDelete(DeleteView):
+    model = City
+    template_name = 'adminview/city/city_confirm_delete.html'
+    def get_success_url(self):
+            return reverse('adminview:allcity')

@@ -1,0 +1,49 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+    
+    {% if object_list %}
+        
+    
+        
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+        <center><h6>City List</h6></center>
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">City Name</th>
+                <th scope="col">Edit / Delete</th>
+
+              </tr>
+            </thead>
+            
+            {% for city in object_list %}
+                
+            
+                
+            <tbody>
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td><b>{{ city.name }}</b></td>
+                <td><b>
+                    <a href="{% url 'adminview:city_update' pk=city.pk %}"><i class='fas fa-pencil-alt text-secondary'></i></a>&nbsp;&nbsp;
+                    <a href="{% url 'adminview:city_delete' pk=city.pk %}"><i class='far fa-trash-alt ms-text-danger'></i></a></td>
+              </tr>
+    </tbody>
+    {% endfor %}
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    {% endif %}
+{% endblock content %}
+    
