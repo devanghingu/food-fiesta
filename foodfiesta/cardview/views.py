@@ -9,8 +9,11 @@ from restaurantview.models import Restaurant
 class RestaurantList(View):
     def get(self, request, *args, **kwargs):
         res_list = Restaurant.objects.all()
-        return render(request, 'frontend/cardview/restaurantlist.html',{'res_list':res_list})
+        count=res_list.count()
+        return render(request, 'frontend/cardview/restaurantlist.html',{'res_list':res_list,'count':count})
 
     def post(self, request):
-        searchinput = request.POST.get('')
-
+        searchinput = request.POST.get('inputcity').strip()
+        res_list= Restaurant.objects.filter(city__name__icontains=searchinput)
+        count=res_list.count()
+        return render(request, 'frontend/cardview/restaurantlist.html', {'res_list': res_list,'count':count})
