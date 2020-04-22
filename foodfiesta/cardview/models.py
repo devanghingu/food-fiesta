@@ -3,7 +3,7 @@ from accounts.models import User
 from restaurantview.models import Restaurant,Delivery
 from adminview.models import Fooditem
 from accounts.models import Address
-from foodfiesta.constants import ORDER_STATES
+from foodfiesta.constants import ORDER_STATUS
 
 class Order(models.Model):
     user            = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -11,7 +11,7 @@ class Order(models.Model):
     address         = models.ForeignKey(Address,on_delete=models.CASCADE)
     date            = models.DateTimeField()
     total_price     = models.PositiveIntegerField()
-    status          = models.SmallIntegerField(choices=ORDER_STATES)
+    status          = models.SmallIntegerField(choices=ORDER_STATUS)
     delivery        = models.ForeignKey(Delivery,on_delete=models.CASCADE)
 
     def __str__(self):

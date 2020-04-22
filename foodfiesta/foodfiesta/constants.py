@@ -6,7 +6,7 @@ ACCEPTED  = 1
 REJECTED  = 2
 DELIVERED = 3
 
-ORDER_STATES =(
+ORDER_STATUS =(
     
     (PENDING,'Pending'),
     (ACCEPTED,'Accepted'),
@@ -38,6 +38,6 @@ ACTIVE   = True
 DEACTIVE = False
 
 ACTIVE_STATUS = (
-    (ACTIVE,'Open'),
-    (DEACTIVE,'Close'),
+    (ACTIVE,'Active'),
+    (DEACTIVE,'Deactive'),
 )
