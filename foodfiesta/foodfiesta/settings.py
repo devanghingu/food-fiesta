@@ -38,13 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cardview',
-    'accounts',
-
-    #Restaurant view#
-    'accounts',
     'restaurantview.apps.RestaurantviewConfig',
     'adminview',
-
+    'cart',
+    'accounts',
 ]
 
 MIDDLEWARE = [
