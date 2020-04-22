@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from adminview.models import City
 
 class User(AbstractUser):
-    profile=models.ImageField(upload_to='profile/')
+    profile=models.ImageField(upload_to='profile/',blank=True,null=True)
 
     def __str__(self):
         return self.username
@@ -17,7 +17,7 @@ class Address(models.Model):
     contact = models.CharField(max_length=13)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     
 
