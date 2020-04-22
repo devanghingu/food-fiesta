@@ -8,7 +8,7 @@ from restaurantview.models import Restaurant
 
 class RestaurantList(View):
     def get(self, request, *args, **kwargs):
-        # res_list = Restaurant.objects.all()
+        res_list = Restaurant.objects.all()
         return render(request, 'frontend/cardview/restaurantlist.html',{'res_list':res_list})
 
     def post(self, request):
