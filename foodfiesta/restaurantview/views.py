@@ -55,4 +55,9 @@ class Customer(View):
 
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
+
+class Delivery(View):
+
+    def get(self,request,*args, **kwargs):
+        return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
         
