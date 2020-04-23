@@ -10,7 +10,7 @@
                     <form class="restaurant-search-form brd-rd2" method="post" action="{% url 'cardview:res-list' %}">{% csrf_token %}
                         <div class="row mrg10">
                             <div class="col-md-6 col-sm-5 col-lg-5 col-xs-12">
-                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text" placeholder="Restaurant Name"></div>
+                                <div class="input-field brd-rd2"><input class="brd-rd2" type="text" placeholder="Restaurant Name" name="inputres"></div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-lg-4 col-xs-12">
                                 <div class="input-field brd-rd2"><i class="fa fa-map-marker"></i><input class="brd-rd2" type="text" placeholder="Search city" name="inputcity"><i class="fa fa-location-arrow"></i></div>
@@ -90,9 +90,9 @@
                                     <div class="col-md-9 col-sm-12 col-lg-9">
                                         <div class="title2-wrapper">
                                             {% if page_obj %}
-                                            <h3 class="marginb-0" itemprop="headline">Restaurant's Found {{count}}</h3>
+                                            <h3 class="marginb-0" itemprop="headline">Restaurant's Found {{count}}{% if searchinput %} for {{searchinput}}{% endif %}</h3>
                                             {% else %}
-                                            <h3 class="marginb-0" itemprop="headline">No Restaurants found.</h3>
+                                            <h3 class="marginb-0" itemprop="headline">No Restaurants found{% if searchinput %} for {{searchinput}}{% endif %}.</h3>
                                             {% endif %}
                                         </div>
                                         <div class="remove-ext">
