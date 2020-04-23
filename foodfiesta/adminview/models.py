@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from foodfiesta.constants import REQUEST_STATUS
-from restaurantview.models import Restaurant
 
 class City(models.Model):
     name        = models.CharField(max_length=255)
@@ -33,3 +32,11 @@ class Fooditem(models.Model):
     def get_absolute_url(self):
         return reverse("adminview:fooditem_detail", kwargs={"pk": self.pk})
     
+class CancelRestaurantRequest(models.Model):
+    restaurant = models.ForeignKey('restaurantview.Restaurant',on_delete=models.CASCADE)
+    reason = models.TextField(blank=True,null=True)
+    status = models.SmallIntegerField(choices=REQUEST_STATUS)
+
+    def __str__(self):
+        return str(self.restaurant.name) + " :- " + str(self.status)
+
