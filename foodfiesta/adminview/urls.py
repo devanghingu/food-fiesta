@@ -23,5 +23,9 @@ urlpatterns = [
     path('city/create/',views.CityCreate.as_view(),name='city_create'),
     path('city/<int:pk>/update',views.CityUpdate.as_view(),name='city_update'),
     path('city/<int:pk>/delete',views.CityDelete.as_view(),name='city_delete'),
+    #Restaurant
+    path('restaurantlist/',views.RestaurantList.as_view(),name='allrestaurant'),
+    path('restaurant/<int:id>/acceptrequest',views.Acceptrequest.as_view(),name='acceptrequest'),
+    path('restaurant<int:id>/deleterequest',views.Deleterequest.as_view(),name='deleterequest'),    
 
 ]

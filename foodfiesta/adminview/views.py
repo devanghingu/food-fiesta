@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import *
+from django.views import View
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import UpdateView,CreateView,DeleteView
 from .forms import *
+from restaurantview.models import Restaurant
+from django.http import HttpResponse
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -29,6 +33,10 @@ class CityList(ListView):
     template_name = 'adminview/city/citylist.html'
 
 
+class RestaurantList(ListView):
+    model = Restaurant
+    template_name = 'adminview/restaurant/restaurantlist.html'
+
 #Category CRUD
 class CategoryCreate(CreateView):
     model = Category
@@ -47,6 +55,28 @@ class CategoryDelete(DeleteView):
     template_name = 'adminview/category/category_confirm_delete.html'
     def get_success_url(self):
             return reverse('adminview:allcategory')
+
+#Restaurant
+class Acceptrequest(View):
+    def get(self,request,*args,**kwargs):
+        id = kwargs['id']
+        restaurant = get_object_or_404(Restaurant,id=id)
+        if restaurant.active == False:
+            restaurant.active = True
+            restaurant.save()
+            messages.success(request,'Restaurant Activated')
+            print("Activated")
+        else:
+            restaurant.active = False
+            restaurant.save()
+            print("DeActivated")
+            messages.success(request,'Restaurant DeActivated')
+        return render(request,'adminview/index.html')
+
+class Deleterequest(View):
+    pass
+
+
 
 
 #FoodItem CRUD

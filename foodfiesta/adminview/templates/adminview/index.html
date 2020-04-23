@@ -94,11 +94,13 @@
       <!-- orders end -->
 
     <!-- restaurants -->
-  <li class="menu-item">
-                      <a href="#">
+                    <li class="menu-item">
+                      <a href="{% url 'adminview:allrestaurant' %}">
                         <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
                       </a>
                     </li>
+                    
+  
             <!-- restaurants end -->
 
             <!-- customers-->
@@ -192,7 +194,21 @@
         </div>
         
         <!-- Food Orders -->
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+
+        <div class="alert alert-success alert-outline " role="alert">
+          <i class="flaticon-tick-inside-circle"></i><strong>{{ message }} !</strong>
+        </div>
         
+        
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
         {% block content %}
           
         

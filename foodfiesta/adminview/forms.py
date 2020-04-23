@@ -8,7 +8,7 @@ class CategoryCreateForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Category Name'}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Category Description'}),
-            'pic' : forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image Of Category'}),
+            'pic': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
         }
 
 class FoodItemCreateForm(forms.ModelForm):
@@ -21,7 +21,7 @@ class FoodItemCreateForm(forms.ModelForm):
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'FoodItem Description'}),
             'pic' : forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image Of Fooditem'}),
         }
-        
+
 class CityCreateForm(forms.ModelForm):
     class Meta:
         model = City

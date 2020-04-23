@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
-
+from foodfiesta.constants import REQUEST_STATUS
+from restaurantview.models import Restaurant
 
 class City(models.Model):
     name        = models.CharField(max_length=255)
@@ -32,3 +32,4 @@ class Fooditem(models.Model):
         return self.name
     def get_absolute_url(self):
         return reverse("adminview:fooditem_detail", kwargs={"pk": self.pk})
+    
