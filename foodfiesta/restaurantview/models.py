@@ -2,6 +2,7 @@ from django.db import models
 from adminview.models import City,Fooditem
 from accounts.models import User
 from foodfiesta.constants import DELIVERY_STATUS,OPEN_STATUS,ACTIVE_STATUS
+from django.urls import reverse
 
 class Restaurant(models.Model):
     user        = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -25,7 +26,7 @@ class Menu(models.Model):
     available   = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.fooditem.name
+        return self.fooditem.name    
 
 class Delivery(models.Model):
     user       = models.OneToOneField(User,on_delete=models.CASCADE)
