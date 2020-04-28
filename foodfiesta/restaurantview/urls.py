@@ -1,8 +1,10 @@
 from django.urls import path
 from django.conf.urls import url
 from restaurantview.views import (Home,Profile,Order,Invoice,
-                                MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,EditFoodDeleteView,
-                                RestaurantList,EditRestaurantUpdateView,RestaurantDetail,
+                                MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,
+                                EditFoodDeleteView,AddFoodItemCreateView,
+                                AddRestaurantCreateView,DeleteRestaurantDeleteView,
+                                RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
                                 Customer,Delivery)
 
 app_name = 'restaurantview'
@@ -17,6 +19,9 @@ urlpatterns = [
     path('<int:pk>/editfood',EditFoodDeleteView.as_view(),name='editfood'),
     path('<int:pk>/deletefood',DeleteFoodDeleteView.as_view(),name='deletefood'),
 
+    #add FoodItem
+    path('addfooditem',AddFoodItemCreateView.as_view(),name='addfooditem'),
+
     #order
     path('order',Order.as_view(),name='order'),
 
@@ -25,8 +30,11 @@ urlpatterns = [
 
     #restaurant
     path('restaurant',RestaurantList.as_view(),name='restaurant'),
-    path('editrestaurant',EditRestaurantUpdateView.as_view(),name='editrestaurant'),
-    path('restaurantdetail',RestaurantDetail.as_view(),name='restaurantdetail'),
+    path('addrestaurant',AddRestaurantCreateView.as_view(),name='addrestaurant'),
+    path('<int:pk>/editrestaurant',EditRestaurantUpdateView.as_view(),name='editrestaurant'),
+    path('<int:pk>/deleterestaurant',DeleteRestaurantDeleteView.as_view(),name='deleterestaurant'),
+    path('<int:pk>/restaurantdetail',ResturantDetailView.as_view(),name='restaurantdetail'),
+    path('status',ChangeStatus.as_view(),name='status'),
 
     #customer
     path('customer',Customer.as_view(),name='customer'),

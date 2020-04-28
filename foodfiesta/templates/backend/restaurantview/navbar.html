@@ -21,13 +21,17 @@
           </div>
         </form>
       </li>
-
       <li class="ms-nav-item ms-nav-user dropdown">
-        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
-            class="ms-user-img ms-img-round float-right" src="{% static 'backend/restaurantview/assets/img/costic/customer-6.jpg' %}" alt="people"> </a>
+        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
+          {% if user.profile %}
+            <img class="ms-user-img ms-img-round float-right" src="{{ user.profile.url }}" alt="people">
+          {% else %}
+            <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/restaurantview/assets/img/costic/customer-6.jpg' %}" alt="people">
+          {% endif %} 
+        </a>
         <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
           <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ user.first_name|title }} {{ user.last_name|title }}</span></h6>
           </li>
           <li class="dropdown-divider"></li>
           <li class="ms-dropdown-list">

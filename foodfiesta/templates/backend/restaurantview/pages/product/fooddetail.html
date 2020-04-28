@@ -67,8 +67,8 @@
                 </tbody>
               </table>
               <div class="new">
-                <button type="button" class="btn btn-primary">Edit</button>
-                <button type="button" class="btn btn-secondary">Delete</button>
+                <a href="{% url 'restaurantview:deletefood'  object.id %}" class="btn btn-primary">Remove</a>
+                <a href="{% url 'restaurantview:editfood'  object.id %}" class="btn btn-secondary">Edit</a>
               </div>
 
             </div>

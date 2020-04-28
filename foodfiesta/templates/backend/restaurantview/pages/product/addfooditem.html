@@ -23,7 +23,8 @@
         <div class="col-xl-12 col-md-12">
           <div class="ms-panel ms-panel-fh">
             <div class="ms-panel-header">
-              <h6>Edit Food Form</h6>
+              <h6>Add Food Form <a class="badge badge-secondary" href="#" style="float:right;">Add New Food Item</a></h6>
+              
             </div>
             <div class="ms-panel-body">
               <!-- <form class="needs-validation clearfix" novalidate>
@@ -96,10 +97,10 @@
 
 
               </form> -->
-              <form method="POST" class='needs-validation clearfix'>
+              <form method="POST" class='needs-validation clearfix' enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-secondary d-block" type="submit">Update</button>
+                <button class="btn btn-secondary d-block" type="submit">Add</button>
               </form>
             </div>
           </div>

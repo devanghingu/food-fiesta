@@ -8,7 +8,7 @@
   <!-- Navigation Bar -->
   {% include 'backend/restaurantview/navbar.html'%}
   
-
+{% if object_list|length > 0 %}
     <!-- Body Content Wrapper -->
     <div class="ms-content-wrapper">
 
@@ -54,5 +54,19 @@
     </div>
 
     {% include 'backend/restaurantview/pagination.html'%}
+
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              In You <strong>Restaurant</strong> There is Not ant Menu Or Food 
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </main>
-{% endblock main%}
+
+  {% endblock main %}

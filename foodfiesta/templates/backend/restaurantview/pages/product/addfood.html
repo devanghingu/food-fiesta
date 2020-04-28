@@ -13,6 +13,7 @@
       <div class="row">
 
         <div class="col-md-12">
+          {% include 'backend/restaurantview/message.html'%}
           <!-- <div class="alert alert-success" role="alert">
             <strong>Well done!</strong> You successfully read this important alert message.
           </div> -->
@@ -23,7 +24,8 @@
         <div class="col-xl-12 col-md-12">
           <div class="ms-panel ms-panel-fh">
             <div class="ms-panel-header">
-              <h6>Add Food Form</h6>
+              <h6>Add Food Form <a class="badge badge-secondary" href="{% url 'restaurantview:addfooditem' %}" style="float:right;">Add New Food Item</a></h6>
+              
             </div>
             <div class="ms-panel-body">
               <!-- <form class="needs-validation clearfix" novalidate>
