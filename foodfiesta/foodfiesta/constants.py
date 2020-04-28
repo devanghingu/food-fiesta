@@ -41,3 +41,10 @@ ACTIVE_STATUS = (
     (ACTIVE,'Active'),
     (DEACTIVE,'Deactive'),
 )
+
+REQUEST_STATUS =(
+    
+    (PENDING,'Pending'),
+    (ACCEPTED,'Accepted'),
+    (REJECTED,'Rejected'),
+    ) 
