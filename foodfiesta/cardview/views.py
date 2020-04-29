@@ -1,11 +1,14 @@
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
-
+import json
 # Create your views here.
 from django.views import View
 
 from restaurantview.models import Restaurant
+
+from adminview.models import City
 
 
 class RestaurantList(View):
@@ -15,22 +18,23 @@ class RestaurantList(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         count = res_list.count()
-        return render(request, 'frontend/cardview/restaurantlist.html', {'page_obj': page_obj,'count':count})
+        return render(request, 'frontend/cardview/restaurantlist.html', {'page_obj': page_obj, 'count': count})
 
     def post(self, request):
         searchcity = request.POST.get('inputcity')
         searchres = request.POST.get('inputres')
-        check_res=Restaurant.objects.all()
+        check_res = Restaurant.objects.all()
         if check_res.count() > 1:
             if searchcity and not searchres:
-                searchinput = "'"+searchcity+"'"
+                searchinput = "'" + searchcity + "'"
                 res_list = Restaurant.objects.filter(city__name__icontains=searchcity.strip())
             elif searchres and not searchcity:
-                searchinput = "'" + searchres+"'"
+                searchinput = "'" + searchres + "'"
                 res_list = Restaurant.objects.filter(name__icontains=searchres.strip())
             elif searchres and searchcity:
-                searchinput = "'"+searchcity+"'"+' '+"'"+searchres+"'"
-                res_list = Restaurant.objects.filter(name__icontains=searchres.strip(), city__name__icontains=searchcity.strip())
+                searchinput = "'" + searchcity + "'" + ' ' + "'" + searchres + "'"
+                res_list = Restaurant.objects.filter(name__icontains=searchres.strip(),
+                                                     city__name__icontains=searchcity.strip())
             elif not searchres and not searchcity:
                 searchinput = ''
                 res_list = Restaurant.objects.all()
@@ -43,6 +47,23 @@ class RestaurantList(View):
             page_obj = paginator.get_page(page_number)
             count = res_list.count()
         else:
-            messages.warning(request,'No Restaurant found')
+            messages.warning(request, 'No Restaurant found')
 
-        return render(request, 'frontend/cardview/restaurantlist.html', {'page_obj': page_obj,'count':count,'searchinput': searchinput})
+        return render(request, 'frontend/cardview/restaurantlist.html',
+                      {'page_obj': page_obj, 'count': count, 'searchinput': searchinput})
+
+
+def autocompletecity(request):
+    """searchbar autocomplete"""
+    if request.is_ajax():
+        q = request.GET.get('term')
+        search_qs = City.objects.filter(name__istartswith=q)
+        print(search_qs)
+        results = []
+        for r in search_qs:
+            results.append(r.name)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
