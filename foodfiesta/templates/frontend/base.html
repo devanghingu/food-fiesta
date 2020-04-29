@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
 </head>
 <body itemscope>
     <main>
@@ -73,12 +74,7 @@
                     <nav>
                         <div class="menu-sec">
                             <ul>
-                                <li class="menu-item-has-children"><a href="#" title="HOMEPAGES" itemprop="url"><span class="red-clr">FOOD ORDERING</span>HOMEPAGES</a>
-                                    <ul class="sub-dropdown">
-                                        <li><a href="index.html" title="HOMEPAGE 1" itemprop="url">HOMEPAGE 1</a></li>
-                                        <li><a href="index2.html" title="HOMEPAGE 2" itemprop="url">HOMEPAGE 2</a></li>
-                                    </ul>
-                                </li>
+                                
                                 <li class="menu-item-has-children"><a href="#" title="RESTAURANTS" itemprop="url"><span class="red-clr">REAL FOOD</span>RESTAURANTS</a>
                                     <ul class="sub-dropdown">
                                         <li><a href="restaurant-found.html" title="RESTAURANT 1" itemprop="url">RESTAURANT 1</a></li>
@@ -140,7 +136,16 @@
                                         <li><a href="food-detail.html" title="FOOD DETAIL" itemprop="url">FOOD DETAIL</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
+                                <li>
+                                    <span class="red-clr">Real Food</span>
+                                    <a href="contact.html" title="CONTACT US" itemprop="url">CONTACT US</a>
+                                
+                                </li>
+                                <li>
+                                    <span class="red-clr">Cart</span>
+                                    <a href="" title="CONTACT US" itemprop="url" id='usercart'>0</a>
+                                
+                                </li>
                             </ul>
                             <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
                         </div>
@@ -246,7 +251,13 @@
                                 <li><a href="food-detail.html" title="FOOD DETAIL" itemprop="url">FOOD DETAIL</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="yellow-clr">REAL FOOD</span>CONTACT US</a></li>
+                        <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="yellow-clr">REAL </span>CONTACT US</a></li>
+                        <li class="menu-item-has-children"><a href="#" title="HOMEPAGES" itemprop="url"><span class="yellow-clr">FOOD ORDERING</span>HOMEPAGES</a>
+                            <ul class="sub-dropdown">
+                                <li><a href="index.html" title="HOMEPAGE 1" itemprop="url">HOMEPAGE 1</a></li>
+                                <li><a href="index2.html" title="HOMEPAGE 2" itemprop="url">HOMEPAGE 2</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <div class="topbar-register">
@@ -257,6 +268,7 @@
                     <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
                     <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
                 </div>
+             
                 <div class="register-btn">
                     <a class="yellow-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
                 </div>
@@ -265,7 +277,6 @@
         <!-- Responsive Header -->
         <!-- manu end -->
         {% block content%}{% endblock content %}
-
         {% include 'frontend/partial/footer.html' %}<!-- to load only footer -->
         {% include 'frontend/partial/user_model.html'%}<!--login/regiration Popup -->        
     </main><!-- Main Wrapper -->
@@ -278,5 +289,6 @@
     <script src="{% static 'assets/js/google-map-int.js' %}"></script>
     <script src="https://www.google.com/recaptcha/api.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/cart.js' %}"></script>
 </body>	
 </html>
