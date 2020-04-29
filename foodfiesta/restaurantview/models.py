@@ -2,7 +2,7 @@ from django.db import models
 from adminview.models import City,Fooditem
 from accounts.models import User
 from foodfiesta.constants import DELIVERY_STATUS,OPEN_STATUS,ACTIVE_STATUS
-from django.urls import reverse
+from restaurantview.managers import RestaurantManager
 
 class Restaurant(models.Model):
     user        = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -15,6 +15,9 @@ class Restaurant(models.Model):
     open        = models.BooleanField(choices=OPEN_STATUS,default=False)
     active      = models.BooleanField(choices=ACTIVE_STATUS,default=False)
     pic         = models.ImageField(upload_to='restaurant/',blank=True,null=True)
+
+    Restaurant = models.Manager()
+    objects = RestaurantManager()
 
     def __str__(self):
         return self.name

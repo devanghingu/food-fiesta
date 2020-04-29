@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('restaurant/',include('restaurantview.urls')),
-    path('admin/', admin.site.urls),
+    path('cart/',include('cart.urls')),
     path('adminview/',include('adminview.urls')),
+    path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

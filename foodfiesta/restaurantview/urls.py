@@ -5,7 +5,7 @@ from restaurantview.views import (Home,Profile,Order,Invoice,
                                 EditFoodDeleteView,AddFoodItemCreateView,
                                 AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
                                 RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
-                                Customer,Delivery)
+                                Customer,DeliveryList)
 
 app_name = 'restaurantview'
 urlpatterns = [
@@ -41,5 +41,5 @@ urlpatterns = [
     path('customer',Customer.as_view(),name='customer'),
 
     #delivery person
-    path('delivery',Delivery.as_view(),name='delivery'),
+    path('delivery',DeliveryList.as_view(),name='delivery'),
 ]
