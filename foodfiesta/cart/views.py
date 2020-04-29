@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from restaurantview.models import Restaurant
 from .models import Order,Orderitem
@@ -24,38 +25,25 @@ class restaurant(View):
             return render(request,'frontend/404.html')
     
     def post(self,request,*args, **kwargs):
+        
         if request.is_ajax():
-            cart=self.get_user_item_from_cart(request) #checking items on cart
-            rest_online=self.check_restaurant_online(request)
+            cart=Order.objects.get_user_item_from_cart('3') # get user item from cart
+            rest_online=Restaurant.objects.check_restaurent_online(request.POST.get('rest_id'))
             if cart:
-                pass
+                return JsonResponse(status=200,)
             else:
                 # when cart is empty
                 if rest_online:
-                    pass #if restaurnat online then check food item available
                     food_item=rest_online.fooditem.filter(id=request.POST.get('food_id'),available=True)
                     if food_item.exists():
                         pass
+                        # create cart 
                     else:
                         pass
 
                 else:
                     return JsonResponse(status=200,data={'message':'Opps..!! Restaurant is offline currently.'})
-
         return JsonResponse(status=200,data={})
-    
-    def check_restaurant_online(self,request,*args, **kwargs):
-        rest_online=Restaurant.objects.filter(id=request.POST.get('rest_id'),open=True)
-        if rest_online.exists():
-            return rest_online.get()
-        return False # when restaurant offline
-
-    def get_user_item_from_cart(self,request,*args, **kwargs):
-        userid=User.objects.get(id=3) #static userid for kalpesh
-        cart=Order.objects.filter(user=userid,status=PANDING)
-        if cart.exists():
-            return cart.get()
-        return False
 
 class AddToCart(View):
     pass
