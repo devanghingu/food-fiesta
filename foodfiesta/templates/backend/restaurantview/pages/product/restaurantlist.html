@@ -30,6 +30,7 @@
               </div>
               <div class="wrapper-new1">
                 <span>Total Order :<strong class="color-red"> {{ obj.order_set.count }}</strong> </span>
+                <span><a class="badge badge-secondary" href="{% url 'restaurantview:dashboard' obj.id %}">See DashBoard</a></span>
               </div>
               <a href="{% url 'restaurantview:restaurantdetail' obj.pk %}" class="btn btn-primary btn-md btn-block">See More</a>
             </div>

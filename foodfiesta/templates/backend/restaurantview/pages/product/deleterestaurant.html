@@ -18,9 +18,11 @@
             </div>
             <div class="ms-panel-body">    
                 <form method="post">{% csrf_token %}
-                    <p>Make sure to delete this "{{ object }}" Restaurant then it will also delete sub-brach and orders and delivery man?</p>
-                    <p>Are you sure you want to delete "{{ object }}"?</p>
-                    <button type="submit" class="btn btn-secondary">Confirm</button>
+                  <p>Make sure to delete this "{{ object }}" Restaurant then it will also delete sub-brach and orders and delivery man?</p>
+                  <p>Are you sure you want to delete "{{ object }}"?</p>
+                  <p>Enter Reason Why you want close Restaurant</p>
+                  {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary confirm">Confirm</button>
                 </form>         
             </div>
           </div>
@@ -30,3 +32,15 @@
 
   </main>
 {% endblock main %}
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const confirmBtn   = document.getElementsByClassName('confirm')[0];
+      const confirmAlert = function(event){
+        const result  = confirm(`Are you sure to ${confirmBtn.innerHTML} The Resturant To Remove on this side`)
+        if(!result){ event.preventDefault()}
+      } 
+      confirmBtn.addEventListener('click',confirmAlert);
+  </script>
+{% endblock psscript %}

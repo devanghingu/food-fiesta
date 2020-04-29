@@ -3,7 +3,7 @@ from django.conf.urls import url
 from restaurantview.views import (Home,Profile,Order,Invoice,
                                 MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,
                                 EditFoodDeleteView,AddFoodItemCreateView,
-                                AddRestaurantCreateView,DeleteRestaurantDeleteView,
+                                AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
                                 RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
                                 Customer,Delivery)
 
@@ -35,6 +35,7 @@ urlpatterns = [
     path('<int:pk>/deleterestaurant',DeleteRestaurantDeleteView.as_view(),name='deleterestaurant'),
     path('<int:pk>/restaurantdetail',ResturantDetailView.as_view(),name='restaurantdetail'),
     path('status',ChangeStatus.as_view(),name='status'),
+    path('<int:pk>/dashboard',DashBoard.as_view(),name='dashboard'),
 
     #customer
     path('customer',Customer.as_view(),name='customer'),

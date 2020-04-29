@@ -1,17 +1,22 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
 from django.views.generic import UpdateView,CreateView,ListView,DetailView,DeleteView
 from restaurantview.models import Restaurant,Menu
-from adminview.models import Fooditem
+from adminview.models import Fooditem,CancelRestaurantRequest
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from foodfiesta.constants import CLOSE,OPEN,ACTIVE,DEACTIVE
+from foodfiesta.constants import CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING
+from .forms import ResturantRemoveForm
+
 TEMPLATE_PATH = 'backend/restaurantview/'
 
 class Home(View):
     def get(self,request,*args, **kwargs):
-        request.session['restaurant']=Restaurant.objects.filter(user=request.user,parent=None)[0].id
+        res = Restaurant.objects.filter(user=request.user,parent=None)[0]
+        if request.session.get('restaurant') != res.id: 
+            messages.success(request,'Welcome '+res.name+' Dashboard ..!')
+        request.session['restaurant']=res.id
         return render(request,TEMPLATE_PATH+'index.html') 
 
 #Profile / Restaurant CRUD --start--
@@ -101,6 +106,14 @@ class Invoice(View):
 
 
 #Resturant Views
+class DashBoard(View):
+    ''' Change Dashboard to one branch to another '''
+    def get(self,request,*args, **kwargs):
+        if Restaurant.objects.filter(id=kwargs.get('pk'),user=request.user).exists():
+            res = Restaurant.objects.get(id=kwargs.get('pk'))
+            messages.success(request,'Welcome In '+res.name+' Dashboard..!')
+            request.session['restaurant']=kwargs.get('pk')
+        return render(request,TEMPLATE_PATH+'index.html') 
 
 class ChangeStatus(View):
 
@@ -147,21 +160,26 @@ class ResturantDetailView(DetailView):
     template_name = TEMPLATE_PATH+'pages/product/restaurantdetail.html'
 
 
-class DeleteRestaurantDeleteView(DeleteView):
-    ''' Delete Branch Resturant from Menu Using DeteleView '''
-    model         = Restaurant
-    template_name = TEMPLATE_PATH+'pages/product/deleterestaurant.html'
-    success_url   = reverse_lazy('restaurantview:restaurant')
-
-    def delete(self,request,*args, **kwargs):
-        """ Call Sending Delete Restaurant request."""
-        self.object = self.get_object()
+class DeleteRestaurantDeleteView(View):
+    ''' Delete Branch Resturant from Menu Using View '''
+    def get(self,request,*args, **kwargs):
+        res = get_object_or_404(Restaurant,id=kwargs.get('pk'))
+        template_name = TEMPLATE_PATH+'pages/product/deleterestaurant.html'
+        form = ResturantRemoveForm()
+        print('Delete View')
+        return render(request,template_name,{'object':res,'form':form})
     
-        if self.object.id == self.request.session.get('restaurant'):
+    def post(self,request,*args, **kwargs):
+        form = ResturantRemoveForm(request.POST)
+        if form.is_valid():
+            res = get_object_or_404(Restaurant,id=kwargs.get('pk'))
+            reason = form.cleaned_data.get('reason')
+            # CancelRestaurantRequest.objects.create(restaurant=res,reason=reason,status=PENDING)
+            #HERE Send Email
+        if res.id == self.request.session.get('restaurant'):
             return redirect('restaurantview:home') # HERE CHANGE
-        Restaurant.objects.filter(id=self.object.id).update(active=DEACTIVE)
+        Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
         return redirect('restaurantview:restaurant')
-
 
 class EditRestaurantUpdateView(SuccessMessageMixin,UpdateView):
     ''' Edit Restaurant and branch Using UpdateView '''
@@ -176,8 +194,9 @@ class Customer(View):
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
 
-class Delivery(View):
+class DeliveryList(View):
 
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
         
+
