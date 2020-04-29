@@ -3,9 +3,12 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Costic Dashboard</title>
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -60,7 +63,7 @@
       <!-- category -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#category" aria-expanded="false" aria-controls="product">
-             <span><i class="fa fa-archive fs-16"></i>Categories </span>
+             <span><i class="fas fa-list-ol fs-16"></i>Categories </span>
          </a>
         <ul id="category" class="collapse" aria-labelledby="category" data-parent="#side-nav-accordion">
             
@@ -74,7 +77,7 @@
       <!-- foods -->
       <li class="menu-item">
           <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false" aria-controls="product">
-               <span><i class="fa fa-archive fs-16"></i>Food Items </span>
+               <span><i class="fas fa-utensils fs-16"></i>Food Items </span>
            </a>
           <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
               
@@ -99,6 +102,11 @@
                         <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="{% url 'adminview:cancelrestaurant' %}">
+                        <span><i class="fa fa-tasks fs-16"></i>Cancel Restaurants List</span>
+                      </a>
+                    </li>
                     
   
             <!-- restaurants end -->
@@ -116,14 +124,14 @@
             <!-- delivery -->
             <li class="menu-item">
               <a href="#">
-                    <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
+                    <span><i class="fas fa-people-carry fs-16"></i>Delevery Persons</span>
               </a>
             </li>
             <!-- delivery-->
             <!-- city -->
               <li class="menu-item">
                 <a href="#" class="has-chevron" data-toggle="collapse" data-target="#city" aria-expanded="false" aria-controls="product">
-                    <span><i class="fa fa-archive fs-16"></i>Citys </span>
+                    <span><i class="fas fa-map-marker fs-16"></i>Citys </span>
                 </a>
                 <ul id="city" class="collapse" aria-labelledby="city" data-parent="#side-nav-accordion">
                       <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allcity' %}">&nbsp;&nbsp; Citys List</a> </li>
@@ -252,7 +260,7 @@
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href=""><h6>Restaurants</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allrestaurant' %}"><h6>Restaurants</h6></a>
                       </div>
                     </div>
                   </div>

@@ -25,7 +25,10 @@ urlpatterns = [
     path('city/<int:pk>/delete',views.CityDelete.as_view(),name='city_delete'),
     #Restaurant
     path('restaurantlist/',views.RestaurantList.as_view(),name='allrestaurant'),
+    path('cancelrestaurantlist/',views.Cancelequest.as_view(),name='cancelrestaurant'),
     path('restaurant/<int:id>/acceptrequest',views.Acceptrequest.as_view(),name='acceptrequest'),
-    path('restaurant<int:id>/deleterequest',views.Deleterequest.as_view(),name='deleterequest'),    
-
+    path('cancelrestaurant/<int:id>/acceptrequest',views.AcceptCancelrequest.as_view(),name='acceptcancelrequest'),
+    path('cancelrestaurant/<int:id>/rejectrequest',views.Rejectrequest.as_view(),name='rejectrequest'),
+    # path('allorders/',views.AllOrders.as_view(),name='allorders'),
+    
 ]

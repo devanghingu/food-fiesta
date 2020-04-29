@@ -1,0 +1,74 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+
+{% if object_list %}
+
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+       <center><h6>All Orders</h6></center> 
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Food Items</th>
+                <th scope="col">Address</th>
+                <th scope="col">Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Order Status</th>
+                <th scope="col">Delivey Boy</th>
+            
+            </tr>
+            </thead>
+            
+            {% for ord in object_list  %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ ord.order.id }}</th>
+                <td>{{ ord.order.user.username }}</td>
+                <td>{{ ord.order.restaurant.name }}</td>
+                <td> {{ ord.food }}</td>
+                <td>{{ ord.order.address.address }}</td>
+                <td>{{ ord.order.date }}</td>
+                <td>{{ ord.price }}</td>
+                <td>{{ ord.quantity }}</td>
+                <td>{{ ord.order.total_price }}</td>
+                <td>
+                {% if ord.order.status == 0 %}
+                <span class="badge badge-primary p-2">Pending</span>
+                {% elif ord.order.status == 1 %} 
+                <span class="badge badge-warning p-2">Accepted</span>
+                {% elif ord.order.status == 2 %} 
+                <span class="badge badge-primary p-2">Rejected</span>
+                {% elif ord.order.status == 3 %} 
+                <span class="badge badge-success p-2">Delivered</span>
+                {% endif %}
+                    </td>
+                <td>{{ ord.order.delivery.user.username }}</td>
+              </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+    </div>
+   </div>
+ </div>
+</div>
+         {% else %}
+         
+         <div class="alert alert-danger w-50" role="alert">
+            <i class="flaticon-alert-1"></i> <strong>Sorry!</strong> No Orders are there. 
+          </div>
+
+{% endif %}
+
+{% endblock content %}

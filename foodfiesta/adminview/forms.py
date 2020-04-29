@@ -18,7 +18,7 @@ class FoodItemCreateForm(forms.ModelForm):
         widgets = {
             'category': forms.Select(attrs={'class': 'form-control', 'placeholder': 'FoodItem Name'}),
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'FoodItem name'}),
-            'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'FoodItem Description'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'FoodItem Description'}),
             'pic' : forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image Of Fooditem'}),
         }
 

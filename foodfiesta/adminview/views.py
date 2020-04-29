@@ -1,12 +1,14 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from django.views import View
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import UpdateView,CreateView,DeleteView
 from .forms import *
+from cart.models import Orderitem
 from restaurantview.models import Restaurant
 from django.http import HttpResponse
 from django.contrib import messages
+from foodfiesta.constants import ACCEPTED,PENDING,REJECTED
 
 # Create your views here.
 def home(request):
@@ -36,6 +38,7 @@ class CityList(ListView):
 class RestaurantList(ListView):
     model = Restaurant
     template_name = 'adminview/restaurant/restaurantlist.html'
+
 
 #Category CRUD
 class CategoryCreate(CreateView):
@@ -71,12 +74,32 @@ class Acceptrequest(View):
             restaurant.save()
             print("DeActivated")
             messages.success(request,'Restaurant DeActivated')
-        return render(request,'adminview/index.html')
+        return redirect('adminview:allrestaurant')
 
-class Deleterequest(View):
-    pass
+class Cancelequest(ListView):
+    model = CancelRestaurantRequest
+    template_name = 'adminview/restaurant/cancelrequest.html'
 
+class AcceptCancelrequest(View):
+    def get(self,request,*args,**kwargs):
+        id = kwargs['id']
+        restaurant = get_object_or_404(CancelRestaurantRequest,id=id)
+        restaurant.status = ACCEPTED
+        restaurant.save()
+        restaurant.restaurant.delete()
+        messages.success(request,"Restaurant Deleted")
+        print("Accepted")
+        return redirect('adminview:cancelrestaurant')
 
+class Rejectrequest(View):
+    def get(self,request,*args,**kwargs):
+        id = kwargs['id']
+        restaurant = get_object_or_404(CancelRestaurantRequest,id=id)
+        restaurant.status = REJECTED
+        restaurant.save()
+        messages.success(request,"Rejected")
+        print("Rejected")
+        return redirect('adminview:cancelrestaurant')
 
 
 #FoodItem CRUD
