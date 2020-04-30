@@ -1,17 +1,11 @@
 {% extends 'backend/restaurantview/base.html' %}
 {% load static %}
 
-{% block psstyle %}
-  <link href="{% static 'backend/restaurantview/assets/css/slick.css' %}" rel="stylesheet">
-{% endblock psstyle %}
-  
-
 {% block main %}
 <!-- Main Content -->
 <main class="body-content">
   <!-- Navigation Bar -->
   {% include 'backend/restaurantview/navbar.html' %}
-  
   {% if object_list|length > 0 %}
   <div class="ms-content-wrapper box">
     
@@ -59,19 +53,6 @@
 
 {% endblock main %}
 
-
-{% block psscript %}
-   <!-- Page Specific Scripts Start -->
-   <script src="{% static 'backend/restaurantview/assets/js' %}/slick.min.js' %}"> </script>
-   <script src="{% static 'backend/restaurantview/assets/js/moment.js' %}"> </script>
-   <script src="{% static 'backend/restaurantview/assets/js/jquery.webticker.min.js' %}"> </script>
-   <script src="{% static 'backend/restaurantview/assets/js/Chart.bundle.min.js' %}"> </script>
-   <script src="{% static 'backend/restaurantview/assets/js/Chart.Financial.js' %}"> </script>
- 
-   <!-- Page Specific Scripts Finish -->
- 
-{% endblock psscript %}
-  
 
  
  

@@ -35,7 +35,13 @@
                 <div class="col-md-6 text-md-right">
                   <ul class="invoice-date">
                     <li>Invoice Date : {{ order.date }}</li>
-                    <li>Delivery By : {{ order.delivery }}</li>
+                    <li> 
+                      {% if order.delivery %}
+                          Delivery By : {{ order.delivery }}
+                      {% else %}
+                          Delivery By : Not Assign Yet
+                      {% endif %}
+                    </li>
                   </ul>
                 </div>
               </div>

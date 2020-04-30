@@ -31,7 +31,7 @@
               <form method="POST" class='needs-validation clearfix' enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-secondary d-block" type="submit">Add New Branch</button>
+                <button class="btn btn-secondary d-block add-new-branch" type="submit">Add New Branch</button>
               </form>
             </div>
           </div>
@@ -46,3 +46,17 @@
   </main>
 
 {% endblock main %}
+
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const addNewBranchBtn   = document.getElementsByClassName('add-new-branch')[0];
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure about This Branch Sending To Admin If they confirm then Create Your Branch Sucessully ?`)
+        if(!result){ event.preventDefault()}
+      } 
+      addNewBranchBtn.addEventListener('click',openAlert);
+  </script>
+{% endblock psscript %}
+  

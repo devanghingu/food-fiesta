@@ -30,11 +30,11 @@
       </li>
       <!-- food end -->
 
-      <!-- foods -->
+      <!-- Order -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#order" aria-expanded="false"
           aria-controls="order">
-          <span><i class="fa fa-archive fs-16"></i>Orders</span>
+          <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
         </a>
         <ul id="order" class="collapse" aria-labelledby="order" data-parent="#side-nav-accordion">
 
@@ -44,25 +44,18 @@
           <li> <a href="{% url 'restaurantview:orderrejected' %}">Rejected Orders</a> </li> 
         </ul>
       </li>
-      <!-- food end -->
+      <!-- Order end -->
 
 
-      <!-- orders -->
-      <li class="menu-item">
-        <a href="{% url 'restaurantview:orderplaced' %}">
-          <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
-        </a>
-      </li>
-      <!-- orders end -->
 
       <!-- restaurants -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
-          aria-controls="product">
+          aria-controls="restaurant">
           <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
         </a>
         
-        <ul id="restaurant" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+        <ul id="restaurant" class="collapse" aria-labelledby="restaurant" data-parent="#side-nav-accordion">
           <li> <a href="{% url 'restaurantview:restaurant' %}">Restaurants List</a> </li>
           <li> <a href="{% url 'restaurantview:addrestaurant' %}">Add Branch </a> </li>
         </ul>
@@ -78,21 +71,11 @@
       </li>
       <!-- Customers  end -->
 
-
-      <!-- delivery -->
-      <li class="menu-item">
-        <a href="pages/sales.html">
-          <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
-        </a>
-      </li>
-      <!-- delivery-->
-
-
       <!-- delivery -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#delivery" aria-expanded="false"
           aria-controls="product">
-          <span><i class="fa fa-tasks fs-16"></i>Delivery Person</span>
+          <span><i class="fa fa-briefcase fs-16"></i>Delivery Person</span>
         </a>
         <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
