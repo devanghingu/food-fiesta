@@ -5,7 +5,7 @@ from restaurantview.views import (Home,Profile,Order,Invoice,
                                 EditFoodDeleteView,AddFoodItemCreateView,
                                 AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
                                 RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
-                                Customer,DeliveryList)
+                                Customer,DeliveryList,AddDeliveryPersonCreateView,DeliveryDetailView)
 
 app_name = 'restaurantview'
 urlpatterns = [
@@ -42,4 +42,6 @@ urlpatterns = [
 
     #delivery person
     path('delivery',DeliveryList.as_view(),name='delivery'),
+    path('adddelivery',AddDeliveryPersonCreateView.as_view(),name='adddelivery'),
+    path('<int:pk>/deliverydetail',DeliveryDetailView.as_view(),name='deliverydetail'),
 ]

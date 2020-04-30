@@ -1,13 +1,13 @@
 from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
 from django.views.generic import UpdateView,CreateView,ListView,DetailView,DeleteView
-from restaurantview.models import Restaurant,Menu
+from restaurantview.models import Restaurant,Menu,Delivery
 from adminview.models import Fooditem,CancelRestaurantRequest
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from foodfiesta.constants import CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING
-from .forms import ResturantRemoveForm
+from foodfiesta.constants import CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING,AVAILABLE,NOT_AVAILABLE
+from .forms import ResturantRemoveForm,DeliveryPersonForm
 
 TEMPLATE_PATH = 'backend/restaurantview/'
 
@@ -194,9 +194,37 @@ class Customer(View):
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
 
-class DeliveryList(View):
 
-    def get(self,request,*args, **kwargs):
-        return render(request,TEMPLATE_PATH+'pages/product/customerlist.html')
-        
+# Delivery Person CRUD --start--
+class DeliveryList(ListView):
+    ''' Menu Of Restaurent Food Listing In Card Using ListView '''
+    model         = Delivery
+    template_name = TEMPLATE_PATH+'pages/product/deliverylist.html'
+    paginate_by   = 8
 
+    def get_queryset(self):
+        return Delivery.objects.filter(restaurant=self.request.session.get('restaurant'))
+    
+
+class AddDeliveryPersonCreateView(CreateView):
+    ''' Delivery Person Create / Add New User and Delivery In Site Using CreateView '''
+    form_class    = DeliveryPersonForm
+    template_name = TEMPLATE_PATH+'pages/product/adddelivery.html'
+    success_url   = reverse_lazy('restaurantview:delivery')
+    
+    def form_valid(self, form):
+        user        = form.save()
+        print(user)
+        res         = get_object_or_404(Restaurant,id=self.request.session.get('restaurant'))
+        Delivery.objects.create(user=user,restaurant=res,status=AVAILABLE)
+        messages.success(self.request,'Delivery Person Created Succefully..!')
+        return super().form_valid(form)
+
+
+
+class DeliveryDetailView(DetailView):
+    ''' Delivery person Of Restaurent  Detailt / Description of that Delivery Using DetailView '''
+    model         = Delivery
+    template_name = TEMPLATE_PATH+'pages/product/deliverytdetail.html'
+    
+# Delivery--end--  

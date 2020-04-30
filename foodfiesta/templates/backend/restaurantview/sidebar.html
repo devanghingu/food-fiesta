@@ -79,8 +79,8 @@
         </a>
         <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
-          <li> <a href="pages/product/deliverylist.html">Delivery List</a> </li>
-          <li> <a href="pages/product/adddelivery.html">Add Delivery Person</a> </li>
+          <li> <a href="{% url 'restaurantview:delivery' %}">Delivery List</a> </li>
+          <li> <a href="{% url 'restaurantview:adddelivery' %}">Add Delivery Person</a> </li>
           <li> <a href="pages/product/deliverydetail.html">Person Detail</a> </li>
         </ul>
       </li>
