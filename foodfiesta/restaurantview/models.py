@@ -15,7 +15,7 @@ class Restaurant(models.Model):
     active      = models.BooleanField(choices=ACTIVE_STATUS,default=False)
     pic         = models.ImageField(upload_to='restaurant/',blank=True,null=True)
 
-    Restaurant = models.Manager()
+    # Restaurant = models.Manager()
     objects = RestaurantManager()
 
     def __str__(self):
@@ -26,6 +26,7 @@ class Menu(models.Model):
     restaurant  = models.ForeignKey(Restaurant,on_delete=models.CASCADE)
     price       = models.PositiveIntegerField(default=0)
     available   = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.fooditem.name

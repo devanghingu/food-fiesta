@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from adminview.models import City
-
+from .managers import AddressManager
 class User(AbstractUser):
     profile=models.ImageField(upload_to='profile/',blank=True,null=True)
 
@@ -15,9 +15,11 @@ class Address(models.Model):
     default = models.BooleanField(default=False)
     city    = models.ForeignKey(City,on_delete=models.CASCADE)
     contact = models.CharField(max_length=13)
+    
+    objects=AddressManager()
 
     def __str__(self):
-        return self.user.username
-
+        return self.address
     
+
 

@@ -33,7 +33,7 @@
                                                         </ul>
                                                     </div>
                                                     <div class="restaurant-detail-title">
-                                                        <h1 itemprop="headline" id="rest_id" data-catid="{{restaurant.id}}">{{restaurant.name|title}}</h1>
+                                                        <h1 itemprop="headline" id="rest_id" data-catid="{{restaurant.id}}">{{restaurant.name|title}}{% if restaurant.open == False %}<span style="color: gray;">  [Offline]</span>{% endif %}</h1>
                                                         <div class="info-meta">
                                                             <span>{{restaurant.address|title}}</span>
                                                             <!-- <span><a href="#" title="" itemprop="url">Bakery</a>, <a href="#" title="" itemprop="url">Cafe</a></span> -->
@@ -82,16 +82,16 @@
                                                             <li><a href="#tab1-4" data-toggle="tab"><i class="fa fa-book"></i> Book A Table</a></li>
                                                             <li><a href="#tab1-5" data-toggle="tab"><i class="fa fa-info"></i> Restaurant Info</a></li>
                                                         </ul>
-                                                        <div class="tab-content">
+                                                        <div class="tab-content" >
                                                             <div class="tab-pane fade in active" id="tab1-1">
                                                                 <form class="search-dish">
                                                                     <input type="text" placeholder="Search here">
                                                                     <button type="submit"><i class="fa fa-search"></i></button>
                                                                 </form>
                                                                 <div class="dishes-list-wrapper">
-                                                                    <h4 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">items</span></h4>
+                                                                    <h4 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">items </span></h4>
                                                                     <!-- <span class="post-rate red-bg brd-rd2"><i class="fa fa-star-o"></i> 4.25</span> -->
-                                                                    <ul class="dishes-list">
+                                                                    <ul class="dishes-list" >
                                                                         {% for item in restaurant.menu_set.all %}
                                                                           
                                                                         <li class="wow fadeInUp" data-wow-delay="0.1s">
@@ -109,10 +109,12 @@
                                                                                     </ul>
                                                                                 </div>
                                                                                 <div class="ord-btn">
-                                                                                    {% if item.available %}
-                                                                                        <button class="btn btn-danger cartbutton" title="cart" itemprop="url" data-catid="{{item.id}}">Add to cart</button>
+                                                                                    {% if item.available and restaurant.open == True %}
+                                                                                        <button class="btn btn-danger cartbutton"  title="cart" itemprop="url" data-catid="{{item.id}}">
+                                                                                        {% if item.id in cartitem %}
+                                                                                            view in Cart{% else %}Add to cart{% endif %}    </button>
                                                                                     {% else %}
-                                                                                    <a class="btn btn-default" href="#" title="not Available" >Not Available</a>
+                                                                                    <a class="btn btn-default" href="#" title="not Available" disabled="true">Not Available</a>
 
                                                                                     {% endif %}
                                                                                 </div>
@@ -356,23 +358,19 @@
                                                                         <li>
                                                                             <i class="fa fa-map-marker red-clr"></i>
                                                                             <strong>Address :</strong>
-                                                                            <span>2nd Street, East-West Mansion Flat A2 231 Newyork NY 10003</span>
+                                                                            <span>{{restaurant.address}}</span>
                                                                         </li>
                                                                         <li>
                                                                             <i class="fa fa-phone red-clr"></i>
                                                                             <strong>Call us & Hire us</strong>
-                                                                            <span>+32 (0) 598 65 8968</span>
+                                                                            <span>{{restaurant.contact}}</span>
                                                                         </li>
                                                                         <li>
                                                                             <i class="fa fa-envelope-o red-clr"></i>
                                                                             <strong>Have any questions?</strong>
                                                                             <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1c4f696c6c736e685c6b797e75727d7279327f7371">[email&#160;protected]</a></span>
                                                                         </li>
-                                                                        <li>
-                                                                            <i class="fa fa-fax red-clr"></i>
-                                                                            <strong>Fax</strong>
-                                                                            <span>+652 235 89658965</span>
-                                                                        </li>
+                                                                        
                                                                     </ul>
                                                                 </div>
                                                             </div>
