@@ -1,0 +1,90 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+
+
+{% block psstyle %}
+  <style>
+    table i{
+      margin-right:0px !important;
+    }
+  </style>
+{% endblock psstyle %}
+  
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+  {% if object_list|length > 0 %}
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="col-12">
+            {% include 'backend/restaurantview/message.html'%}
+            <div class="ms-panel">
+              <div class="ms-panel-header">
+                <h6>Delivered Order List</h6>
+              </div>
+              <div class="ms-panel-body">
+                <div class="table-responsive">
+                  <table class="table table-hover thead-primary">
+                    <thead>
+                      <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Order Status</th>
+                        <th scope="col">Order Time</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Change Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for object in object_list %}
+                      <tr>
+                        <th scope="row">{{ object.id }}</th>
+                        <td>{{ object.user }}</td>
+                        <td>{{ object.address.address|title }}</td>
+                        <td>{{ object.address.contact }}</td>
+                        <td>
+                          <span class="badge badge-secondary">Delivered</span> 
+                        </td>
+                        <td>{{ object.date }}</td>
+                        <td>{{ object.total_price }}</td>
+                        <td>
+                          <a href="{% url 'restaurantview:invoice' object.id %}" title="Order Invoice" class="badge badge-dark active"><i class="fas fa-receipt"></i></a>
+                          <a class="badge badge-success" title="Place Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=4 %}"><i class="fa fa-undo"></i></a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {% include 'backend/restaurantview/pagination.html'%}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              Yet There is no <strong>Order</strong> For Your Restaurant..!
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </main>
+{% endblock main%}

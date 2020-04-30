@@ -30,9 +30,26 @@
       </li>
       <!-- food end -->
 
+      <!-- foods -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#order" aria-expanded="false"
+          aria-controls="order">
+          <span><i class="fa fa-archive fs-16"></i>Orders</span>
+        </a>
+        <ul id="order" class="collapse" aria-labelledby="order" data-parent="#side-nav-accordion">
+
+          <li> <a href="{% url 'restaurantview:orderplaced' %}">Places Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderaccepted' %}">Accepted Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderdelivered' %}">Delivered Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderrejected' %}">Rejected Orders</a> </li> 
+        </ul>
+      </li>
+      <!-- food end -->
+
+
       <!-- orders -->
       <li class="menu-item">
-        <a href="{% url 'restaurantview:order' %}">
+        <a href="{% url 'restaurantview:orderplaced' %}">
           <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
         </a>
       </li>

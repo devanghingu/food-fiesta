@@ -1,12 +1,16 @@
 from django.shortcuts import redirect, render,get_object_or_404
 from django.views import View
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import UpdateView,CreateView,ListView,DetailView,DeleteView
-from restaurantview.models import Restaurant,Menu,Delivery
-from adminview.models import Fooditem,CancelRestaurantRequest
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from foodfiesta.constants import CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING,AVAILABLE,NOT_AVAILABLE
+from django.contrib.auth.models import Group
+# site specific module
+from foodfiesta.constants import (CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING,AVAILABLE,NOT_AVAILABLE,
+                                  PLACED,ACCEPTED,REJECTED,DELIVERED,ORDER_STATUS)
+from adminview.models import Fooditem,CancelRestaurantRequest
+from restaurantview.models import Restaurant,Menu,Delivery
+from cart.models   import Order,Orderitem
 from .forms import ResturantRemoveForm,DeliveryPersonForm
 
 TEMPLATE_PATH = 'backend/restaurantview/'
@@ -93,15 +97,80 @@ class AddFoodItemCreateView(SuccessMessageMixin,CreateView):
 
 # Order / Order Status CRUD --start--
 
-class Order(View):
+class ChangeOrderStatus(View):
+
     def get(self,request,*args, **kwargs):
-        return render(request,TEMPLATE_PATH+'pages/orders.html') 
+        order = get_object_or_404(Order,id=self.kwargs.get('pk'))
+        change_to = {
+            0:PENDING,
+            4:PLACED,
+            1:ACCEPTED,
+            3:DELIVERED,
+            2:REJECTED}
+        to_status = self.kwargs.get('change_to')
+        
+        if to_status in change_to.keys():
+            # order.status=change_to[to_status]
+            # order.save()   
+            messages.success(request,'Order '+dict(ORDER_STATUS)[to_status]+' Successfully..!')
+        called_page_url = request.META.get('HTTP_REFERER').split('?').pop()
+        print(called_page_url)
+        return redirect(called_page_url)   
+
+class OrderPlacedListView(ListView):
+    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    model         = Order
+    template_name = TEMPLATE_PATH+'pages/orderplaced.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=PLACED).order_by('-date')
 
 
-class Invoice(View):
-    def get(self,request,*args, **kwargs):
-        return render(request,TEMPLATE_PATH+'pages/invoice.html') 
+class OrderAcceptedListView(ListView):
+    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    model         = Order
+    template_name = TEMPLATE_PATH+'pages/orderaccepted.html'
+    paginate_by   = 8
 
+    def get_queryset(self):
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=ACCEPTED).order_by('-date')
+
+
+class OrderRejectedListView(ListView):
+    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    model         = Order
+    template_name = TEMPLATE_PATH+'pages/orderrejected.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=REJECTED).order_by('-date')
+
+class OrderDeliveredListView(ListView):
+    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    model         = Order
+    template_name = TEMPLATE_PATH+'pages/orderdelivered.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=DELIVERED).order_by('-date')
+
+
+class Invoice(ListView):
+    ''' Details About Order in Invoice Card Using ListView '''
+    model         = Orderitem
+    template_name = TEMPLATE_PATH+'pages/invoice.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return self.model.objects.filter(order__restaurant__id=self.request.session.get('restaurant'),order=self.kwargs.get('pk')).order_by('-quantity')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["order"] =Order.objects.get(id=self.kwargs.get('pk')) 
+        return context
+    
+   
 # Order / Order Status --end--
 
 
@@ -213,11 +282,13 @@ class AddDeliveryPersonCreateView(CreateView):
     success_url   = reverse_lazy('restaurantview:delivery')
     
     def form_valid(self, form):
-        user        = form.save()
+        user          = form.save()
         print(user)
-        res         = get_object_or_404(Restaurant,id=self.request.session.get('restaurant'))
+        group,created = Group.objects.get_or_create(name='delivery_group')
+        res           = get_object_or_404(Restaurant,id=self.request.session.get('restaurant'))
         Delivery.objects.create(user=user,restaurant=res,status=AVAILABLE)
         messages.success(self.request,'Delivery Person Created Succefully..!')
+        group.user_set.add(user)
         return super().form_valid(form)
 
 

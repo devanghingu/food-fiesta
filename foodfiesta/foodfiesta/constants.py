@@ -12,7 +12,7 @@ ORDER_STATUS =(
     (ACCEPTED,'Accepted'),
     (REJECTED,'Rejected'),
     (DELIVERED,'Delivered'),
-    (PLACED,'placed')
+    (PLACED,'Placed')
     ) 
 #Delivery Person
 
