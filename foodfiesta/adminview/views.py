@@ -5,16 +5,21 @@ from django.views.generic import ListView,DetailView
 from django.views.generic.edit import UpdateView,CreateView,DeleteView
 from .forms import *
 from cart.models import Orderitem,Order
+from accounts.models import User
 from restaurantview.models import Restaurant,Delivery
 from django.http import HttpResponse
 from django.contrib import messages
 from foodfiesta.constants import ACCEPTED,PENDING,REJECTED
-
+from django.contrib.auth.decorators import user_passes_test,login_required
 
 # Create your views here.
+#AdminHome
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def home(request):
     return render(request,'adminview/index.html')
 
+#Category
 class CategoryList(ListView):
     model = Category
     template_name = 'adminview/category/categorygrid.html'
@@ -23,6 +28,7 @@ class CategoryDetail(DetailView):
     model = Category
     template_name = 'adminview/category/category_detail.html'
 
+#FoodItem
 class FoodItemList(ListView):
     model = Fooditem
     template_name = 'adminview/fooditem/fooditemgird.html'
@@ -31,24 +37,24 @@ class FoodItemDetail(DetailView):
     model = Fooditem
     template_name = 'adminview/fooditem/fooditem_detail.html'
 
+#City
 class CityList(ListView):
     model = City
     template_name = 'adminview/city/citylist.html'
 
 
-class RestaurantList(ListView):
-    model = Restaurant
-    template_name = 'adminview/restaurant/restaurantlist.html'
-
+#DeliveryBoyList
 class DeliveryList(ListView):
     model = Delivery
     template_name = 'adminview/delivery/deliverylist.html'
 
+#Orders
 class AllOrders(ListView):
     model = Order
     template_name = 'adminview/orders/allorders.html'
 
 
+#OrdderDetails
 class OrderDetails(ListView):
     model = Orderitem
     template_name = 'adminview/orders/orderdetails.html'
@@ -57,6 +63,17 @@ class OrderDetails(ListView):
         context['order'] = Order.objects.filter(id = self.kwargs.get('pk'))
         context['orderitem'] = Orderitem.objects.filter(order__id = self.kwargs.get('pk'))
         return context
+
+
+#All Customers
+class AllCustomers(ListView):
+    model = User
+    template_name = 'adminview/customer/customerlist.html'
+    def get_context_data(self, **kwargs):
+        context = super(AllCustomers, self).get_context_data(**kwargs)
+        context['user_group'] = User.objects.filter(groups__name='user_group')
+        return context
+
 #Category CRUD
 class CategoryCreate(CreateView):
     model = Category
@@ -77,6 +94,11 @@ class CategoryDelete(DeleteView):
             return reverse('adminview:allcategory')
 
 #Restaurant
+class RestaurantList(ListView):
+    model = Restaurant
+    template_name = 'adminview/restaurant/restaurantlist.html'
+
+
 class Acceptrequest(View):
     def get(self,request,*args,**kwargs):
         id = kwargs['id']
