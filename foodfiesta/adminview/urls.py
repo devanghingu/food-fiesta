@@ -29,6 +29,9 @@ urlpatterns = [
     path('restaurant/<int:id>/acceptrequest',views.Acceptrequest.as_view(),name='acceptrequest'),
     path('cancelrestaurant/<int:id>/acceptrequest',views.AcceptCancelrequest.as_view(),name='acceptcancelrequest'),
     path('cancelrestaurant/<int:id>/rejectrequest',views.Rejectrequest.as_view(),name='rejectrequest'),
-    # path('allorders/',views.AllOrders.as_view(),name='allorders'),
-    
+    #Orders
+    path('allorders/',views.AllOrders.as_view(),name='allorders'),
+    path('orderdetails/<int:pk>/',views.OrderDetails.as_view(),name='orderdetails'),
+    #Delivery
+    path('deliverylist/',views.DeliveryList.as_view(),name='deliverylist'),
 ]

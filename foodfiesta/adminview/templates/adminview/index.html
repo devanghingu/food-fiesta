@@ -90,7 +90,7 @@
 
       <!-- orders -->
       <li class="menu-item">
-                <a href="#">
+                <a href="{% url 'adminview:allorders' %}">
                  <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
                 </a>
               </li>
@@ -123,7 +123,7 @@
 
             <!-- delivery -->
             <li class="menu-item">
-              <a href="#">
+              <a href="{% url 'adminview:deliverylist' %}">
                     <span><i class="fas fa-people-carry fs-16"></i>Delevery Persons</span>
               </a>
             </li>
@@ -272,7 +272,7 @@
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href="#"><h6>Order</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allorders' %}"><h6>Order</h6></a>
                       </div>
                     </div>
                   </div>

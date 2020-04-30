@@ -4,11 +4,12 @@ from django.views import View
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import UpdateView,CreateView,DeleteView
 from .forms import *
-from cart.models import Orderitem
-from restaurantview.models import Restaurant
+from cart.models import Orderitem,Order
+from restaurantview.models import Restaurant,Delivery
 from django.http import HttpResponse
 from django.contrib import messages
 from foodfiesta.constants import ACCEPTED,PENDING,REJECTED
+
 
 # Create your views here.
 def home(request):
@@ -39,7 +40,23 @@ class RestaurantList(ListView):
     model = Restaurant
     template_name = 'adminview/restaurant/restaurantlist.html'
 
+class DeliveryList(ListView):
+    model = Delivery
+    template_name = 'adminview/delivery/deliverylist.html'
 
+class AllOrders(ListView):
+    model = Order
+    template_name = 'adminview/orders/allorders.html'
+
+
+class OrderDetails(ListView):
+    model = Orderitem
+    template_name = 'adminview/orders/orderdetails.html'
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetails,self).get_context_data(**kwargs)
+        context['order'] = Order.objects.filter(id = self.kwargs.get('pk'))
+        context['orderitem'] = Orderitem.objects.filter(order__id = self.kwargs.get('pk'))
+        return context
 #Category CRUD
 class CategoryCreate(CreateView):
     model = Category
