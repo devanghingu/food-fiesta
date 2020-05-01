@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.contrib.auth.models import User
@@ -113,13 +114,16 @@ def placeorder(request, rest_id):
     order = Order.objects.get(user__id=usr, restaurant__id=rest_id)
     order.status = PLACED
     order.save()
-    return redirect(request, 'cart:cart')
+    messages.success(request,'Your order has been Placed!..')
+    object_list = Order.objects.filter(user__id=2)
+    return render(request, 'frontend/myorderlist.html', {'object_list': object_list})
 
 
 class OrderList(ListView):
     model = Order
     template_name = 'frontend/myorderlist.html'
+
     # paginate_by = 100  # if pagination is desired
 
     def get_queryset(self):
-        return Order.objects.filter(restaurant__id=2, user__id=2)
+        return Order.objects.filter(user__id=2)

@@ -8,6 +8,19 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-lg-12">
                             <div class="sec-box">
+
+                                {% if messages %}
+                                    <ul class="messages">
+                                        {% for message in messages %}
+                                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                            {{ message }}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+
+
                                 <div class="dashboard-tabs-wrapper">
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12 col-lg-4">
@@ -35,117 +48,83 @@
                                         </div>
                                         <div class="col-md-8 col-sm-12 col-lg-8">
                                             <div class="tab-content">
-                                                <div class="tab-pane fade in active" id="dashboard">
-                                                    <div class="dashboard-wrapper brd-rd5">
-                                                        <div class="welcome-note yellow-bg brd-rd5">
-                                                            <h4 itemprop="headline">WELCOME TO YOUR ACCOUNT</h4>
-                                                            <p itemprop="description">Things that get tricky are things like burgers and fries, or things that are deep-fried. We do have a couple of burger restaurants that are capable of doing a good</p>
-                                                            <img src="assets/images/resource/welcome-note-img.png" alt="welcome-note-img.png" itemprop="image">
-                                                            <a class="remove-noti" href="#" title="" itemprop="url"><img src="assets/images/close-icon.png" alt="close-icon.png" itemprop="image"></a>
-                                                        </div>
-                                                        <div class="dashboard-title">
-                                                            <h4 itemprop="headline">SUGGESTED RESTAURANTS</h4>
-                                                            <span>Define <a class="red-clr" href="#" title="" itemprop="url">Search criteria</a> to search for specific</span>
-                                                        </div>
-                                                        <div class="restaurants-list">
-                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.2s">
-                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-1.png" alt="restaurant-logo1-1.png" itemprop="image"></a></div>
-                                                                <div class="featured-restaurant-info">
-                                                                    <span class="red-clr">5th Avenue New York 68</span>
-                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Domino's Pizza</a></h4>
-                                                                    <ul class="post-meta">
-                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
-                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="view-menu-liks">
-                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 12</span>
-                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.3s">
-                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-2.png" alt="restaurant-logo1-2.png" itemprop="image"></a></div>
-                                                                <div class="featured-restaurant-info">
-                                                                    <span class="red-clr">5th Avenue New York 68</span>
-                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Pizza Hut</a></h4>
-                                                                    <ul class="post-meta">
-                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $40</li>
-                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="view-menu-liks">
-                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 20</span>
-                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.4s">
-                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-1.png" alt="restaurant-logo1-1.png" itemprop="image"></a></div>
-                                                                <div class="featured-restaurant-info">
-                                                                    <span class="red-clr">5th Avenue New York 68</span>
-                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Burger King</a></h4>
-                                                                    <ul class="post-meta">
-                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $100</li>
-                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="view-menu-liks">
-                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 15</span>
-                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade" id="my-bookings">
+<!--                                                <div class="tab-pane fade in active" id="dashboard">-->
+<!--                                                    <div class="dashboard-wrapper brd-rd5">-->
+<!--                                                        <div class="welcome-note yellow-bg brd-rd5">-->
+<!--                                                            <h4 itemprop="headline">WELCOME TO YOUR ACCOUNT</h4>-->
+<!--                                                            <p itemprop="description">Things that get tricky are things like burgers and fries, or things that are deep-fried. We do have a couple of burger restaurants that are capable of doing a good</p>-->
+<!--                                                            <img src="assets/images/resource/welcome-note-img.png" alt="welcome-note-img.png" itemprop="image">-->
+<!--                                                            <a class="remove-noti" href="#" title="" itemprop="url"><img src="assets/images/close-icon.png" alt="close-icon.png" itemprop="image"></a>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="dashboard-title">-->
+<!--                                                            <h4 itemprop="headline">SUGGESTED RESTAURANTS</h4>-->
+<!--                                                            <span>Define <a class="red-clr" href="#" title="" itemprop="url">Search criteria</a> to search for specific</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="restaurants-list">-->
+<!--                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.2s">-->
+<!--                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-1.png" alt="restaurant-logo1-1.png" itemprop="image"></a></div>-->
+<!--                                                                <div class="featured-restaurant-info">-->
+<!--                                                                    <span class="red-clr">5th Avenue New York 68</span>-->
+<!--                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Domino's Pizza</a></h4>-->
+<!--                                                                    <ul class="post-meta">-->
+<!--                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>-->
+<!--                                                                        <li><i class="flaticon-transport"></i> 30min</li>-->
+<!--                                                                    </ul>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="view-menu-liks">-->
+<!--                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 12</span>-->
+<!--                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.3s">-->
+<!--                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-2.png" alt="restaurant-logo1-2.png" itemprop="image"></a></div>-->
+<!--                                                                <div class="featured-restaurant-info">-->
+<!--                                                                    <span class="red-clr">5th Avenue New York 68</span>-->
+<!--                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Pizza Hut</a></h4>-->
+<!--                                                                    <ul class="post-meta">-->
+<!--                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $40</li>-->
+<!--                                                                        <li><i class="flaticon-transport"></i> 30min</li>-->
+<!--                                                                    </ul>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="view-menu-liks">-->
+<!--                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 20</span>-->
+<!--                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="featured-restaurant-box style3 brd-rd5 wow fadeInUp" data-wow-delay="0.4s">-->
+<!--                                                                <div class="featured-restaurant-thumb"><a href="#" title="" itemprop="url"><img src="assets/images/resource/restaurant-logo1-1.png" alt="restaurant-logo1-1.png" itemprop="image"></a></div>-->
+<!--                                                                <div class="featured-restaurant-info">-->
+<!--                                                                    <span class="red-clr">5th Avenue New York 68</span>-->
+<!--                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Burger King</a></h4>-->
+<!--                                                                    <ul class="post-meta">-->
+<!--                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $100</li>-->
+<!--                                                                        <li><i class="flaticon-transport"></i> 30min</li>-->
+<!--                                                                    </ul>-->
+<!--                                                                </div>-->
+<!--                                                                <div class="view-menu-liks">-->
+<!--                                                                    <span class="red-bg brd-rd4 post-likes"><i class="fa fa-heart-o"></i> 15</span>-->
+<!--                                                                    <a class="brd-rd3" href="#" title="" itemprop="url">View Menu</a>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="tab-pane fade" id="my-bookings">-->
                                                     <div class="tabs-wrp brd-rd5">
                                                         <h4 itemprop="headline">MY BOOKINGS</h4>
-                                                        <div class="select-wrap-inner">
-                                                            <div class="select-wrp2">
-                                                                <select>
-                                                                    <option>Select Booking Status</option>
-                                                                    <option>Select Booking Status</option>
-                                                                    <option>Select Booking Status</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="select-wrp2">
-                                                                <select>
-                                                                    <option>Select Date Range</option>
-                                                                    <option>Select Date Range</option>
-                                                                    <option>Select Date Range</option>
-                                                                </select>
-                                                            </div>
                                                         </div>
                                                         <div class="booking-table">
                                                             <table>
                                                                 <thead>
-                                                                    <tr><th>RESTAURANT NAME</th><th>DATE</th><th>STATUS</th></tr>
+                                                                    <tr><th>RESTAURANT NAME</th><th> </th><th>STATUS</th></tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody>{% if object_list %}{% for ordr in object_list %}
                                                                     <tr>
-                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">Jet's Kitchen ( #8589 )</a></h5></td>
-                                                                        <td>Aug 17,2017</td>
-                                                                        <td><span class="brd-rd3 processing">PROCESSING</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
+                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">{{ordr.restaurant.name}}</a></h5></td>
+                                                                        <td></td>
+                                                                        <td><span class="brd-rd3 processing">{%if ordr.status == 4 %}Placed{%elif ordr.status == 0%}In cart{%endif%}</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">Jet's Kitchen ( #8589 )</a></h5></td>
-                                                                        <td>Aug 17,2017</td>
-                                                                        <td><span class="brd-rd3 processing">PROCESSING</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">Jet's Kitchen ( #8589 )</a></h5></td>
-                                                                        <td>Aug 17,2017</td>
-                                                                        <td><span class="brd-rd3 completed">COMPLETED</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">Jet's Kitchen ( #8589 )</a></h5></td>
-                                                                        <td>Aug 17,2017</td>
-                                                                        <td><span class="brd-rd3 processing">PROCESSING</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><h5 itemprop="headline"><a href="#" title="" itemprop="url">Jet's Kitchen ( #8589 )</a></h5></td>
-                                                                        <td>Aug 17,2017</td>
-                                                                        <td><span class="brd-rd3 completed">COMPLETED</span> <a class="detail-link brd-rd50" href="#" title="" itemprop="url"><i class="fa fa-chain"></i></a></td>
-                                                                    </tr>
+                                                                    {% endfor %}{% endif %}
                                                                 </tbody>
                                                             </table>
                                                         </div>
