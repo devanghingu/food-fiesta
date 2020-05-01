@@ -6,7 +6,9 @@ from restaurantview.views import (Home,Profile,Invoice,
                                 EditFoodDeleteView,AddFoodItemCreateView,
                                 AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
                                 RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
-                                Customer,DeliveryList,AddDeliveryPersonCreateView,DeliveryDetailView)
+                                Customer,DeliveryList,AddDeliveryPersonCreateView,DeliveryDetailView,DeliveryHome,MarkAsDelivered,ChangeStatus)
+from django.contrib.auth.decorators import user_passes_test
+
 
 app_name = 'restaurantview'
 urlpatterns = [
@@ -50,4 +52,8 @@ urlpatterns = [
     path('delivery',DeliveryList.as_view(),name='delivery'),
     path('adddelivery',AddDeliveryPersonCreateView.as_view(),name='adddelivery'),
     path('<int:pk>/deliverydetail',DeliveryDetailView.as_view(),name='deliverydetail'),
+    #Delivery Dashboard
+    path('deliveryhome',user_passes_test(lambda u:u.groups.filter(name='delivery_group'))(DeliveryHome.as_view()),name='deliveryhome'),
+    path('<int:pk>/markasdelivered',user_passes_test(lambda u:u.groups.filter(name='delivery_group'))(MarkAsDelivered.as_view()),name='markasdelivered'),
+    path('<int:pk>/changestatus',user_passes_test(lambda u:u.groups.filter(name='delivery_group'))(ChangeStatus.as_view()),name='changestatus'),
 ]

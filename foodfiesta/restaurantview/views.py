@@ -6,7 +6,7 @@ from django.views.generic          import UpdateView,CreateView,ListView,DetailV
 from django.urls                   import reverse_lazy
 from django.contrib                import messages
 from django.contrib.auth.models    import Group
-
+from django.utils                  import timezone
 #python core
 import random
 
@@ -331,3 +331,36 @@ class DeliveryDetailView(DetailView):
     template_name = TEMPLATE_PATH+'pages/product/deliverytdetail.html'
     
 # Delivery--end--  
+#Delivery Dashboard
+class DeliveryHome(ListView):
+    model = Order
+    template_name = TEMPLATE_PATH+'deliverydashboard.html'
+    def get_context_data(self, **kwargs):
+        context = super(DeliveryHome,self).get_context_data(**kwargs)
+        context['order'] = Order.objects.filter(delivery__user= self.request.user).order_by('status')
+        context['user'] = Delivery.objects.filter(user=self.request.user)
+        return context
+
+class MarkAsDelivered(View):
+    def get(self,request,*args, **kwargs):
+        id = kwargs['pk']
+        order = get_object_or_404(Order,id=id)
+        order.status = DELIVERED
+        order.save()
+        messages.success(request,'Order Marked As Delivered')
+        return redirect('restaurantview:deliveryhome')
+    
+class ChangeStatus(View):
+    def get(self,request,*args, **kwargs):
+        id = kwargs['pk']
+        user = get_object_or_404(Delivery,id=id)
+        if user.status == True:
+            user.status = False
+            user.save()
+            messages.success(request,"Change Status To Not Availabel")
+        else:
+            user.status = True
+            user.save()
+            messages.success(request,"Change Status To Availabel")
+        return redirect('restaurantview:deliveryhome')
+    

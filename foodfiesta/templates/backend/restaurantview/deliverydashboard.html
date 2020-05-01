@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Restaurant Dashboard</title>
+  <!-- Iconic Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/font-awesome/css/all.min.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/flat-icons/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css' %}">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'backend/restaurantview/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+  <!-- jQuery UI -->
+  <link href="{% static 'backend/restaurantview/assets/css/jquery-ui.min.css' %}" rel="stylesheet">
+  <!-- Page Specific CSS (Slick Slider.css) -->
+
+  <link href="{% static 'backend/restaurantview/assets/css/style.css' %}" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static favicon.ico">
+
+  <style>
+    form input:focus,form select:focus,form textarea:focus{
+      border:1px solid gainsboro;
+      border-radius: 2px;
+      padding: 4px;
+    }
+  </style>
+</head>
+
+<!-- Main Content -->
+<main class="body-content">
+    <!-- Navigation Bar -->
+    <nav class="navbar ms-navbar">
+
+      <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
+  
+      <div class="logo-sn logo-sm ms-d-block-sm">
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="index.html"><img
+            src="{% static 'backend/restaurantview/assets/img/costic/costic-logo-84x41.png' %}" alt="logo"> </a>
+      </div>
+  
+      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+        <li class="ms-nav-item ms-search-form pb-0 py-0">
+          <form class="ms-form" method="post">
+            <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+              <input type="search" class="ms-form-input" name="search" placeholder="Search here..." value="">
+              <i class="flaticon-search text-disabled"></i>
+            </div>
+          </form>
+        </li>
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
+            {% if user.profile %}
+              <img class="ms-user-img ms-img-round float-right" src="{{ user.profile.url }}" alt="people">
+            {% else %}
+              <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/restaurantview/assets/img/costic/customer-6.jpg' %}" alt="people">
+            {% endif %} 
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ user.first_name|title }} {{ user.last_name|title }}</span></h6>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="ms-dropdown-list">
+              <a class="media fs-14 p-2" href="{% url 'restaurantview:profile' %}"> <span><i
+                    class="flaticon-user mr-2"></i> Profile</span> </a>
+              <a class="media fs-14 p-2" href="{% url 'restaurantview:profile' %}"> <span><i
+                    class="flaticon-gear mr-2"></i> Account Settings</span> </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i
+                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+  
+      <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+          <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
+  
+    </nav>    
+
+
+    <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
+
+      <!-- Logo -->
+      <div class="logo-sn ms-d-block-lg">
+        <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:home' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+      </div>
+  
+      <!-- Navigation -->
+      <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
+      
+        <li class="menu-item">
+          <a href="#" class="active" data-toggle="collapse" data-target="#product" aria-expanded="false"
+            aria-controls="product">
+            <span><i class="fa fa-archive fs-16"></i>Delivery Dashboard</span>
+          </a>
+        </li>
+        
+      </ul>
+  </aside>
+  
+    {% if order %}
+      <!-- Body Content Wrapper -->
+      <div class="ms-content-wrapper">
+        <div class="row">
+  
+          <div class="col-md-12">
+            <div class="col-12">
+              {% include 'backend/restaurantview/message.html'%}
+              
+              <div class="ms-panel">
+                <div class="ms-panel-header">
+                  
+                  {% if user %}
+                  
+                  {% for user in user %}
+                  <h6 style="margin-left: 60%;">Your Name;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; {{ user.user.username }} </h6>
+                  <h6 style="margin-left: 60%;">Your Tie-Up Restaurant : &nbsp;&nbsp;<span class="text-primary">{{ user.restaurant.name }}</span></h6>
+                  <h6 style="margin-left: 60%;">Your Current Status &nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;
+                  {% if user.status == True %}
+                  <span class="badge badge-success">Availabel</span>
+                  {% else %}
+                  <span class="badge badge-primary">Not Availabel</span>
+                  {% endif %}
+                </h6>
+                  <h6 style="margin-left: 60%;">Change Status To &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :{% if user.status == True %} 
+                    &nbsp;&nbsp;
+                    <a class="badge badge-primary" href="{% url 'restaurantview:changestatus' pk=user.id  %}">Not Availabel</a>
+                    {% else %}
+                    <a class="badge badge-success" href="{% url 'restaurantview:changestatus' pk=user.id  %}"">Availabel</a>
+                    {% endif %}
+                  </h6>
+                  {% endfor %}
+                  {% endif %}
+                  <br><br>
+                  <center><h6>Your Orders</h6></center>
+                </div>
+                <div class="ms-panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover thead-primary">
+                      <thead>
+                        <tr>
+                          <th scope="col">Order ID</th>
+                          <th scope="col">Customer Name</th>
+                          <th scope="col">Location</th>
+                          <th scope="col">Contact</th>
+                          <th scope="col">Order Status</th>
+                          <th scope="col">Order Time</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Mark As Deliverd</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for object in order %}
+                        <tr>
+                          <th scope="row">{{ object.id }}</th>
+                          <td>{{ object.user }}</td>
+                          <td>{{ object.address.address|title }}</td>
+                          <td>{{ object.address.contact }}</td>
+                          <td>{% if object.status == 1 %}
+                              <span class="badge badge-primary">Pending</span>
+                              {% elif object.status == 3 %} 
+                              <span class="badge badge-success">Delivered</span>
+                              {% endif %}
+                          </td>
+                          <td>{{ object.date }}</td>
+                          <td>{{ object.total_price }}</td>
+                          <td>
+                            
+                            {% if object.status != 3 %}
+                            <center><a title="Accept Order" href="{% url 'restaurantview:markasdelivered' pk=object.id  %}"><i style="font-size: 25px;" class="fa fa-check-circle ms-text-success"></i></a></center>    
+                            {% endif %}
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              {% include 'backend/restaurantview/pagination.html'%}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="ms-content-wrapper">
+        <div class="row">
+  
+          <div class="col-md-12">
+            <div class="alert alert-danger" role="alert">
+                Yet There is no <strong>Order</strong> For You..!
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+  
+    </main>
+    <script src="{% static 'backend/restaurantview/assets/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'backend/restaurantview/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'backend/restaurantview/assets/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'backend/restaurantview/assets/js/perfect-scrollbar.js' %}"></script>
+  <script src="{% static 'backend/restaurantview/assets/js/jquery-ui.min.js' %}">
+  </script>
+     
+  <!-- Costic core JavaScript -->
+  <script src="{% static 'backend/restaurantview/assets/js/framework.js' %}"></script>
+  <!-- Settings -->
+  <script src="{% static 'backend/restaurantview/assets/js/settings.js' %}"></script>
+  </body>
+
+  </html>
