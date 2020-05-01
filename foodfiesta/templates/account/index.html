@@ -144,7 +144,9 @@
                                 </li>
                                 <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
                             </ul>
-                            <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
+                            {% if user.is_staff %}
+                                <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
+                            {% endif %}
                         </div>
                     </nav><!-- Navigation -->
                 </div>
@@ -260,7 +262,9 @@
                     <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
                 </div>
                 <div class="register-btn">
+                    {% if user.is_staff %}
                     <a class="yellow-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
+                    {% endif %}
                 </div>
             </div><!-- Responsive Menu -->
         </div><!-- Responsive Header -->

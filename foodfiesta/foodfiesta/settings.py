@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
+    'allauth.socialaccount', 
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
-    'django.contrib.sites',
 
     'restaurantview.apps.RestaurantviewConfig',
     'accounts.apps.AccountsConfig',
@@ -58,6 +58,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+
+ACCOUNT_AUTHENTICATION_METHOD='username_email'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,12 +138,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-
-
-LOGIN_REDIRECT_URL="/"
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+LOGIN_REDIRECT_URL= '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

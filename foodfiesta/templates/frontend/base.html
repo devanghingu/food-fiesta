@@ -146,7 +146,9 @@
                                 </li>
                                 <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
                             </ul>
-                            <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
+                            {% if user.is_staff %}
+                            <a class="red-bg brd-rd4" href="/createrestaurant" title="Register" itemprop="url">REGISTER RESTAURANT</a>
+                            {%endif%}
                         </div>
                     </nav><!-- Navigation -->
                 </div>

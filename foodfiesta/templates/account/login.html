@@ -13,6 +13,11 @@
   <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
   <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+  <style>
+    #id_remember{
+      display: none;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
@@ -29,13 +34,28 @@
                         <div class="col-md-6 col-sm-12 col-lg-6">
                             <div class="sign-popup-wrapper brd-rd5">
                                 <div class="sign-popup-inner brd-rd5">
+                                  {% if form.errors %}
+                                    {% for field in form %}
+                                      {% for error in field.errors %}
+                                          <div class="alert alert-error">
+                                            <strong>{{ error|escape }}</strong>
+                                          </div>
+                                      {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                      <div class="alert alert-error">
+                                            <strong>{{ error|escape }}</strong>
+                                      </div>
+                                    {% endfor %}
+                                  {% endif %}
                                     <div class="sign-popup-title text-center">
-                                        <h4 itemprop="headline">{% trans "Sign In" %}</h4>
-                                        <span>with your social network</span>
+                                      <h4 itemprop="headline">{% trans "Sign In" %}</h4>
+                                      <span>with your social network</span>
                                     </div>
                                     <div class="popup-social text-center">
-                                        <!-- <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a> -->
-                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                      <!-- <a class="socialaccount_provider facebook brd-rd3" href="/accounts/facebook/login/?process=login" title="Facebook" itemprop="url"><i class="fa fa-facebook"></i> Facebook</a>
+                                      <a class="socialaccount_provider google brd-rd3" href="/accounts/google/login/?process=login" title="Google" itemprop="url"><i class="fa fa-google-plus"></i> Google</a> -->
+                                      <!-- {% include "socialaccount/snippets/provider_list.html" with process="login" %} -->
                                     </div>
                                     <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
                                     <form class="sign-form login" method="POST" action="{% url 'account_login' %}">
