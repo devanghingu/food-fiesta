@@ -1,41 +1,43 @@
-# Order
-PENDING = 0
-ACCEPTED = 1
-REJECTED = 2
+
+
+#Order
+PENDING   = 0
+ACCEPTED  = 1
+REJECTED  = 2
 DELIVERED = 3
+PLACED    = 4
+#
+ORDER_STATUS =(
+    (PENDING,'Pending'),
+    (ACCEPTED,'Accepted'),
+    (REJECTED,'Rejected'),
+    (DELIVERED,'Delivered'),
+    (PLACED,'placed')
+    )
+#Delivery Person
 
-ORDER_STATUS = (
-
-    (PENDING, 'Pending'),
-    (ACCEPTED, 'Accepted'),
-    (REJECTED, 'Rejected'),
-    (DELIVERED, 'Delivered'),
-)
-
-# Delivery Person
-
-AVAILABLE = True
+AVAILABLE     = True
 NOT_AVAILABLE = False
 
 DELIVERY_STATUS = (
-    (AVAILABLE, 'Available'),
-    (NOT_AVAILABLE, 'Not Available'),
+    (AVAILABLE,'Available'),
+    (NOT_AVAILABLE,'Not Available'),
 )
 
-# Restaurant
+#Restaurant 
 
-OPEN = True
+OPEN  = True
 CLOSE = False
 
 OPEN_STATUS = (
-    (OPEN, 'Open'),
-    (CLOSE, 'Close'),
+    (OPEN,'Open'),
+    (CLOSE,'Close'),
 )
 
-ACTIVE = True
+ACTIVE   = True
 DEACTIVE = False
 
 ACTIVE_STATUS = (
-    (ACTIVE, 'Active'),
-    (DEACTIVE, 'Deactive'),
+    (ACTIVE,'Active'),
+    (DEACTIVE,'Deactive'),
 )
