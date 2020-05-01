@@ -18,12 +18,7 @@ class OrderManager(models.Manager):
         user    =   User.objects.get(id=2)
         cart    =   self.create(user=user,address=address,restaurant=restaurant)
         return cart
-    def count_totoal_item(self,cart_id):
-        item=self.get_user_item_from_cart(cart_id).orderitem_set.count()
-        if item == 0:
-            self.delete_cart_object()
-            return 0
-        return item
+    
     def order_total_price(self):
         return sum([self.orderitem_set.all()])
     def update_cart_object(self):
@@ -35,7 +30,7 @@ class OrderManager(models.Manager):
 class OrderitemManager(models.Manager):
     def add_item(self,order,item_id):
 
-        menu        =   Menu.objects.get(id=item_id) #get item from menu 
+        menu        =   Menu.objects.get(id=item_id,) #get item from menu 
         cartitem    =   self.filter(order=order)
         if cartitem.exists():
             if int(item_id) in [i.menu_id for i in cartitem]:

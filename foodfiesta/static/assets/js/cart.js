@@ -10,26 +10,17 @@ $(document).ready(function(){
         form.append('food_id',$(this).attr('data-catid'));
         var abc= $.ajax({
             url: window.location.href,
-            method: "POST",
-            dataType: "json",
-            data: form,
-            processData: false,
-            contentType:false,
+            method: "POST",dataType: "json",
+            data: form,processData: false,contentType:false,
         }).done(function(responce){
-            button.html('View in Cart');
-            button.attr('disabled','true')
-            alert("" + responce['message'])
+            button.html('Added in Cart').attr('disabled','true')
+            alert(responce['message'])
+            if(responce['total_item'])
+            {   $('#usercart').html(responce['total_item']); }
         })  
         .fail(function(xhr, status, errorThrown ){
             alert("error=  "+status+" -> "+errorThrown)
         });
-
         return false
     });
 });
-
-
-$( ".abcd" ).change(function() {
-    var abc= $(this).attr('value')
-    alert(abc );
-  });

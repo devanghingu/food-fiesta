@@ -37,13 +37,16 @@ class restaurant(View):
                         if int(cart.restaurant_id) == int(request.POST.get('rest_id')):  
                             item    =   Orderitem.objects.add_item(cart,request.POST.get('food_id'))
                             if item:
-                                return JsonResponse(status=201,data={'message':'item added in cart'})
+                                total_item=cart.orderitem_set.count()
+                                return JsonResponse(status=201,data={'message':'item added in cart','total_item':total_item})
                             return JsonResponse(status=201,data={'message':'item already in cart'})
                         else:
                             cart.delete()
                     cart    =   Order.objects.create_cart_object(user_id,rest_online)
                     item    =   Orderitem.objects.add_item(cart,request.POST.get('food_id'))
-                    return JsonResponse(status=201,data={'message':'item added in cart'}) 
+                    
+                    total_item=cart.orderitem_set.count()
+                    return JsonResponse(status=201,data={'message':'item added in cart','total_item':total_item}) 
                 return JsonResponse(status=200,data={'message':'item not available at moment'})
             return JsonResponse(status=200,data={'message':'Opps..!! Restaurant is offline currently.'})
 

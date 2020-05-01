@@ -110,18 +110,18 @@
                                                                                 </div>
                                                                                 <div class="ord-btn">
                                                                                     {% if item.available and restaurant.open == True %}
-                                                                                        <button class="btn btn-danger cartbutton"  title="cart" itemprop="url" data-catid="{{item.id}}">
-                                                                                        {% if item.id in cartitem %}
-                                                                                            view in Cart{% else %}Add to cart{% endif %}    </button>
+                                                                                        {% if item.id in cartitem %}    
+                                                                                            <button class="btn btn-danger cartbutton"  title="cart" itemprop="url" data-catid="{{item.id}}" disabled='true'>Added in Cart</button>
+                                                                                        {% else %}
+                                                                                            <button class="btn btn-danger cartbutton"  title="cart" itemprop="url" data-catid="{{item.id}}">Add to Cart</button>
+                                                                                        {% endif %}
                                                                                     {% else %}
-                                                                                    <a class="btn btn-default" href="#" title="not Available" disabled="true">Not Available</a>
-
+                                                                                        <a class="btn btn-default" href="#" title="not Available" disabled="true">Not Available</a>
                                                                                     {% endif %}
                                                                                 </div>
                                                                             </div>
                                                                         </li>
                                                                         {% endfor %}
-
                                                                     </ul>
                                                                 </div>
                                                                 <div class="dishes-list-wrapper">
