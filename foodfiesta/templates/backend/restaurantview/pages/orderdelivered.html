@@ -59,7 +59,7 @@
                         <td>{{ object.total_price }}</td>
                         <td>
                           <a href="{% url 'restaurantview:invoice' object.id %}" title="Order Invoice" class="badge badge-dark active"><i class="fas fa-receipt"></i></a>
-                          <a class="badge badge-success" title="Place Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=4 %}"><i class="fa fa-undo"></i></a>
+                          <a class="badge badge-success placed" title="Place Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=4 %}"><i class="fa fa-undo"></i></a>
                         </td>
                       </tr>
                       {% endfor %}
@@ -88,3 +88,19 @@
 
   </main>
 {% endblock main%}
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure to ${this.title}`)
+        if(!result){ event.preventDefault()}
+      } 
+
+      const placedBtn   = document.getElementsByClassName('placed'); 
+      for(let i=0;i<placedBtn.length;i++){
+        placedBtn[i].addEventListener('click',openAlert);
+      }
+
+  </script>
+{% endblock psscript %}

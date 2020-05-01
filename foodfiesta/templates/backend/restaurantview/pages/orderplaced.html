@@ -59,8 +59,8 @@
                         <td>{{ object.total_price }}</td>
                         <td>
                           <a href="{% url 'restaurantview:invoice' object.id %}" title="Order Invoice" class="badge badge-dark active"><i class="fas fa-receipt"></i></a>
-                          <a class="badge badge-success" title="Accept Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=1 %}"><i class="fa fa-check-circle"></i></a>
-                          <a class="badge badge-danger" title="Reject Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=2 %}"><i class="fa fa-ban"></i></a>
+                          <a class="badge badge-success placed" title="Accept Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=1 %}"><i class="fa fa-check-circle"></i></a>
+                          <a class="badge badge-danger rejected" title="Reject Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=2 %}"><i class="fa fa-ban"></i></a>
                         </td>
                       </tr>
                       {% endfor %}
@@ -89,3 +89,24 @@
 
   </main>
 {% endblock main%}
+
+{% block psscript %}
+  <script>
+    'use strict';
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure to ${this.title}`)
+        if(!result){ event.preventDefault()}
+      } 
+
+      const rejectedBtn   = document.getElementsByClassName('rejected'); 
+      for(let i=0;i<rejectedBtn.length;i++){
+        rejectedBtn[i].addEventListener('click',openAlert);
+      }
+
+      const placedBtn   =document.getElementsByClassName('placed');
+      for(let i=0;i<placedBtn.length;i++){
+        placedBtn[i].addEventListener('click',openAlert);
+      }
+  </script>
+{% endblock psscript %}
+  

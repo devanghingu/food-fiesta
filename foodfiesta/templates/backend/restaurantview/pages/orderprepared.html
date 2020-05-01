@@ -28,7 +28,7 @@
             {% include 'backend/restaurantview/message.html'%}
             <div class="ms-panel">
               <div class="ms-panel-header">
-                <h6>Rejected Order List</h6>
+                <h6>Prepared Order List</h6>
               </div>
               <div class="ms-panel-body">
                 <div class="table-responsive">
@@ -53,13 +53,13 @@
                         <td>{{ object.address.address|title }}</td>
                         <td>{{ object.address.contact }}</td>
                         <td>
-                          <span class="badge badge-secondary">Rejected</span> 
+                          <span class="badge badge-secondary">Prepared</span> 
                         </td>
                         <td>{{ object.date }}</td>
                         <td>{{ object.total_price }}</td>
                         <td>
                           <a href="{% url 'restaurantview:invoice' object.id %}" title="Order Invoice" class="badge badge-dark active"><i class="fas fa-receipt"></i></a>
-                          <a class="badge badge-success placed" title="Place Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=4 %}"><i class="fa fa-undo"></i></a>
+                          <a class="badge badge-success delivered" title="Delivery Order" href="{% url 'restaurantview:changeorderstatus' pk=object.id change_to=3 %}"><i class="fa fa-check-circle"></i></a>
                         </td>
                       </tr>
                       {% endfor %}
@@ -87,20 +87,20 @@
     {% endif %}
 
   </main>
-{% endblock main%}  
+{% endblock main%}
+
 
 {% block psscript %}
   <script>
-      'use strict';
+    'use strict';
       const openAlert = function(event){
         const result  = confirm(`Are you sure to ${this.title}`)
         if(!result){ event.preventDefault()}
       } 
 
-      const placedBtn   = document.getElementsByClassName('placed'); 
-      for(let i=0;i<placedBtn.length;i++){
-        placedBtn[i].addEventListener('click',openAlert);
+      const deliveredBtn   = document.getElementsByClassName('delivered'); 
+      for(let i=0;i<deliveredBtn.length;i++){
+        deliveredBtn[i].addEventListener('click',openAlert);
       }
-
   </script>
 {% endblock psscript %}
