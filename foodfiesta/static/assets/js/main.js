@@ -216,7 +216,7 @@ $(document).ready(function(){
 
   //===== Touch Spin =====//
   if ($.isFunction($.fn.TouchSpin)) {
-    $('input.qty').TouchSpin({});
+    $('input.qty').TouchSpin({min: 1,max: 10});
   }
 
   //===== Owl Carousel =====//

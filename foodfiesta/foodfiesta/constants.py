@@ -6,14 +6,14 @@ ACCEPTED  = 1
 REJECTED  = 2
 DELIVERED = 3
 PLACED    = 4
-# 
+#
 ORDER_STATUS =(
     (PENDING,'Pending'),
     (ACCEPTED,'Accepted'),
     (REJECTED,'Rejected'),
     (DELIVERED,'Delivered'),
     (PLACED,'placed')
-    ) 
+    )
 #Delivery Person
 
 AVAILABLE     = True
