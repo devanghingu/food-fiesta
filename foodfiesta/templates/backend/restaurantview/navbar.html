@@ -16,6 +16,7 @@
       <li class="ms-nav-item ms-search-form pb-0 py-0">
         <form class="ms-form" method="post">
           <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+            {% csrf_token %}
             <input type="search" class="ms-form-input" name="search" placeholder="Search here..." value="">
             <i class="flaticon-search text-disabled"></i>
           </div>

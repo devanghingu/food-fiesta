@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls import url
 from restaurantview.views import (Home,Profile,Invoice,
-                                OrderPlacedListView,OrderAcceptedListView,ChangeOrderStatus,OrderRejectedListView,OrderDeliveredListView,
+                                OrderPlacedListView,OrderAcceptedListView,ChangeOrderStatus,OrderRejectedListView,OrderDeliveredListView,OrderPreparedListView,
                                 MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,
                                 EditFoodDeleteView,AddFoodItemCreateView,
                                 AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
@@ -29,6 +29,7 @@ urlpatterns = [
     path('<int:pk>/<int:change_to>/changeorderstatus',ChangeOrderStatus.as_view(),name='changeorderstatus'),
     path('orderplaced',OrderPlacedListView.as_view(),name='orderplaced'),
     path('orderaccepted',OrderAcceptedListView.as_view(),name='orderaccepted'),
+    path('orderprepared',OrderPreparedListView.as_view(),name='orderprepared'),
     path('orderrejected',OrderRejectedListView.as_view(),name='orderrejected'),
     path('orderdelivered',OrderDeliveredListView.as_view(),name='orderdelivered'),
   

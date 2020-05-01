@@ -152,3 +152,5 @@ MESSAGE_TAGS = {
     messages.ERROR: "alert-danger",
 }
 
+
+

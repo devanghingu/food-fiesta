@@ -1,6 +1,15 @@
 {% extends 'backend/restaurantview/base.html' %}
 
 {% load static %}
+
+{% block psstyle %}
+  <style>
+    table i{
+      margin-right:0px !important;
+    }
+  </style>
+{% endblock psstyle %}
+
 {% block main %}
 <!-- Main Content -->
 <main class="body-content">
@@ -30,6 +39,7 @@
                           <th scope="col">Email</th>
                           <th scope="col">Total Order</th>
                           <th scope="col">Avil.. Status</th>
+                          <th scope="col">Detail</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -45,7 +55,9 @@
                             {% else %}
                             <span class="badge badge-primary">No Available</span>
                             {% endif%}
-                            
+                          </td>
+                          <td>
+                            <a href="{% url 'restaurantview:deliverydetail' object.id %}" title="Order Invoice" class="badge badge-secondary active"><i class="fas fa-info-circle"></i></a>
                           </td>
                         </tr>
                         {% endfor %}

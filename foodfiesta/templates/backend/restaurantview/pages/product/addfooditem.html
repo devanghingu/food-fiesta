@@ -100,7 +100,7 @@
               <form method="POST" class='needs-validation clearfix' enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button class="btn btn-secondary d-block" type="submit">Add</button>
+                <button class="btn btn-secondary d-block add-food-item" type="submit">Add Food Item</button>
               </form>
             </div>
           </div>
@@ -115,3 +115,20 @@
   </main>
 
 {% endblock main %}
+
+
+{% block psscript %}
+  <script>
+    'use strict';
+      const openAlert = function(event){
+        const resrult  = confirm(`Are you sure to Add Food Item, This item able to add another Resturant`)
+        if(!result){ event.preventDefault()}
+      } 
+
+      const addFoodItemBtn   = document.getElementsByClassName('add-food-item'); 
+      for(let i=0;i<addFoodItemBtn.length;i++){
+        addFoodItemBtn[i].addEventListener('click',openAlert);
+      }
+  </script>
+{% endblock psscript %}
+  

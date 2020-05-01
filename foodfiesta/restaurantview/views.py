@@ -1,27 +1,30 @@
 #django
-from django.shortcuts              import redirect, render,get_object_or_404
-from django.views                  import View
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic          import UpdateView,CreateView,ListView,DetailView,DeleteView
-from django.urls                   import reverse_lazy
-from django.contrib                import messages
-from django.contrib.auth.models    import Group
-from django.utils                  import timezone
+from django.shortcuts               import redirect, render,get_object_or_404
+from django.views                   import View
+from django.contrib.messages.views  import SuccessMessageMixin
+from django.views.generic           import UpdateView,CreateView,ListView,DetailView,DeleteView
+from django.urls                    import reverse_lazy
+from django.contrib                 import messages
+from django.contrib.auth.models     import Group
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators        import method_decorator
 #python core
 import random
 
 # site specific module
 from foodfiesta.constants   import (CLOSE,OPEN,ACTIVE,DEACTIVE,PENDING,AVAILABLE,NOT_AVAILABLE,
-                                  PLACED,ACCEPTED,REJECTED,DELIVERED,ORDER_STATUS)
+                                  PLACED,ACCEPTED,REJECTED,DELIVERED,PREPARED,ORDER_STATUS)
 from adminview.models       import Fooditem,CancelRestaurantRequest
 from restaurantview.models  import Restaurant,Menu,Delivery
 from cart.models            import Order,Orderitem
 from accounts.models        import User
 from .forms                 import ResturantRemoveForm,DeliveryPersonForm
+from .decorators            import check_is_restaurant
 
 #template prefix constant
 TEMPLATE_PATH = 'backend/restaurantview/'
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Home(View):
     def get(self,request,*args, **kwargs):
         res = Restaurant.objects.filter(user=request.user,parent=None)[0]
@@ -32,6 +35,7 @@ class Home(View):
 
 #Profile / Restaurant CRUD --start--
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Profile(View):
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'pages/product/restaurant-profile.html',{
@@ -42,6 +46,7 @@ class Profile(View):
 
 #Food / Menu CRUD --start--
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class MenuListView(ListView):
     ''' Menu Of Restaurent Food Listing In Card Using ListView '''
     model         =  Menu
@@ -52,6 +57,7 @@ class MenuListView(ListView):
         return Menu.objects.filter(restaurant=self.request.session.get('restaurant'))
     
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class AddFoodCreateView(CreateView):
     ''' Menu Of Restaurent  Create / Add New Food Item In Site Using CreateView '''
     model         = Menu
@@ -67,18 +73,22 @@ class AddFoodCreateView(CreateView):
         return super().form_valid(form)
     
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class FoodDetailView(DetailView):
     ''' Menu Of Restaurent  Detailt / Description of Food Using DetailView '''
     model         = Menu
     template_name = TEMPLATE_PATH+'pages/product/fooddetail.html'
 
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class DeleteFoodDeleteView(DeleteView):
     ''' Delete Food from Menu Using DeteleView '''
     model         = Menu
     template_name = TEMPLATE_PATH+'pages/product/deletefood.html'
     success_url   = reverse_lazy('restaurantview:menu')
 
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class EditFoodDeleteView(UpdateView):
     ''' Edit Food Detailt / Description / Price / Quantity of Food Using EditView '''
     model       = Menu
@@ -90,6 +100,7 @@ class EditFoodDeleteView(UpdateView):
 
 # Foositem / NewFood Status CRUD --start--
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class AddFoodItemCreateView(SuccessMessageMixin,CreateView):
     ''' Menu Of Restaurent  Create / Add Food In Menu Using CreateView '''
     model           = Fooditem
@@ -104,19 +115,21 @@ class AddFoodItemCreateView(SuccessMessageMixin,CreateView):
 
 # Order / Order Status CRUD --start--
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class ChangeOrderStatus(View):
 
     def get(self,request,*args, **kwargs):
         called_page_url = request.META.get('HTTP_REFERER').split('?')[0]
         order = get_object_or_404(Order,id=self.kwargs.get('pk'))
         change_to = {0:PENDING,
-                    4:PLACED,
                     1:ACCEPTED,
+                    2:REJECTED,
                     3:DELIVERED,
-                    2:REJECTED}
+                    4:PLACED,
+                    5:PREPARED}
                     
         to_status = self.kwargs.get('change_to')
-        if to_status == ACCEPTED:
+        if to_status == PREPARED:
             delivery_person      = Delivery.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=AVAILABLE)
             if delivery_person.count()>0:
                 delivery_person_list   = list(delivery_person.values_list('id',flat=True))
@@ -141,6 +154,7 @@ class ChangeOrderStatus(View):
         return redirect(called_page_url)   
 
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class OrderPlacedListView(ListView):
     ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
     model         = Order
@@ -151,8 +165,9 @@ class OrderPlacedListView(ListView):
         return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=PLACED).order_by('-date')
 
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class OrderAcceptedListView(ListView):
-    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    ''' Accepted Order Of Restaurent Food Listing In Details Using ListView '''
     model         = Order
     template_name = TEMPLATE_PATH+'pages/orderaccepted.html'
     paginate_by   = 8
@@ -161,17 +176,20 @@ class OrderAcceptedListView(ListView):
         return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=ACCEPTED).order_by('-date')
 
 
-class OrderRejectedListView(ListView):
-    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
+class OrderPreparedListView(ListView):
+    ''' Prepared Order Of Restaurent Food Listing In Details Using ListView '''
     model         = Order
-    template_name = TEMPLATE_PATH+'pages/orderrejected.html'
+    template_name = TEMPLATE_PATH+'pages/orderprepared.html'
     paginate_by   = 8
 
     def get_queryset(self):
-        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=REJECTED).order_by('-date')
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=PREPARED).order_by('-date')
 
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class OrderDeliveredListView(ListView):
-    ''' Place Order Of Restaurent Food Listing In Details Using ListView '''
+    ''' Delivered Order Of Restaurent Food Listing In Details Using ListView '''
     model         = Order
     template_name = TEMPLATE_PATH+'pages/orderdelivered.html'
     paginate_by   = 8
@@ -180,6 +198,18 @@ class OrderDeliveredListView(ListView):
         return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=DELIVERED).order_by('-date')
 
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
+class OrderRejectedListView(ListView):
+    ''' Rejected Order Of Restaurent Food Listing In Details Using ListView '''
+    model         = Order
+    template_name = TEMPLATE_PATH+'pages/orderrejected.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return Order.objects.filter(restaurant__id=self.request.session.get('restaurant'),status=REJECTED).order_by('-date')
+
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Invoice(ListView):
     ''' Details About Order in Invoice Card Using ListView '''
     model         = Orderitem
@@ -199,6 +229,8 @@ class Invoice(ListView):
 
 
 #Resturant Views
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class DashBoard(View):
     ''' Change Dashboard to one branch to another '''
     def get(self,request,*args, **kwargs):
@@ -208,6 +240,8 @@ class DashBoard(View):
             request.session['restaurant']=kwargs.get('pk')
         return render(request,TEMPLATE_PATH+'index.html') 
 
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class ChangeStatus(View):
 
     def get(self,request,*args, **kwargs):
@@ -221,6 +255,8 @@ class ChangeStatus(View):
         resaurant.save()
         return redirect('restaurantview:profile')
 
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class RestaurantList(ListView):
     ''' Menu Of Restaurent Food Listing In Card Using ListView '''
     model         = Restaurant
@@ -232,6 +268,7 @@ class RestaurantList(ListView):
 
 
     
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class AddRestaurantCreateView(CreateView):
     ''' Menu Of Restaurent  Create / Add New Food Item In Site Using CreateView '''
     model         = Restaurant
@@ -247,12 +284,14 @@ class AddRestaurantCreateView(CreateView):
         messages.success(self.request,'Branch Added Succefully..!')
         return super().form_valid(form)
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class ResturantDetailView(DetailView):
     ''' Branch Of Restaurent  Detailt / Description of that Branch Using DetailView '''
     model         = Restaurant
     template_name = TEMPLATE_PATH+'pages/product/restaurantdetail.html'
 
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class DeleteRestaurantDeleteView(View):
     ''' Delete Branch Resturant from Menu Using View '''
     def get(self,request,*args, **kwargs):
@@ -274,6 +313,7 @@ class DeleteRestaurantDeleteView(View):
         Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
         return redirect('restaurantview:restaurant')
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class EditRestaurantUpdateView(SuccessMessageMixin,UpdateView):
     ''' Edit Restaurant and branch Using UpdateView '''
     model           = Restaurant
@@ -286,6 +326,7 @@ class EditRestaurantUpdateView(SuccessMessageMixin,UpdateView):
 
 # Customer CRUD --start--
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Customer(ListView):
     model         = Order
     template_name = TEMPLATE_PATH+'pages/product/customerlist.html'
@@ -297,6 +338,8 @@ class Customer(ListView):
 
 # Customer CRUD --end--
 # Delivery Person CRUD --start--
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class DeliveryList(ListView):
     ''' Delivery Pesron Listing In Tabel Using ListView '''
     model         = Delivery
@@ -307,6 +350,7 @@ class DeliveryList(ListView):
         return Delivery.objects.filter(restaurant=self.request.session.get('restaurant'))
     
 
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class AddDeliveryPersonCreateView(CreateView):
     ''' Delivery Person Create / Add New User and Delivery In Site Using CreateView '''
     form_class    = DeliveryPersonForm
@@ -324,11 +368,11 @@ class AddDeliveryPersonCreateView(CreateView):
         return super().form_valid(form)
 
 
-
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
 class DeliveryDetailView(DetailView):
     ''' Delivery person Of Restaurent  Detailt / Description of that Delivery Using DetailView '''
     model         = Delivery
-    template_name = TEMPLATE_PATH+'pages/product/deliverytdetail.html'
+    template_name = TEMPLATE_PATH+'pages/product/deliverydetail.html'
     
 # Delivery--end--  
 #Delivery Dashboard
