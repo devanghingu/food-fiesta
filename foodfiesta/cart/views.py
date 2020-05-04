@@ -41,67 +41,47 @@ class cart(View):
 class restaurant(View):
     def get(self, request, *args, **kwargs):
         context = {}
-        rest = Restaurant.objects.filter(id=kwargs["rest_id"])
-        if rest.exists():
-            context["restaurant"] = rest = rest.get()
-            context["cartitem"] = [
-                i.menu_id for i in Order.objects.get_user_item_from_cart(
-                    2).orderitem_set.all()
-            ]
-            return render(request, "frontend/user_restaurant.html", context)
 
-        return render(request, "frontend/404.html")
-
+        try:
+            print(kwargs['rest_id'])
+        except KeyError:
+            return redirect('/')
+        if self.request.user.is_authenticated:
+            rest = Restaurant.objects.filter(id=kwargs["rest_id"])
+            if rest.exists():
+                context["restaurant"] = rest = rest.get()
+                cart=Order.objects.get_user_item_from_cart(self.request.user.id)
+                if cart:
+                    context["cartitem"] = [i.menu_id for i in cart.orderitem_set.all()]
+                return render(request, "frontend/user_restaurant.html", context)
+            return render(request, "frontend/404.html")
+        return redirect('login')
     def post(self, request, *args, **kwargs):
-        user_id = 2
-        if request.is_ajax():
-            cart = Order.objects.get_user_item_from_cart(
-                user_id)  # get user item from cart
-            rest_online = Restaurant.objects.check_restaurent_online(
-                request.POST.get("rest_id"))
+        if request.is_ajax() and self.request.user.is_authenticated:
+            cart = Order.objects.get_user_item_from_cart(self.request.user.id)  # get user item from cart
+            rest_online = Restaurant.objects.check_restaurent_online(request.POST.get("rest_id",None))
             if rest_online:
                 # item available
-                if rest_online.menu_set.filter(id=request.POST.get("food_id"),
-                                               available=True):
+                if rest_online.menu_set.filter(id=request.POST.get("food_id",None),available=True):
                     if cart:  # when cart is available
-                        if int(cart.restaurant_id) == int(
-                                request.POST.get("rest_id")):
-                            item = Orderitem.objects.add_item(
-                                cart, request.POST.get("food_id"))
+                        if int(cart.restaurant_id) == int(request.POST.get("rest_id",None)):
+                            item = Orderitem.objects.add_item(cart, request.POST.get("food_id",None))
                             if item:
                                 total_item = cart.orderitem_set.count()
-                                return JsonResponse(
-                                    status=201,
-                                    data={
-                                        "message": "item added in cart",
-                                        "total_item": total_item,
-                                    },
-                                )
-                            return JsonResponse(
-                                status=201,
-                                data={"message": "item already in cart"})
+                                return JsonResponse(status=201,data={"message": "item added in cart","total_item": total_item})
+                            return JsonResponse(status=201,data={"message": "item already in cart"})
                         else:
                             cart.delete()
-                    cart = Order.objects.create_cart_object(
-                        user_id, rest_online)
-                    item = Orderitem.objects.add_item(
-                        cart, request.POST.get("food_id"))
-
-                    total_item = cart.orderitem_set.count()
-                    return JsonResponse(
-                        status=201,
-                        data={
-                            "message": "item added in cart",
-                            "total_item": total_item,
-                        },
-                    )
+                    cart = Order.objects.create_cart_object(self.request.user.id, rest_online)
+                    if cart:
+                        item = Orderitem.objects.add_item(cart, request.POST.get("food_id"))
+                        total_item = cart.orderitem_set.count()
+                        return JsonResponse(status=201,data={"message": "item added in cart","total_item": total_item})
+                    return JsonResponse(status=201,data={'message':'Please select your Default address before adding cart'})
                 return JsonResponse(
-                    status=200,
-                    data={"message": "item not available at moment"})
+                    status=200,data={"message": "item not available at moment"})
             return JsonResponse(
-                status=200,
-                data={"message": "Opps..!! Restaurant is offline currently."},
-            )
+                status=200,data={"message": "Opps..!! Restaurant is offline currently."})
 
 
 def modify_quantity(request):
@@ -154,9 +134,7 @@ def placeorder(request):
 class OrderList(ListView):
     model = Order
     template_name = "frontend/myorderlist.html"
-
     # paginate_by = 100  # if pagination is desired
-
     def get_queryset(self):
         return Order.objects.filter(user=self.get_context_data())
 

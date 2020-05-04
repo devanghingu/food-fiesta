@@ -20,9 +20,9 @@ $(document).ready(function () {
       contentType: false,
     })
       .done(function (responce) {
-        button.html("Added in Cart").attr("disabled", "true");
         alert(responce["message"]);
         if (responce["total_item"]) {
+          button.html("Added in Cart").attr("disabled", "true");
           $("#usercart").html(responce["total_item"]);
         }
       })

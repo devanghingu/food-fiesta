@@ -6,5 +6,7 @@ from django.db import models
 
 class AddressManager(models.Manager):
     def get_user_address(self,user_id):
-        # user    =   User.objects.get(id=3)
-        return self.filter(user__id=user_id,default=True).first()
+        address=self.filter(user__id=user_id,default=True)
+        if address.exists():
+             return address.first()
+        return False
