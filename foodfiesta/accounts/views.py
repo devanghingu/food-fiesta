@@ -26,8 +26,13 @@ class CustomLoginView(LoginView):
     def post(self,request,*args,**kwargs):
         response=super().post(request,*args,**kwargs)
         if request.user.groups.filter(name='staff_group').exists():
-            print('stafffffffffff')
-            return redirect('accounts:index')
+            if Restaurant.objects.filter(user=request.user,parent=None,active=True):
+                print('stafffffffffff')
+                return redirect('accounts:index')
+            else:
+                messages.info(request, "Your Restaurant request is in process")
+                return redirect('accounts:index')
+                
         elif request.user.groups.filter(name='delivery_group').exists():
             print('deliveryyyyyy')
             return redirect('accounts:index')
