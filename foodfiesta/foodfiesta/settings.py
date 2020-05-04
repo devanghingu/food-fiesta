@@ -30,21 +30,25 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "django.contrib.sites",
-    "restaurantview.apps.RestaurantviewConfig",
-    "accounts.apps.AccountsConfig",
-    "adminview.apps.AdminviewConfig",
-    "cart.apps.CartConfig",
-    "cardview.apps.CardviewConfig",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount', 
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+
+    'restaurantview.apps.RestaurantviewConfig',
+    'accounts.apps.AccountsConfig',
+    'adminview.apps.AdminviewConfig',
+    'cart.apps.CartConfig',
+    'cardview.apps.CardviewConfig',
 ]
 
 AUTHENTICATION_BACKENDS = (
@@ -138,6 +142,8 @@ USE_TZ = True
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_REDIRECT_URL = "/"
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
