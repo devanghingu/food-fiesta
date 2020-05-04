@@ -3,27 +3,28 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Costic Dashboard</title>
+  <title>Restaurant Dashboard</title>
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{% static 'assets/vendors/iconic-fonts/font-awesome/css/all.min.css' %}" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'assets/vendors/iconic-fonts/flat-icons/flaticon.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css' %}">
+  <link href="{% static 'backend/adminview/assets/vendors/iconic-fonts/font-awesome/css/all.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'backend/adminview/assets/vendors/iconic-fonts/flat-icons/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/adminview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css' %}">
+  <link rel="stylesheet" href="{% static 'backend/adminview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css' %}">
   <!-- Bootstrap core CSS -->
-  <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/adminview/assets/css/bootstrap.min.css' %}" rel="stylesheet">
   <!-- jQuery UI -->
-  <link href="{% static 'assets/css/jquery-ui.min.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/adminview/assets/css/jquery-ui.min.css' %}" rel="stylesheet">
   <!-- Page Specific CSS (Slick Slider.css) -->
-  <link href="{% static 'assets/css/slick.css' %}" rel="stylesheet">
-  <link href="{% static 'assets/css/datatables.min.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/adminview/assets/css/slick.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/adminview/assets/css/datatables.min.css' %}" rel="stylesheet">
   <!-- Costic styles -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/adminview/assets/css/style.css' %}" rel="stylesheet">
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'backend/adminview/favicon.ico' %}">
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -52,59 +53,66 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="index.html"> <img src="{% static 'assets/img/costic/costic-logo-84x41.png" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="{% url 'adminview:adminview_home' %}"> <img src="{% static 'backend/adminview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
       <!-- category -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#category" aria-expanded="false" aria-controls="product">
-             <span><i class="fa fa-archive fs-16"></i>Categoies </span>
+      <li class="menu-item ">
+        <a class="{% if request.resolver_match.url_name == 'adminview_home' %}active{% endif%}" href="#" class="has-chevron Active" data-toggle="collapse" data-target="#category" aria-expanded="false" aria-controls="product">
+             <span><i class="fas fa-list-ol fs-16"></i>Categories </span>
          </a>
         <ul id="category" class="collapse" aria-labelledby="category" data-parent="#side-nav-accordion">
             
-              <li> <a href="#">Categories Grid</a> </li>
-              <li> <a href="#">Add category Item</a> </li>
-              <li> <a href="#">category Detail</a> </li>
+              <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allcategory' %}">&nbsp;&nbsp;Categories Grid</a> </li>
+              <li><a class="fa fa-plus-circle fs-16" href="{% url 'adminview:category_create' %}">&nbsp;&nbsp; Add category Item</a></li>
+              
         </ul>
       </li>
       <!-- category end --> 
 
       <!-- foods -->
       <li class="menu-item">
-          <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false" aria-controls="product">
-               <span><i class="fa fa-archive fs-16"></i>Food Items </span>
+          <a href="#" class="{% if request.resolver_match.url_name == 'allfooditem' %}active{% endif%}"class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false" aria-controls="product">
+               <span><i class="fas fa-utensils fs-16"></i>Food Items </span>
            </a>
           <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
               
-                <li> <a href="#">Food Items Grid</a> </li>
-                <li> <a href="#">Add Food Item</a> </li>
-                <li> <a href="#">Food Detail</a> </li>
+                <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allfooditem' %}">&nbsp;&nbsp;Food Items Grid</a> </li>
+                <li> <a class="fa fa-plus-circle fs-16" href="{% url 'adminview:fooditem_create' %}">&nbsp;&nbsp; Add Food Item</a> </li>
+                
           </ul>
       </li>
       <!-- food end -->
 
       <!-- orders -->
       <li class="menu-item">
-                <a href="#">
+                <a class="{% if request.resolver_match.url_name == 'allorders' %}active{% endif%}" href="{% url 'adminview:allorders' %}">
                  <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
                 </a>
               </li>
       <!-- orders end -->
 
     <!-- restaurants -->
-  <li class="menu-item">
-                      <a href="#">
+                    <li class="menu-item">
+                      <a class="{% if request.resolver_match.url_name == 'allrestaurant' %}active{% endif%}" href="{% url 'adminview:allrestaurant' %}">
                         <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a class="{% if request.resolver_match.url_name == 'cancelrestaurant' %}active{% endif%}" href="{% url 'adminview:cancelrestaurant' %}">
+                        <span><i class="fa fa-tasks fs-16"></i>Cancel Restaurants List</span>
+                      </a>
+                    </li>
+                    
+  
             <!-- restaurants end -->
 
             <!-- customers-->
 
             <li class="menu-item">
-                <a href="#" >
+                <a href="{% url 'adminview:customerlist' %}" >
                      <span><i class="fas fa-user-friends fs-16"></i>Customers </span>
                  </a>
             </li>
@@ -113,20 +121,19 @@
 
             <!-- delivery -->
             <li class="menu-item">
-              <a href="#">
-                    <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
+              <a class="{% if request.resolver_match.url_name == 'deliverylist' %}active{% endif%}" href="{% url 'adminview:deliverylist' %}">
+                    <span><i class="fas fa-people-carry fs-16"></i>Delevery Persons</span>
               </a>
             </li>
             <!-- delivery-->
             <!-- city -->
               <li class="menu-item">
-                <a href="#" class="has-chevron" data-toggle="collapse" data-target="#city" aria-expanded="false" aria-controls="product">
-                    <span><i class="fa fa-archive fs-16"></i>Citys </span>
+                <a href="#" class="{% if request.resolver_match.url_name == 'allcity' %}active{% endif%}" class="has-chevron" data-toggle="collapse" data-target="#city" aria-expanded="false" aria-controls="product">
+                    <span><i class="fas fa-map-marker fs-16"></i>Citys </span>
                 </a>
                 <ul id="city" class="collapse" aria-labelledby="city" data-parent="#side-nav-accordion">
-                      <li> <a href="#">Citys Grid</a> </li>
-                      <li> <a href="#">Add city Item</a> </li>
-                      <li> <a href="#">city Detail</a> </li>
+                      <li> <a class="fa fa-list fs-16" href="{% url 'adminview:allcity' %}">&nbsp;&nbsp; Citys List</a> </li>
+                      <li> <a class="fa fa-plus-circle fs-16" href="{% url 'adminview:city_create' %}">&nbsp;&nbsp; Add City</a> </li>
                 </ul>
               </li>
             <!-- category end --> 
@@ -147,7 +154,7 @@
     </div>
 
     <div class="logo-sn logo-sm ms-d-block-sm">
-      <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="index.html"><img src="{% static 'assets/img/costic/costic-logo-84x41.png' %}" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="{% url 'adminview:adminview_home' %}"><img src="{% static 'assets/img/costic/costic-logo-84x41.png' %}" alt="logo"> </a>
     </div>
 
     <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
@@ -161,10 +168,10 @@
       </li>
 
       <li class="ms-nav-item ms-nav-user dropdown">
-        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="{% static 'assets/img/costic/customer-6.jpg' %}" alt="people"> </a>
+        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/adminview/assets/img/costic/customer-6.jpg' %}" alt="people"> </a>
         <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
           <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ request.user.username }}</span></h6>
           </li>
           <li class="dropdown-divider"></li>
           <li class="ms-dropdown-list">
@@ -173,7 +180,7 @@
           </li>
           <li class="dropdown-divider"></li>
           <li class="dropdown-menu-footer">
-            <a class="media fs-14 p-2" href="#"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+            <a class="media fs-14 p-2" href="{% url 'account_logout' %}"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
           </li>
         </ul>
       </li>
@@ -189,10 +196,29 @@
     <div class="ms-content-wrapper">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="db-header-title">Welcome, Anny</h1>
+          <h1 class="db-header-title">Welcome, {{ request.user.username }}</h1>
         </div>
         
         <!-- Food Orders -->
+        {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+
+        <div class="alert alert-success alert-outline " role="alert">
+          <i class="flaticon-tick-inside-circle"></i><strong>{{ message }} !</strong>
+        </div>
+        
+        
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+        {% block content %}
+          
+        
+          
         <div class="col-md-12">
           <div class="ms-panel">
             <div class="ms-panel-header">
@@ -204,11 +230,11 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                   <div class="ms-card no-margin">
                     <div class="ms-card-img">
-                      <img src="{% static 'assets/img/costic/food-5.jpg' %}" alt="card_img">
+                      <img src="{% static 'backend/adminview/assets/img/costic/food-5.jpg' %}" alt="card_img">
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href="#"><h6>Categories</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allcategory' %}"><h6>Categories</h6></a>
                       </div>
                     </div>
                   </div>
@@ -216,11 +242,11 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                   <div class="ms-card no-margin">
                     <div class="ms-card-img">
-                      <img src="{% static 'assets/img/costic/food-2.jpg' %}" alt="card_img">
+                      <img src="{% static 'backend/adminview/assets/img/costic/food-2.jpg' %}" alt="card_img">
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href="#"><h6>Food</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allfooditem' %}"><h6>Food Items</h6></a>
                       </div>
                     </div>
                   </div>
@@ -228,11 +254,11 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                   <div class="ms-card no-margin">
                     <div class="ms-card-img">
-                      <img src="{% static 'assets/img/costic/food-4.jpg' %}" alt="card_img">
+                      <img src="{% static 'backend/adminview/assets/img/costic/food-4.jpg' %}" alt="card_img">
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href=""><h6>Restaurants</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allrestaurant' %}"><h6>Restaurants</h6></a>
                       </div>
                     </div>
                   </div>
@@ -240,11 +266,11 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
                   <div class="ms-card no-margin">
                     <div class="ms-card-img">
-                      <img src="{% static 'assets/img/costic/food-3.jpg' %}" alt="card_img">
+                      <img src="{% static 'backend/adminview/assets/img/costic/food-3.jpg' %}" alt="card_img">
                     </div>
                     <div class="ms-card-body">
                       <div class="ms-card-heading-title">
-                          <a style="color:black;"href="#"><h6>Order</h6></a>
+                          <a style="color:black;"href="{% url 'adminview:allorders' %}"><h6>Order</h6></a>
                       </div>
                     </div>
                   </div>
@@ -254,40 +280,41 @@
             </div>
           </div>
         </div>
+        {% endblock content %}
         <!-- END/Food Orders -->
       </div>
     </div>
   </main>
   <!-- SCRIPTS -->
   <!-- Global Required Scripts Start -->
-  <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
-  <script src="{% static 'assets/js/popper.min.js' %}"></script>
-  <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'assets/js/perfect-scrollbar.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'backend/adminview/assets/js/popper.min.js' %}"></script>
+  <script src="{% static 'backend/adminview/assets/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'backend/adminview/assets/js/perfect-scrollbar.js' %}">
   </script>
-  <script src="{% static 'assets/js/jquery-ui.min.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/jquery-ui.min.js' %}">
   </script>
   <!-- Global Required Scripts End -->
   <!-- Page Specific Scripts Start -->
 
-  <script src="{% static 'assets/js/Chart.bundle.min.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/Chart.bundle.min.js' %}">
   </script>
-  <script src="{% static 'assets/js/widgets.js' %}"> </script>
-  <script src="{% static 'assets/js/clients.js' %}"> </script>
-  <script src="{% static 'assets/js/Chart.Financial.js' %}"> </script>
-  <script src="{% static 'assets/js/d3.v3.min.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/widgets.js' %}"> </script>
+  <script src="{% static 'backend/adminview/assets/js/clients.js' %}"> </script>
+  <script src="{% static 'backend/adminview/assets/js/Chart.Financial.js' %}"> </script>
+  <script src="{% static 'backend/adminview/assets/js/d3.v3.min.js' %}">
   </script>
-  <script src="{% static 'assets/js/topojson.v1.min.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/topojson.v1.min.js' %}">
   </script>
-  <script src="{% static 'assets/js/datatables.min.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/datatables.min.js' %}">
   </script>
-  <script src="{% static 'assets/js/data-tables.js' %}">
+  <script src="{% static 'backend/adminview/assets/js/data-tables.js' %}">
   </script>
   <!-- Page Specific Scripts Finish -->
   <!-- Costic core JavaScript -->
-  <script src="{% static 'assets/js/framework.js' %}"></script>
+  <script src="{% static 'backend/adminview/assets/js/framework.js' %}"></script>
   <!-- Settings -->
-  <script src="{% static 'assets/js/settings.js' %}"></script>
+  <script src="{% static 'backend/adminview/assets/js/settings.js' %}"></script>
 </body>
 
 </html>

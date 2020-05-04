@@ -2,6 +2,13 @@
 
 {% load static %}
 {% block main %}
+<style>
+  {% if object.pic %}
+  .ms-profile-cover{
+    background-image: url({{ object.pic.url }});
+  }
+  {% endif %}
+</style>
 <main class="body-content">
 
   <!-- Navigation Bar -->
@@ -9,12 +16,15 @@
 
   <!-- Body Content Wrapper -->
   <div class="ms-content-wrapper">
-
     <div class="ms-profile-overview">
       <div class="ms-profile-cover">
-        <img class="ms-profile-img" src="{% static 'backend/restaurantview/assets/img/costic/customer-5.jpg' %}" alt="people">
+        {% if object.user.profile %}
+          <img class="ms-profile-img" src="{{ object.user.profile.url }}" alt="people">
+        {% else %}
+          <img class="ms-profile-img" src="{% static 'backend/restaurantview/assets/img/costic/customer-5.jpg' %}" alt="people">
+        {% endif %}
         <div class="ms-profile-user-info">
-          <h4 class="ms-profile-username text-white">Chihoo Hwang</h4>
+          <h4 class="ms-profile-username text-white">{{ object.name }}</h4>
           <h2 class="ms-profile-role">Professional Cheff</h2>
         </div>
       </div>
@@ -24,21 +34,46 @@
     </div>
 
     <div class="row">
+      {% include 'backend/restaurantview/message.html'%}
       <div class="col-xl-7 col-md-12">
         <div class="ms-panel ms-panel-fh">
           <div class="ms-panel-body">
             <h2 class="section-title">About Me</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
-            </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
-            </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non elit nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-              Aenean luctus, justo id pellentesque imperdiet, augue metus ornare quam, in pulvinar massa erat nec dui. Nam at facilisis nulla.
+            <p>
+              {{ object.user.first_name|title }} is owner of {{ object.name }} Restaurant  
             </p>
           </div>
-
+          <div class="ms-panel-body">
+            <h2 class="section-title">Change Status</h2>
+            <table class="table ms-profile-information">
+              <tbody>
+                <tr>
+                  <th scope="row"><a href="{% url 'restaurantview:restaurantdetail' object.id %}" class="btn btn-info">Detail</a></th>
+                  <td>
+                      {% if object.open %}
+                        <a href="{% url 'restaurantview:status' %}" class="btn btn-primary close">Close</a> 
+                      {% else %}
+                      <a href="{% url 'restaurantview:status' %}" class="btn btn-secondary open">Open</a> 
+                      {% endif%}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+            <div class="ms-quick-stats">
+              <div class="ms-stats-grid">
+                <i class="fa fa-bullhorn"></i>
+                <p class="ms-text-dark">{{ object.order_set.count }}</p>
+                <span>Total Order</span>
+              </div>
+              <div class="ms-stats-grid">
+                <i class="fas fa-utensils"></i>
+                <p class="ms-text-dark">{{ object.menu_set.count }}</p>
+                <span>Recipes</span>
+              </div>
+            </div>
+            <hr>
+          </div>
         </div>
       </div>
       <div class="col-xl-5 col-md-12">
@@ -49,31 +84,37 @@
               <tbody>
                 <tr>
                   <th scope="row">Full Name</th>
-                  <td>Chihoo Hwang</td>
+                  <td>{{ object.name }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Birthday</th>
-                  <td>January 25th, 1996</td>
+                  <th scope="row">Parent Rastaurant</th>
+                  <td>{{ object.parent }}</td>
                 </tr>
                 <tr>
-                  <th scope="row">Language</th>
-                  <td>English (US)</td>
-                </tr>
-                <tr>
-                  <th scope="row">Website</th>
-                  <td>www.example.com</td>
+                  <th scope="row">Open Status</th>
+                  <td>
+                    {% if object.open %}
+                      <span class="badge badge-success">Open</span>
+                    {% else %}
+                      <span class="badge badge-danger">Close</span>
+                    {% endif%}
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">Phone Number</th>
-                  <td>+123 456 789</td>
-                </tr>
-                <tr>
-                  <th scope="row">Email Address</th>
-                  <td>example@mail.com</td>
+                  <td>{{ object.contact}}</td>
                 </tr>
                 <tr>
                   <th scope="row">Location</th>
-                  <td>New York, USA</td>
+                  <td>{{ object.address }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">City</th>
+                  <td>{{ object.city }}</td>
+                </tr>
+                <tr>
+                  <th scope="row"><a href="{% url 'restaurantview:deleterestaurant'  object.id %}" class="btn btn-primary">Remove</a></th>
+                  <td><a href="{% url 'restaurantview:editrestaurant'  object.id %}" class="btn btn-secondary">Edit</a></td>
                 </tr>
               </tbody>
             </table>
@@ -83,5 +124,18 @@
     </div>
   </div>
 </main>
+{% endblock main%}
 
-  {% endblock main%}
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const openBtn   = document.getElementsByClassName('open')[0] || document.getElementsByClassName('close')[0] ;
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure to ${openBtn.innerHTML} The Resturant`)
+        if(!result){ event.preventDefault()}
+      } 
+      openBtn.addEventListener('click',openAlert);
+  </script>
+{% endblock psscript %}
+  

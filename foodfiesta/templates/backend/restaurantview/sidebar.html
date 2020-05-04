@@ -3,12 +3,19 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="index.html"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:home' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
-
+      
+      <!-- Parent Branch -->
+      <!-- <li class="menu-item">
+        <a href="{% url 'restaurantview:home' %}">
+          <span><i class="fas fa-clipboard-list fs-16"></i>Main Branch DashBoard</span>
+        </a>
+      </li> -->
+      <!-- Parent Branch -->
       <!-- foods -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false"
@@ -18,31 +25,40 @@
         <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
           <li> <a href="{% url 'restaurantview:menu' %}">Menus Grid</a> </li>
-          <li> <a href="{% url 'restaurantview:addfood' %}">Add Food Item</a> </li>
-          <li> <a href="{% url 'restaurantview:fooddetail' %}">Food Detail</a> </li>
+          <li> <a href="{% url 'restaurantview:addfood' %}">Add Food Item</a> </li> 
         </ul>
       </li>
       <!-- food end -->
 
-      <!-- orders -->
+      <!-- Order -->
       <li class="menu-item">
-        <a href="{% url 'restaurantview:order' %}">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#order" aria-expanded="false"
+          aria-controls="order">
           <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
         </a>
+        <ul id="order" class="collapse" aria-labelledby="order" data-parent="#side-nav-accordion">
+
+          <li> <a href="{% url 'restaurantview:orderplaced' %}">Places Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderaccepted' %}">Accepted Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderprepared' %}">Prepared Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderdelivered' %}">Delivered Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderrejected' %}">Rejected Orders</a> </li> 
+        </ul>
       </li>
-      <!-- orders end -->
+      <!-- Order end -->
+
+
 
       <!-- restaurants -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
-          aria-controls="product">
+          aria-controls="restaurant">
           <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
         </a>
-        <ul id="restaurant" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
-
-          <li> <a href="pages/product/restaurantlist.html">Restaurants List</a> </li>
-          <li> <a href="pages/product/addrestaurant.html">Add Restaurant</a> </li>
-          <li> <a href="pages/product/restaurantdetail.html">Restaurant Detail</a> </li>
+        
+        <ul id="restaurant" class="collapse" aria-labelledby="restaurant" data-parent="#side-nav-accordion">
+          <li> <a href="{% url 'restaurantview:restaurant' %}">Restaurants List</a> </li>
+          <li> <a href="{% url 'restaurantview:addrestaurant' %}">Add Branch </a> </li>
         </ul>
       </li>
       <!-- restaurants end -->
@@ -50,33 +66,22 @@
       <!-- customers-->
 
       <li class="menu-item">
-        <a href="pages/customer/customerlist.html">
+        <a href="{% url 'restaurantview:customer' %}">
           <span><i class="fas fa-user-friends fs-16"></i>Customers </span>
         </a>
       </li>
       <!-- Customers  end -->
 
-
-      <!-- delivery -->
-      <li class="menu-item">
-        <a href="pages/sales.html">
-          <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
-        </a>
-      </li>
-      <!-- delivery-->
-
-
       <!-- delivery -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#delivery" aria-expanded="false"
           aria-controls="product">
-          <span><i class="fa fa-tasks fs-16"></i>Delivery Person</span>
+          <span><i class="fa fa-briefcase fs-16"></i>Delivery Person</span>
         </a>
         <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
-          <li> <a href="pages/product/deliverylist.html">Delivery List</a> </li>
-          <li> <a href="pages/product/adddelivery.html">Add Delivery Person</a> </li>
-          <li> <a href="pages/product/deliverydetail.html">Person Detail</a> </li>
+          <li> <a href="{% url 'restaurantview:delivery' %}">Delivery List</a> </li>
+          <li> <a href="{% url 'restaurantview:adddelivery' %}">Add Delivery Person</a> </li>
         </ul>
       </li>
       <!-- delivery end -->

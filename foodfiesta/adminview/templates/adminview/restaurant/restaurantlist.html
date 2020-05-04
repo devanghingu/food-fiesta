@@ -1,0 +1,70 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+
+{% if object_list %}
+
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+       <center><h6>Restaurant List</h6></center> 
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">Restaurant ID</th>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Restaurant Owner</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Status</th>
+                <th scope="col">Change Status</th>
+            </tr>
+            </thead>
+            
+            {% for res in object_list  %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ res.id }}</th>
+                <td>{{ res.name }}</td>
+                <td> {{ res.user.username }}</td>
+                <td>{{ res.address }}</td>
+                <td>{{ res.city }}</td>
+                <td>{{ res.contact }}</td>
+                <td>
+                {% if res.active == True %}
+                <span class="badge badge-success p-2">Active</span>
+                {% else %}
+                <span class="badge badge-primary p-2">Deactive</span>
+                {% endif %}
+                    </td>
+                <td> 
+                {% if res.active == False %}
+                <span class="badge badge-success p-1"><a style="color: white;" href="{% url 'adminview:acceptrequest' id=res.id %}">Active</a></span>
+                {% else %}
+                <span class="badge badge-primary p-1"><a style="color: white;" href="{% url 'adminview:acceptrequest' id=res.id %}">Deactivate</a></span>
+                {% endif %}
+                     </td>
+              </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+    </div>
+   </div>
+ </div>
+</div>
+         {% else %}
+         
+         <div class="alert alert-danger w-50" role="alert">
+            <i class="flaticon-alert-1"></i> <strong>Sorry!</strong> No Restaurants are there. 
+          </div>
+
+{% endif %}
+
+{% endblock content %}
+    
