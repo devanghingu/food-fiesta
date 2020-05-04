@@ -5,7 +5,7 @@ from restaurantview.views import (Home,Profile,Invoice,
                                 MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,
                                 EditFoodDeleteView,AddFoodItemCreateView,
                                 AddRestaurantCreateView,DeleteRestaurantDeleteView,DashBoard,
-                                RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatus,
+                                RestaurantList,EditRestaurantUpdateView,ResturantDetailView,ChangeStatusOpenClose,
                                 Customer,DeliveryList,AddDeliveryPersonCreateView,DeliveryDetailView,DeliveryHome,MarkAsDelivered,ChangeStatus)
 from django.contrib.auth.decorators import user_passes_test
 
@@ -43,7 +43,7 @@ urlpatterns = [
     path('<int:pk>/editrestaurant',EditRestaurantUpdateView.as_view(),name='editrestaurant'),
     path('<int:pk>/deleterestaurant',DeleteRestaurantDeleteView.as_view(),name='deleterestaurant'),
     path('<int:pk>/restaurantdetail',ResturantDetailView.as_view(),name='restaurantdetail'),
-    path('status',ChangeStatus.as_view(),name='status'),
+    path('status',ChangeStatusOpenClose.as_view(),name='status'),
     path('<int:pk>/dashboard',DashBoard.as_view(),name='dashboard'),
 
     #customer

@@ -242,7 +242,7 @@ class DashBoard(View):
 
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
-class ChangeStatus(View):
+class ChangeStatusOpenClose(View):
 
     def get(self,request,*args, **kwargs):
         resaurant = Restaurant.objects.get(id=self.request.session.get('restaurant')) # HERE CHANGE
@@ -390,6 +390,9 @@ class MarkAsDelivered(View):
         id = kwargs['pk']
         order = get_object_or_404(Order,id=id)
         order.status = DELIVERED
+        delivery_person = order.delivery
+        delivery_person.status = AVAILABLE
+        delivery_person.save()
         order.save()
         messages.success(request,'Order Marked As Delivered')
         return redirect('restaurantview:deliveryhome')
