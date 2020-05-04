@@ -28,10 +28,10 @@ class CustomLoginView(LoginView):
         if request.user.groups.filter(name='staff_group').exists():
             print('stafffffffffff')
             return redirect('accounts:index')
-        elif request.user.group.filter(name='delivery_group').exists():
+        elif request.user.groups.filter(name='delivery_group').exists():
             print('deliveryyyyyy')
             return redirect('accounts:index')
-        elif request.user.group.filter(name='user_group').exists():
+        elif request.user.groups.filter(name='user_group').exists():
             print('userrrrrrr')
         elif self.request.user.is_superuser:
             print('Supeeeeeeeeeeeeeeeeerrrrrrrrrrrrrr')
