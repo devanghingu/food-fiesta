@@ -16,7 +16,7 @@
     <table>
     <form method="POST">
         {% csrf_token %}
-           
+
             {% for field in form %}
                 <tr>
                     <td>
@@ -33,7 +33,7 @@
         <tr>
             <td colspan="3">
                 <center><button type="submit" class="btn btn-primary">Add Restaurant</button></center>
-            </td>        
+            </td>
         </tr>
     </form>
     </table>

@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        
+
         <header class="stick">
             <div class="topbar">
                 <div class="container">
@@ -70,7 +70,7 @@
                         <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
                         <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
                     </div>
-                </div>                
+                </div>
             </div><!-- Topbar -->
             <div class="logo-menu-sec">
                 <div class="container">
@@ -148,12 +148,12 @@
                                 <li>
                                     <span class="red-clr">Real Food</span>
                                     <a href="contact.html" title="CONTACT US" itemprop="url">CONTACT US</a>
-                                
+
                                 </li>
                                 <li>
                                     <span class="red-clr">Cart</span>
                                     <a href="{% url 'cart:cart' %}" title="CONTACT US" itemprop="url" id='usercart'> {%if cartitem %}{{cartitem|length}} {%else %} 0 {% endif %}</a>
-                                
+
                                 </li>
                                 <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
                             </ul>
@@ -285,7 +285,7 @@
         {% block content%}{% endblock content %}
 
         {% include 'frontend/partial/footer.html' %}<!-- to load only footer -->
-        {% include 'frontend/partial/user_model.html'%}<!--login/regiration Popup -->        
+        {% include 'frontend/partial/user_model.html'%}<!--login/regiration Popup -->
     </main><!-- Main Wrapper -->
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -297,5 +297,5 @@
     <script src="https://www.google.com/recaptcha/api.js' %}"></script>
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/cart.js' %}"></script>
-</body>	
+</body>
 </html>
