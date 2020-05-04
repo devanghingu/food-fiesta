@@ -9,21 +9,22 @@ from restaurantview.managers import RestaurantManager
 class Restaurant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     parent = models.ForeignKey(
-        'Restaurant', on_delete=models.CASCADE, blank=True, null=True)
-    fooditem = models.ManyToManyField(Fooditem, through='Menu')
+        "Restaurant", on_delete=models.CASCADE, blank=True, null=True
+    )
+    fooditem = models.ManyToManyField(Fooditem, through="Menu")
     name = models.CharField(max_length=75)
     address = models.TextField(max_length=255)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     contact = models.CharField(max_length=13)
     open = models.BooleanField(choices=OPEN_STATUS, default=False)
     active = models.BooleanField(choices=ACTIVE_STATUS, default=False)
-    pic = models.ImageField(upload_to='restaurant/', blank=True, null=True)
+    pic = models.ImageField(upload_to="restaurant/", blank=True, null=True)
 
     # Restaurant = models.Manager()
     objects = RestaurantManager()
 
     def __str__(self):
-        return str(self.id)+' ' + self.name
+        return str(self.id) + " " + self.name
 
 
 class Menu(models.Model):
