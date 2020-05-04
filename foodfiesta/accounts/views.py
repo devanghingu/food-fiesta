@@ -1,18 +1,18 @@
-from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
-from allauth.account.views import SignupView, LoginView
-from allauth.account.forms import SignupForm
-from django.contrib.auth import logout, login
-from django.contrib.auth.models import Group
-from restaurantview.models import Restaurant
-from django.urls import reverse_lazy
-from . import forms
-from django.views.generic import View
-from django.contrib import messages
-from adminview.models import City
 from accounts.models import User
+from adminview.models import City
+from allauth.account.forms import SignupForm
+from allauth.account.views import LoginView, SignupView
+from django.contrib import messages
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView, View
+from restaurantview.models import Restaurant
+
+from . import forms
 
 
 # Create your views here.

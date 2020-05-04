@@ -1,13 +1,13 @@
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, ListView
-from restaurantview.models import Restaurant
-from .models import Order, Orderitem
-from foodfiesta.constants import PENDING, ORDER_STATUS, PLACED
 from django.views import View
+from django.views.generic import DeleteView, ListView
+from foodfiesta.constants import ORDER_STATUS, PENDING, PLACED
+from restaurantview.models import Restaurant
 
+from .models import Order, Orderitem
 
 # Create your views here.
 
