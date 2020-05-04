@@ -173,7 +173,7 @@
                           <td>{{ object.user }}</td>
                           <td>{{ object.address.address|title }}</td>
                           <td>{{ object.address.contact }}</td>
-                          <td>{% if object.status == 1 %}
+                          <td>{% if object.status == 5 %}
                               <span class="badge badge-primary">Pending</span>
                               {% elif object.status == 3 %} 
                               <span class="badge badge-success">Delivered</span>
@@ -184,7 +184,7 @@
                           <td>
                             
                             {% if object.status != 3 %}
-                            <center><a title="Accept Order" href="{% url 'restaurantview:markasdelivered' pk=object.id  %}"><i style="font-size: 25px;" class="fa fa-check-circle ms-text-success"></i></a></center>    
+                            <center><a title="Mark as delivered" href="{% url 'restaurantview:markasdelivered' pk=object.id  %}"><i style="font-size: 25px;" class="fa fa-check-circle ms-text-success"></i></a></center>    
                             {% endif %}
                           </td>
                         </tr>

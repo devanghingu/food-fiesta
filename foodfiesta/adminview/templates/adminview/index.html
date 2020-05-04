@@ -171,7 +171,7 @@
         <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/adminview/assets/img/costic/customer-6.jpg' %}" alt="people"> </a>
         <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
           <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ request.user.username }}</span></h6>
           </li>
           <li class="dropdown-divider"></li>
           <li class="ms-dropdown-list">
@@ -196,7 +196,7 @@
     <div class="ms-content-wrapper">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="db-header-title">Welcome, Anny</h1>
+          <h1 class="db-header-title">Welcome, {{ request.user.username }}</h1>
         </div>
         
         <!-- Food Orders -->
