@@ -32,10 +32,10 @@ $(document).ready(function(){
 //        var cart_item_id=$('#2').value();
 //        alert(cart_item_id);
         $.ajax({
-                url: 'modify/quantity/',
+                url: '../modify/quantity',
                 data: {
                   'qty': qty,
-                  'orditm_id':orditm_id
+                  'orditm_id':orditm_id,
                 },
                 dataType: 'json',
                 success: function (data) {

@@ -73,7 +73,7 @@
                                               <button class="red-bg brd-rd3 primaryAction" type="submit">{% trans "SIGN IN" %}</button>
                                           </div>
                                           <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-                                              <a class="sign-btn" href="{{ signup_url }}" title="" itemprop="url">Not a member? Sign up</a>
+                                              <a class="sign-btn" href="{% url 'account_signup' %}" title="" itemprop="url">Not a member? Sign up</a>
                                               <a class="recover-btn secondaryAction" href="{% url 'account_reset_password' %}" title="" itemprop="url">{% trans "Forgot Password?" %}</a>
                                           </div>
                                         </div>
