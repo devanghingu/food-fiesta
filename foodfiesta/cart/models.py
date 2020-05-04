@@ -27,5 +27,8 @@ class Orderitem(models.Model):
     quantity    = models.PositiveIntegerField()
     price       = models.PositiveIntegerField()
 
+    def total(self):
+        return self.quantity * self.price
+
     def __str__(self):
         return str(self.order)

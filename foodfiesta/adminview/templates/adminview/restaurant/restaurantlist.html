@@ -24,8 +24,6 @@
                 <th scope="col">Contact</th>
                 <th scope="col">Status</th>
                 <th scope="col">Change Status</th>
-                <th scope="col">Delete Restaurant</th>
-                  
             </tr>
             </thead>
             
@@ -52,10 +50,9 @@
                 <span class="badge badge-primary p-1"><a style="color: white;" href="{% url 'adminview:acceptrequest' id=res.id %}">Deactivate</a></span>
                 {% endif %}
                      </td>
-                <td><center><a href="#"><i class="far fa-trash-alt ms-text-danger"></i></a></center></td>     
               </tr>
             </tbody>
-            {% endfor %}
+            {% endfor %} 
         </table>
     </div>
    </div>
