@@ -104,7 +104,11 @@ class CartItemDelete(DeleteView):
 
 def placeorder(request):
     order = Order.objects.get(user=request.user)
+    order_list=order.orderitem_set.all()
+    tot_price=sum(order_list[i].price for i in range(len(order_list)))
+    print(tot_price)
     order.status = PLACED
+    order.total_price=tot_price
     order.save()
     messages.success(request, 'Your order has been Placed!..')
     object_list = Order.objects.filter(user=request.user)
