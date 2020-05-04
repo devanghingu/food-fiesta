@@ -1,8 +1,12 @@
 from accounts.models import User
-from adminview.models import City, Fooditem
+from adminview.models import City
+from adminview.models import Fooditem
 from django.db import models
-from foodfiesta.constants import ACTIVE_STATUS, DELIVERY_STATUS, OPEN_STATUS
 from restaurantview.managers import RestaurantManager
+
+from foodfiesta.constants import ACTIVE_STATUS
+from foodfiesta.constants import DELIVERY_STATUS
+from foodfiesta.constants import OPEN_STATUS
 
 
 class Restaurant(models.Model):
