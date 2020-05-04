@@ -1,0 +1,63 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+
+{% if object_list %}
+
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+       <center><h6>Cancel Restaurant List</h6></center> 
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">Restaurant ID</th>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Restaurant Owner</th>
+                <th scope="col">City</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Cancelation Status</th>
+                <th scope="col">Accept/Reject</th>
+            </tr>
+            </thead>
+            
+            {% for res in object_list  %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ res.restaurant.id }}</th>
+                <td>{{ res.restaurant.name }}</td>
+                <td> {{ res.restaurant.user.username }}</td>
+                <td>{{ res.restaurant.city }}</td>
+                <td>{{ res.reason }}</td>
+                <td>
+                {% if res.status == 0 %}
+                <span class="badge badge-success p-2">Pending</span>
+                {% elif res.status == 2 %} 
+                <span class="badge badge-primary p-2">Rejected</span>
+                {% endif %}
+                    </td>
+                
+                <td><center><a href="{% url 'adminview:acceptcancelrequest' id=res.pk %}"><i style="font-size: 25px;" class="fa fa-check-circle ms-text-success"></i></a>&nbsp;&nbsp;<a href="{% url 'adminview:rejectrequest' id=res.pk %}"><i style="font-size: 25px;" class="fas fa-times-circle ms-text-danger"></i></a></center></td>     
+              </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+    </div>
+   </div>
+ </div>
+</div>
+         {% else %}
+         
+         <div class="alert alert-danger w-50" role="alert">
+            <i class="flaticon-alert-1"></i> <strong>Sorry!</strong> No Restaurants are there. 
+          </div>
+
+{% endif %}
+
+{% endblock content %}
+    

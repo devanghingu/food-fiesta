@@ -33,7 +33,7 @@
                 <th scope="row">{{forloop.counter}}</th>
                 <td><b>{{ city.name }}</b></td>
                 <td><b>
-                    <a href="{% url 'adminview:city_update' pk=city.pk %}"><i class='fas fa-pencil-alt text-secondary'></i></a>&nbsp;&nbsp;
+                    <a href="{% url 'adminview:city_update' pk=city.pk %}"><i class='fas fa-pencil-alt text-success'></i></a>&nbsp;&nbsp;
                     <a href="{% url 'adminview:city_delete' pk=city.pk %}"><i class='far fa-trash-alt ms-text-danger'></i></a></td>
               </tr>
     </tbody>

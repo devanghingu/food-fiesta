@@ -8,8 +8,8 @@
       <div class="col-md-12">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb breadcrumb-arrow has-gap has-bg">
-            <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Menu</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'adminview:adminview_home' %}"><i class="material-icons">home</i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'adminview:allfooditem' %}">FoodItem List</a></li>
             <li class="breadcrumb-item active" aria-current="page">Update FoodItem</li>
           </ol>
         </nav>
