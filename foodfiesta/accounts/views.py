@@ -69,9 +69,9 @@ class CreateRestaurant(View):
             contact = form.cleaned_data.get("contact")
             if Restaurant.objects.filter(name=name).exists():
                 messages.info(request, "Restaurant is already Exist")
-                return render(
-                    request, "frontend/createrestaurant.html", context={"form": form}
-                )
+                return render(request,
+                              "frontend/createrestaurant.html",
+                              context={"form": form})
             else:
                 Restaurant.objects.create(
                     user=request.user,
@@ -80,13 +80,15 @@ class CreateRestaurant(View):
                     address=address,
                     contact=contact,
                 )
-                new_group, created = Group.objects.get_or_create(name="staff_group")
-                alice_group = User.groups.through.objects.get(user=request.user)
+                new_group, created = Group.objects.get_or_create(
+                    name="staff_group")
+                alice_group = User.groups.through.objects.get(
+                    user=request.user)
                 alice_group.group = new_group
                 alice_group.save()
                 messages.success(request, "New Restaurant Added")
                 return redirect("accounts:index")
         else:
-            return render(
-                request, "frontend/createrestaurant.html", context={"form": form}
-            )
+            return render(request,
+                          "frontend/createrestaurant.html",
+                          context={"form": form})

@@ -11,9 +11,10 @@ from foodfiesta.constants import OPEN_STATUS
 
 class Restaurant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent = models.ForeignKey(
-        "Restaurant", on_delete=models.CASCADE, blank=True, null=True
-    )
+    parent = models.ForeignKey("Restaurant",
+                               on_delete=models.CASCADE,
+                               blank=True,
+                               null=True)
     fooditem = models.ManyToManyField(Fooditem, through="Menu")
     name = models.CharField(max_length=75)
     address = models.TextField(max_length=255)

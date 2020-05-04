@@ -6,5 +6,7 @@ app_name = "accounts"
 
 urlpatterns = [
     path("", views.Index.as_view(), name="index"),
-    path("createrestaurant", views.CreateRestaurant.as_view(), name="createrestaurant"),
+    path("createrestaurant",
+         views.CreateRestaurant.as_view(),
+         name="createrestaurant"),
 ]
