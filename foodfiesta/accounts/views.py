@@ -11,6 +11,8 @@ from django.views.generic import View
 from django.contrib import messages
 from adminview.models import City
 from accounts.models import User
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -18,46 +20,31 @@ class Index(TemplateView):
     '''template for display when user come'''
     template_name="frontend/index.html"
 
-# class JointSignupView(SignupView):
-    
-#     def __init__(self, **kwargs):
-#         super(JointSignupView, self).__init__(*kwargs)        
-    
-#     def post(self,request,*args,**kwargs):
-#         response=super().post(request,*args,**kwargs)
-#         # new_group, created = Group.objects.get_or_create(name ='user_group')
-#         # new_group.user_set.add(self.request.user)
-#         # self.request.user.groups.add(new_group)
-
-#         # if self.request.user://gone to user profile set login redirect url
-#         #     logout(request)
-#         #     return redirect('account_login')
-#         return response
-
-#     def get_context_data(self, **kwargs):
-#         ret = super(JointSignupView, self).get_context_data(**kwargs)
-#         # ret['signupform'] = get_form_class(app_settings.FORMS, 'signup', self.signup_form)
-#         return ret
-
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
 
     def post(self,request,*args,**kwargs):
         response=super().post(request,*args,**kwargs)
-        if self.request.user.is_superuser:
-            print('Supeeeeeeeeeeeeeeeeerrrrrrrrrrrrrr')
-            return redirect('admin')
-        elif self.request.user.is_staff:
+        if request.user.groups.filter(name='staff_group').exists():
             print('stafffffffffff')
             return redirect('accounts:index')
+        elif request.user.group.filter(name='delivery_group').exists():
+            print('deliveryyyyyy')
+            return redirect('accounts:index')
+        elif request.user.group.filter(name='user_group').exists():
+            print('userrrrrrr')
+        elif self.request.user.is_superuser:
+            print('Supeeeeeeeeeeeeeeeeerrrrrrrrrrrrrr')
+            return redirect('/admin')
         return response
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(LoginView, self).get_context_data(**kwargs)
-    #     context.update({'signup_form': SignupForm})
+    def get_context_data(self, **kwargs):
+        context = super(LoginView, self).get_context_data(**kwargs)
+        context.update({'signup_form': SignupForm})
 
-    #     return context
+        return context
 
+@method_decorator(login_required,name='dispatch')
 class CreateRestaurant(View):
     def get(self,request,*args, **kwargs):
         form=forms.createrestaurant()
@@ -78,11 +65,10 @@ class CreateRestaurant(View):
                 return render(request,'frontend/createrestaurant.html',context={'form':form})
             else:
                 Restaurant.objects.create(user=request.user,city=city,name=name,address=address,contact=contact)
-                # new_group, created = Group.objects.get_or_create(name ='staff_group')
-                # alice_group=User.groups.through.objects.get(user=self.request.user)
-                # print(alice_group)
-                # alice_group.group=new_group
-                # alice_group.save()
+                new_group, created = Group.objects.get_or_create(name ='staff_group')
+                alice_group = User.groups.through.objects.get(user=request.user)
+                alice_group.group=new_group
+                alice_group.save()
                 messages.success(request, "New Restaurant Added")
                 return redirect("accounts:index")
         else:
