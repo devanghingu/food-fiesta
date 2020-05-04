@@ -1,20 +1,20 @@
-{% load static %}
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title>Food Fiesta</title>
-    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
-    <link rel="stylesheet" href="{% static 'assets/css/icons.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <title>Food Ordering HTML Template</title>
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    
+
+    <link rel="stylesheet" href="assets/css/icons.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/red-color.css">
+    <link rel="stylesheet" href="assets/css/yellow-color.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body itemscope>
     <main>
@@ -59,11 +59,7 @@
                         </select>
                     </div>
                     <div class="topbar-register">
-                        {% if not user.is_authenticated %}
-                            <a class="" href="accounts/login" title="Login" itemprop="url">LOGIN</a> / <a class="" href="accounts/signup" title="Register" itemprop="url">REGISTER</a>
-                        {%else%}
-                            <a class="" href="accounts/logout" title="Login" itemprop="url">LOGOUT</a>
-                        {%endif%}
+                        <a class="log-popup-btn" href="#" title="Login" itemprop="url">LOGIN</a> / <a class="sign-popup-btn" href="#" title="Register" itemprop="url">REGISTER</a>
                     </div>
                     <div class="social1">
                         <a href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook-square"></i></a>
@@ -74,7 +70,7 @@
             </div><!-- Topbar -->
             <div class="logo-menu-sec">
                 <div class="container">
-                    <div class="logo"><h1 itemprop="headline"><a href="index.html" title="Home" itemprop="url"><img src="{% static 'assets/images/Food_fiesta.png' %}" alt="logo.png' %}" itemprop="image"></a></h1></div>
+                    <div class="logo"><h1 itemprop="headline"><a href="index.html" title="Home" itemprop="url"><img src="assets/images/logo2.png" alt="logo.png" itemprop="image"></a></h1></div>
                     <nav>
                         <div class="menu-sec">
                             <ul>
@@ -145,21 +141,9 @@
                                         <li><a href="food-detail.html" title="FOOD DETAIL" itemprop="url">FOOD DETAIL</a></li>
                                     </ul>
                                 </li>
-                                <li>
-                                    <span class="red-clr">Real Food</span>
-                                    <a href="contact.html" title="CONTACT US" itemprop="url">CONTACT US</a>
-                                
-                                </li>
-                                <li>
-                                    <span class="red-clr">Cart</span>
-                                    <a href="{% url 'cart:cart' %}" title="CONTACT US" itemprop="url" id='usercart'> {%if cartitem %}{{cartitem|length}} {%else %} 0 {% endif %}</a>
-                                
-                                </li>
                                 <li><a href="contact.html" title="CONTACT US" itemprop="url"><span class="red-clr">REAL FOOD</span>CONTACT US</a></li>
                             </ul>
-                            {% if user.is_staff %}
-                            <a class="red-bg brd-rd4" href="{% url 'accounts:createrestaurant' %}" title="Register" itemprop="url">REGISTER RESTAURANT</a>
-                            {%endif%}
+                            <a class="red-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
                         </div>
                     </nav><!-- Navigation -->
                 </div>
@@ -180,15 +164,15 @@
                 <div class="select-wrp">
                     <select data-placeholder="Choose Location">
                         <option>CHOOSE LOCATION</option>
-                        <option>New york</option>
-                        <option>Washington</option>
-                        <option>Chicago</option>
-                        <option>Los Angeles</option>
+                        <option>Multan</option>
+                        <option>Lahore</option>
+                        <option>Karachi</option>
+                        <option>Islamabad</option>
                     </select>
                 </div>
             </div>
             <div class="responsive-logomenu">
-                <div class="logo"><h1 itemprop="headline"><a href="index.html" title="Home" itemprop="url"><img src="{% static 'assets/images/logo.png' %}" alt="logo.png' %}" itemprop="image"></a></h1></div>
+                <div class="logo"><h1 itemprop="headline"><a href="index.html" title="Home" itemprop="url"><img src="assets/images/logo.png" alt="logo.png" itemprop="image"></a></h1></div>
                 <span class="menu-btn yellow-bg brd-rd4"><i class="fa fa-align-justify"></i></span>
             </div>
             <div class="responsive-menu">
@@ -274,28 +258,113 @@
                     <a href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i></a>
                     <a href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i></a>
                 </div>
-
                 <div class="register-btn">
                     <a class="yellow-bg brd-rd4" href="register-reservation.html" title="Register" itemprop="url">REGISTER RESTAURANT</a>
                 </div>
             </div><!-- Responsive Menu -->
-        </div>
-        <!-- Responsive Header -->
-        <!-- manu end -->
-        {% block content%}{% endblock content %}
+        </div><!-- Responsive Header -->
 
-        {% include 'frontend/partial/footer.html' %}<!-- to load only footer -->
-        {% include 'frontend/partial/user_model.html'%}<!--login/regiration Popup -->        
+        <section>
+            <div class="block">
+                <div style="background-image: url(assets/images/topbg.jpg);" class="fixed-bg"></div>
+                <div class="error-page-wrapper text-center">
+                    <div class="error-page-inner">
+                        <h1 itemprop="headline">404 <span class="red-clr">Error</span></h1>
+                        <h4 itemprop="headline"><span class="yellow-clr">Oops,</span> This Page Not Found!</h4>
+                        <p itemprop="description">Vivam pulput vehic Mauris porttitor erovel sapien Sed ut persp tatem semper mi, at ultricies odio.</p>
+                        <a class="brd-rd2 yellow-bg" href="#" title="" itemprop="url"><i class="fa fa-home"></i> BACK TO HOME</a>
+                        <form class="search-frm">
+                            <input class="brd-rd3" type="text" placeholder="SEARCH KEYWORD">
+                            <button class="yellow-bg" type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                </div><!-- Error Page Wrapper -->
+            </div>
+        </section>
+        
+        <div class="bottom-bar dark-bg text-center">
+            <div class="container">
+                <p itemprop="description">&copy; 2018 <a class="red-clr" href="http://webinane.com/" title="Webinane" itemprop="url" target="_blank">WEBINANE</a>. All Rights Reserved</p>
+            </div>
+        </div><!-- Bottom Bar -->
+
+        <div class="log-popup text-center">
+            <div class="sign-popup-wrapper brd-rd5">
+                <div class="sign-popup-inner brd-rd5">
+                    <a class="log-close-btn" href="#" title="" itemprop="url"><i class="fa fa-close"></i></a>
+                    <div class="sign-popup-title text-center">
+                        <h4 itemprop="headline">SIGN IN</h4>
+                        <span>with your social network</span>
+                    </div>
+                    <div class="popup-social text-center">
+                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i> Google</a>
+                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
+                    </div>
+                    <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
+                    <form class="sign-form">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="text" placeholder="Username or Email">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="password" placeholder="Password">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <button class="red-bg brd-rd3" type="submit">SIGN IN</button>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <a class="sign-btn" href="#" title="" itemprop="url">Not a member? Sign up</a>
+                                <a class="recover-btn" href="#" title="" itemprop="url">Recover my password</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="sign-popup text-center">
+            <div class="sign-popup-wrapper brd-rd5">
+                <div class="sign-popup-inner brd-rd5">
+                    <a class="sign-close-btn" href="#" title="" itemprop="url"><i class="fa fa-close"></i></a>
+                    <div class="sign-popup-title text-center">
+                        <h4 itemprop="headline">SIGN UP</h4>
+                        <span>with your social network</span>
+                    </div>
+                    <div class="popup-social text-center">
+                        <a class="facebook brd-rd3" href="#" title="Facebook" itemprop="url" target="_blank"><i class="fa fa-facebook"></i> Facebook</a>
+                        <a class="google brd-rd3" href="#" title="Google Plus" itemprop="url" target="_blank"><i class="fa fa-google-plus"></i> Google</a>
+                        <a class="twitter brd-rd3" href="#" title="Twitter" itemprop="url" target="_blank"><i class="fa fa-twitter"></i> Twitter</a>
+                    </div>
+                    <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span>
+                    <form class="sign-form">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="text" placeholder="Username">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <input class="brd-rd3" type="password" placeholder="Password">
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <button class="red-bg brd-rd3" type="submit">REGISTER NOW</button>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
+                                <a class="sign-btn" href="#" title="" itemprop="url">Already Registered? Sign in</a>
+                                <a class="recover-btn" href="#" title="" itemprop="url">Recover my password</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main><!-- Main Wrapper -->
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'assets/js/plugins.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-    <script src="{% static 'assets/js/google-map-int.js' %}"></script>
-    <script src="https://www.google.com/recaptcha/api.js' %}"></script>
-    <script src="{% static 'assets/js/main.js' %}"></script>
-    <script src="{% static 'assets/js/cart.js' %}"></script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>	
 </html>
