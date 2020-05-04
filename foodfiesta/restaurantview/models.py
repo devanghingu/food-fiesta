@@ -8,7 +8,8 @@ from restaurantview.managers import RestaurantManager
 
 class Restaurant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    parent = models.ForeignKey('Restaurant', on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey(
+        'Restaurant', on_delete=models.CASCADE, blank=True, null=True)
     fooditem = models.ManyToManyField(Fooditem, through='Menu')
     name = models.CharField(max_length=75)
     address = models.TextField(max_length=255)
@@ -22,7 +23,7 @@ class Restaurant(models.Model):
     objects = RestaurantManager()
 
     def __str__(self):
-        return str(self.id)+' '+ self.name
+        return str(self.id)+' ' + self.name
 
 
 class Menu(models.Model):
@@ -30,7 +31,6 @@ class Menu(models.Model):
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     price = models.PositiveIntegerField(default=0)
     available = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.fooditem.name
