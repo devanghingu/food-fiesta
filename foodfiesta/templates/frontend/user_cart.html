@@ -45,7 +45,7 @@
                                 </li>
                                 {% endfor %}
                                     {% else %}
-                                    <h3> No Items Found.. </h3><a class="btn btn-danger" >Add Items</a>
+                                    <h3> No Items Found.. </h3><a class="btn btn-danger">Add Items</a>
                                 {% endif %}
                             </ul>
                         </div>
@@ -70,7 +70,7 @@
 <!--                                        </ul>-->
                                         <ul class="order-method brd-rd2 red-bg"><input type="text" id="old_price" value="{{amount}}" hidden="true">
                                             <li><span id="total">Total</span> <span class="price" id="price">&#x20B9;{{amount}}</span></li>
-                                            <li><a class="brd-rd2" href="{% url 'cart:placed-order' rest_id %}" title="" itemprop="url">CONFIRM ORDER</a></li>
+                                            <li><a class="brd-rd2" href="{% url 'cart:placed-order' %}" title="" itemprop="url">CONFIRM ORDER</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -81,5 +81,5 @@
             </div>
         </div>
     </div>
-
+{% csrf_token %}
 {% endblock content %}
