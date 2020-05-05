@@ -16,11 +16,13 @@ class cart(View):
         print(request.user)
         try:
             ordr = get_object_or_404(Order, user=request.user, status=0)
+            rest=ordr.restaurant
         except:
             ordr=None
+            rest=None
         cartitem = Orderitem.objects.filter(order=ordr).order_by('id')
         amount = sum([item.price for item in cartitem])
-        return render(request, 'frontend/user_cart.html', {'cartitem': cartitem, 'amount': amount})
+        return render(request, 'frontend/user_cart.html', {'cartitem': cartitem, 'amount': amount,'rest':rest})
 
     def post(self, request, *args, **kwargs):
         pass
@@ -103,7 +105,7 @@ class CartItemDelete(DeleteView):
 
 
 def placeorder(request):
-    order = Order.objects.get(user=request.user)
+    order = Order.objects.get(user=request.user,status=PENDING)
     order_list=order.orderitem_set.all()
     tot_price=sum(order_list[i].price for i in range(len(order_list)))
     print(tot_price)
