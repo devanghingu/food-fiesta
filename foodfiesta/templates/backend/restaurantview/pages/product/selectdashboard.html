@@ -1,0 +1,218 @@
+
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Restaurant Dashboard</title>
+    <!-- Iconic Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/font-awesome/css/all.min.css' %}"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/flat-icons/flaticon.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins.css' %}">
+    <link rel="stylesheet"
+        href="{% static 'backend/restaurantview/assets/vendors/iconic-fonts/cryptocoins/cryptocoins-colors.css' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'backend/restaurantview/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- jQuery UI -->
+    <link href="{% static 'backend/restaurantview/assets/css/jquery-ui.min.css' %}" rel="stylesheet">
+    <!-- Page Specific CSS (Slick Slider.css) -->
+
+
+    {% block psstyle %}
+
+    {% endblock psstyle %}
+
+
+    <!-- Costic styles -->
+    <link href="{% static 'backend/restaurantview/assets/css/style.css' %}" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static favicon.ico">
+
+  <style>
+    form input:focus,form select:focus,form textarea:focus{
+      border:1px solid gainsboro;
+      border-radius: 2px;
+      padding: 4px;
+    }
+  </style>
+</head>
+
+<body class="ms-body ms-aside-left-open ms-primary-theme ">
+  <!-- Preloader -->
+  <div id="preloader-wrap">
+    <div class="spinner spinner-8">
+      <div class="ms-circle1 ms-child"></div>
+      <div class="ms-circle2 ms-child"></div>
+      <div class="ms-circle3 ms-child"></div>
+      <div class="ms-circle4 ms-child"></div>
+      <div class="ms-circle5 ms-child"></div>
+      <div class="ms-circle6 ms-child"></div>
+      <div class="ms-circle7 ms-child"></div>
+      <div class="ms-circle8 ms-child"></div>
+      <div class="ms-circle9 ms-child"></div>
+      <div class="ms-circle10 ms-child"></div>
+      <div class="ms-circle11 ms-child"></div>
+      <div class="ms-circle12 ms-child"></div>
+    </div>
+  </div>
+  <!-- Overlays -->
+  <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
+  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
+  </div>
+  <!-- Sidebar Navigation Left -->
+  {% load static %}
+<aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
+
+    <!-- Logo -->
+    <div class="logo-sn ms-d-block-lg">
+      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:selectdashboard' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+    </div>
+
+    <!-- Navigation -->
+    <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">   
+      <!-- Select Dashboard -->
+      <li class="menu-item">
+        <a href="{% url 'restaurantview:selectdashboard' %}">
+          <span><i class="fas fa-hand-pointer"></i> Select DashBoard</span>
+        </a>
+      </li>
+      <!-- Select Dahsboard -->
+      <li class="menu-item">
+        <a href="{% url 'restaurantview:addnewrestaurant' %}">
+          <span><i class="fas fa-plus"></i>Add New Restaurant </span>
+        </a>
+      </li>
+      <!-- Customers  end -->
+    </ul>
+  </aside>
+
+  
+  <main class="body-content">
+    <!-- Navigation Bar -->
+    <nav class="navbar ms-navbar">
+    
+        <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
+          <span class="ms-toggler-bar bg-primary"></span>
+          <span class="ms-toggler-bar bg-primary"></span>
+          <span class="ms-toggler-bar bg-primary"></span>
+        </div>
+    
+        <div class="logo-sn logo-sm ms-d-block-sm">
+          <a class="pl-0 ml-0 text-center navbar-brand mr-0"><img
+              src="{% static 'backend/restaurantview/assets/img/costic/costic-logo-84x41.png' %}" alt="logo"> </a>
+        </div>
+    
+        <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+          <li class="ms-nav-item ms-search-form pb-0 py-0">
+            <form class="ms-form" method="post">
+              <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+                {% csrf_token %}
+                <input type="search" class="ms-form-input" name="search" placeholder="Search here..." value="">
+                <i class="flaticon-search text-disabled"></i>
+              </div>
+            </form>
+          </li>
+          <li class="ms-nav-item ms-nav-user dropdown">
+            <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
+              {% if user.profile %}
+                <img class="ms-user-img ms-img-round float-right" src="{{ user.profile.url }}" alt="people">
+              {% else %}
+                <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/restaurantview/assets/img/costic/customer-6.jpg' %}" alt="people">
+              {% endif %} 
+            </a>
+          </li>
+        </ul>
+    
+        <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+          <span class="ms-toggler-bar bg-primary"></span>
+          <span class="ms-toggler-bar bg-primary"></span>
+          <span class="ms-toggler-bar bg-primary"></span>
+        </div>
+    
+      </nav>    
+    {% if object_list|length > 0 %}
+    <!-- Body Content Wrapper -->
+    <div class=" ms-content-wrapper">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                {% include 'backend/restaurantview/message.html'%}
+                {% for obj in object_list %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                    <div class="ms-card">
+                        <div class="ms-card-img">
+                            <img src="{{ obj.pic.url }}" alt="card_img">
+                        </div>
+                        <div class="ms-card-body">
+
+                            <div class="new">
+                                <h6 class="mb-0"> {{ obj.name }}</a></h6>
+                            </div>
+                            <p> {{ obj.fooditem.description }}</p>
+                            <div class="new mb-0">
+                                <a href="{% url 'restaurantview:dashboard' obj.id %}"
+                                    class="btn btn-primary btn-md btn-block">Manage</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    </div>
+
+    {% include 'backend/restaurantview/pagination.html'%}
+
+    {% else %}
+    <div class="ms-content-wrapper">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                    In You <strong>Restaurant</strong> There is Not ant Menu Or Food
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    </main>
+
+    <!-- SCRIPTS -->
+    <!-- Global Required Scripts Start -->
+    <script src="{% static 'backend/restaurantview/assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'backend/restaurantview/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'backend/restaurantview/assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'backend/restaurantview/assets/js/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'backend/restaurantview/assets/js/jquery-ui.min.js' %}">
+    </script>
+    <!-- Global Required Scripts End -->
+
+    {% block psscript %}
+
+    {% endblock psscript %}
+
+    <!-- Costic core JavaScript -->
+    <script src="{% static 'backend/restaurantview/assets/js/framework.js' %}"></script>
+    <!-- Settings -->
+    <script src="{% static 'backend/restaurantview/assets/js/settings.js' %}"></script>
+    </body>
+
+</html>

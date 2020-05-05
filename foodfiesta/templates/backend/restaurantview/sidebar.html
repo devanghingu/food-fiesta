@@ -3,24 +3,24 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:home' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:selectdashboard' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
       
-      <!-- Parent Branch -->
-      <!-- <li class="menu-item">
-        <a href="{% url 'restaurantview:home' %}">
-          <span><i class="fas fa-clipboard-list fs-16"></i>Main Branch DashBoard</span>
+      <!-- Select Dashboard -->
+      <li class="menu-item">
+        <a href="{% url 'restaurantview:selectdashboard' %}">
+          <span><i class="fas fa-mouse-pointer fs-16"></i> Select DashBoard</span>
         </a>
-      </li> -->
-      <!-- Parent Branch -->
+      </li>
+      <!-- Select Dahsboard -->
       <!-- foods -->
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false"
           aria-controls="product">
-          <span><i class="fa fa-archive fs-16"></i>Menus</span>
+          <span><i class="fa fa-cookie-bite fs-16"></i>Menus</span>
         </a>
         <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
@@ -53,7 +53,7 @@
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
           aria-controls="restaurant">
-          <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
+          <span><i class="fa fa-utensils fs-16"></i>Restaurants List</span>
         </a>
         
         <ul id="restaurant" class="collapse" aria-labelledby="restaurant" data-parent="#side-nav-accordion">
