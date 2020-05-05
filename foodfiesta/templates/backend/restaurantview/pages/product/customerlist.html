@@ -1,0 +1,70 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html' %}
+
+  {% if object_list|length > 0 %}
+  <div class="ms-content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        {% include 'backend/restaurantview/message.html'%}
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <h6>Customer Person</h6>
+          </div>
+          <div class="ms-panel-body">
+            <div class="table-responsive">
+              <div id="data-table-4_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+                  <div class="col-sm-12 table-responsive">
+                    <table class="table table-hover thead-primary">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Customer Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Orders</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ object.username }}</td>
+                          <td>{{ object.email }}</td>
+                          <td>{{ object.order_set.count }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  {% include 'backend/restaurantview/pagination.html'%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              There is no <strong>Customer</strong> For Your Restaurant 
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+</main>
+{% endblock main%}

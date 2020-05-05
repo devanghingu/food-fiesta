@@ -1,0 +1,14 @@
+{% extends 'adminview/index.html' %}
+
+
+{% block content %}
+    
+<form method="post">{% csrf_token %} 
+    <h5>Are you sure you want to delete "<span class="text text-danger">{{ object }}</span>" City?</h5> 
+    <input class="btn btn-primary" type="submit" value="Confirm"> 
+    <a class="btn btn-secondary" href="{% url 'adminview:allcity' %}">No,Cancel</a>
+</form> 
+
+{% endblock content %}
+    
+

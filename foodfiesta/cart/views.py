@@ -121,10 +121,9 @@ def placeorder(request):
     order.status = PLACED
     order.total_price=tot_price
     order.save()
-    messages.success(request, "Your order has been Placed!..")
+    messages.success(request, 'Your order has been Placed!..')
     object_list = Order.objects.filter(user=request.user)
-    return render(request, "frontend/myorderlist.html",
-                  {"object_list": object_list})
+    return render(request, 'frontend/myorderlist.html', {'object_list': object_list})
 
 
 class OrderList(ListView):

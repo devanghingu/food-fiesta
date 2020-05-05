@@ -1,0 +1,67 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+    
+<div class="ms-content-wrapper">
+    <div class="row">
+
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb breadcrumb-arrow has-gap has-bg">
+            <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'adminview:allcity' %}">City List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update City</li>
+          </ol>
+        </nav>
+
+        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                                    {{ message }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+
+
+      </div>
+      
+      <div class="col-xl-12 col-md-12">
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <center>
+            <h6>Update City</h6>
+        </center>
+          </div>
+          <div class="ms-panel-body">
+            <form method="POST">
+              <div class="form-row">
+                <div class="col-md-12 mb-3">
+          {% csrf_token %}
+
+            {% for field in form %}
+
+
+            <div class="form-group">
+                <label>{{ field.label}}</label>
+                {{ field }}
+
+            </div>
+            {% endfor %}
+
+            <button class="btn btn-primary mt-4 d-block w-100" type="submit">Update</button>
+        </div>
+        </form>
+        </div>
+        </div>
+      </div>
+      </div>
+</div>
+
+
+
+          
+{% endblock content %}
+    

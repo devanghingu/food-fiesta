@@ -29,19 +29,24 @@ class Index(TemplateView):
 class CustomLoginView(LoginView):
     template_name = "account/login.html"
 
-    def post(self, request, *args, **kwargs):
-        response = super().post(request, *args, **kwargs)
-        if request.user.groups.filter(name="staff_group").exists():
-            print("stafffffffffff")
-            return redirect("accounts:index")
-        elif request.user.groups.filter(name="delivery_group").exists():
-            print("deliveryyyyyy")
-            return redirect("accounts:index")
-        elif request.user.groups.filter(name="user_group").exists():
-            print("userrrrrrr")
+    def post(self,request,*args,**kwargs):
+        response=super().post(request,*args,**kwargs)
+        if request.user.groups.filter(name='staff_group').exists():
+            if Restaurant.objects.filter(user=request.user,parent=None,active=True):
+                print('stafffffffffff')
+                return redirect('restaurantview:home')
+            else:
+                messages.info(request, "Your Restaurant request is in process")
+                return redirect('accounts:index')
+                
+        elif request.user.groups.filter(name='delivery_group').exists():
+            print('deliveryyyyyy')
+            return redirect('restaurantview:deliveryhome')
+        elif request.user.groups.filter(name='user_group').exists():
+            print('userrrrrrr')
         elif self.request.user.is_superuser:
             print("Supeeeeeeeeeeeeeeeeerrrrrrrrrrrrrr")
-            return redirect("/admin")
+            return redirect('adminview:adminview_home')
         return response
 
     def get_context_data(self, **kwargs):
