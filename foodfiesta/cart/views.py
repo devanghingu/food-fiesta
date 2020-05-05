@@ -44,7 +44,7 @@ class restaurant(View):
                     context["cartitem"] = [i.menu_id for i in cart.orderitem_set.all()]
                 return render(request, "frontend/user_restaurant.html", context)
             return render(request, "frontend/404.html")
-        return redirect('login')
+        return redirect('account_login')
     def post(self, request, *args, **kwargs):
         if request.is_ajax() and self.request.user.is_authenticated:
             cart = Order.objects.get_user_item_from_cart(self.request.user.id)  # get user item from cart

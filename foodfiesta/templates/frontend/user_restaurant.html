@@ -28,9 +28,9 @@
                                                         <ul class="restaurant-detail-img-carousel">
                                                             <li><img class="brd-rd3" src="{{restaurant.pic.url}}" alt="restaurant-detail-big-img1-1.jpg' %}" itemprop="image"></li>
                                                         </ul>
-                                                        <ul class="restaurant-detail-thumb-carousel">
+                                                        <!-- <ul class="restaurant-detail-thumb-carousel">
                                                             <li><img class="brd-rd3" src="{{restaurant.pic.url}}"  alt="restaurant-detail-small-img1-1.jpg' %}" itemprop="image"></li>
-                                                        </ul>
+                                                        </ul> -->
                                                     </div>
                                                     <div class="restaurant-detail-title">
                                                         <h1 itemprop="headline" id="rest_id" data-catid="{{restaurant.id}}">{{restaurant.name|title}}{% if restaurant.open == False %}<span style="color: gray;">  [Offline]</span>{% endif %}</h1>
@@ -124,88 +124,88 @@
                                                                         {% endfor %}
                                                                     </ul>
                                                                 </div>
-                                                                <div class="dishes-list-wrapper">
-                                                                    <h4 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Burgers</span></h4>
-                                                                    <span class="post-rate red-bg brd-rd2"><i class="fa fa-star-o"></i> 4.25</span>
-                                                                    <ul class="dishes-list">
-                                                                        <li class="wow fadeInUp" data-wow-delay="0.2s">
-                                                                            <div class="featured-restaurant-box">
-                                                                                <div class="featured-restaurant-thumb">
-                                                                                    <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-1.jpg' %}" alt="dish-img2-1.jpg' %}" itemprop="image"></a>
+                                                                    <!-- <div class="dishes-list-wrapper">
+                                                                        <h4 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Burgers</span></h4>
+                                                                        <span class="post-rate red-bg brd-rd2"><i class="fa fa-star-o"></i> 4.25</span>
+                                                                        <ul class="dishes-list">
+                                                                            <li class="wow fadeInUp" data-wow-delay="0.2s">
+                                                                                <div class="featured-restaurant-box">
+                                                                                    <div class="featured-restaurant-thumb">
+                                                                                        <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-1.jpg' %}" alt="dish-img2-1.jpg' %}" itemprop="image"></a>
+                                                                                    </div>
+                                                                                    <div class="featured-restaurant-info">
+                                                                                        <h4 itemprop="headline"><a href="#" title="" itemprop="url">Bacon Gouda Burger</a></h4>
+                                                                                        <span class="price">$85.00</span>
+                                                                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
+                                                                                        <ul class="post-meta">
+                                                                                            <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
+                                                                                            <li><i class="flaticon-transport"></i> 30min</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <div class="ord-btn">
+                                                                                        <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="featured-restaurant-info">
-                                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Bacon Gouda Burger</a></h4>
-                                                                                    <span class="price">$85.00</span>
-                                                                                    <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
-                                                                                    <ul class="post-meta">
-                                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
-                                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                                    </ul>
+                                                                            </li>
+                                                                            <li class="wow fadeInUp" data-wow-delay="0.3s">
+                                                                                <div class="featured-restaurant-box">
+                                                                                    <div class="featured-restaurant-thumb">
+                                                                                        <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-2.jpg' %}" alt="dish-img2-2.jpg' %}" itemprop="image"></a>
+                                                                                    </div>
+                                                                                    <div class="featured-restaurant-info">
+                                                                                        <h4 itemprop="headline"><a href="#" title="" itemprop="url">Tribeca Chicken Burger</a></h4>
+                                                                                        <span class="price">$85.00</span>
+                                                                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
+                                                                                        <ul class="post-meta">
+                                                                                            <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
+                                                                                            <li><i class="flaticon-transport"></i> 30min</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <div class="ord-btn">
+                                                                                        <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="ord-btn">
-                                                                                    <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
+                                                                            </li>
+                                                                            <li class="wow fadeInUp" data-wow-delay="0.4s">
+                                                                                <div class="featured-restaurant-box">
+                                                                                    <div class="featured-restaurant-thumb">
+                                                                                        <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-3.jpg' %}" alt="dish-img2-3.jpg' %}" itemprop="image"></a>
+                                                                                    </div>
+                                                                                    <div class="featured-restaurant-info">
+                                                                                        <h4 itemprop="headline"><a href="#" title="" itemprop="url">Charburger</a></h4>
+                                                                                        <span class="price">$85.00</span>
+                                                                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
+                                                                                        <ul class="post-meta">
+                                                                                            <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
+                                                                                            <li><i class="flaticon-transport"></i> 30min</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <div class="ord-btn">
+                                                                                        <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="wow fadeInUp" data-wow-delay="0.3s">
-                                                                            <div class="featured-restaurant-box">
-                                                                                <div class="featured-restaurant-thumb">
-                                                                                    <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-2.jpg' %}" alt="dish-img2-2.jpg' %}" itemprop="image"></a>
+                                                                            </li>
+                                                                            <li class="wow fadeInUp" data-wow-delay="0.5s">
+                                                                                <div class="featured-restaurant-box">
+                                                                                    <div class="featured-restaurant-thumb">
+                                                                                        <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-4.jpg' %}" alt="dish-img2-4.jpg' %}" itemprop="image"></a>
+                                                                                    </div>
+                                                                                    <div class="featured-restaurant-info">
+                                                                                        <h4 itemprop="headline"><a href="#" title="" itemprop="url">Salads & Veggies Burger</a></h4>
+                                                                                        <span class="price">$85.00</span>
+                                                                                        <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
+                                                                                        <ul class="post-meta">
+                                                                                            <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
+                                                                                            <li><i class="flaticon-transport"></i> 30min</li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <div class="ord-btn">
+                                                                                        <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="featured-restaurant-info">
-                                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Tribeca Chicken Burger</a></h4>
-                                                                                    <span class="price">$85.00</span>
-                                                                                    <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
-                                                                                    <ul class="post-meta">
-                                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
-                                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                                <div class="ord-btn">
-                                                                                    <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="wow fadeInUp" data-wow-delay="0.4s">
-                                                                            <div class="featured-restaurant-box">
-                                                                                <div class="featured-restaurant-thumb">
-                                                                                    <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-3.jpg' %}" alt="dish-img2-3.jpg' %}" itemprop="image"></a>
-                                                                                </div>
-                                                                                <div class="featured-restaurant-info">
-                                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Charburger</a></h4>
-                                                                                    <span class="price">$85.00</span>
-                                                                                    <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
-                                                                                    <ul class="post-meta">
-                                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
-                                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                                <div class="ord-btn">
-                                                                                    <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li class="wow fadeInUp" data-wow-delay="0.5s">
-                                                                            <div class="featured-restaurant-box">
-                                                                                <div class="featured-restaurant-thumb">
-                                                                                    <a href="#" title="" itemprop="url"><img src="{% static 'assets/images/resource/dish-img2-4.jpg' %}" alt="dish-img2-4.jpg' %}" itemprop="image"></a>
-                                                                                </div>
-                                                                                <div class="featured-restaurant-info">
-                                                                                    <h4 itemprop="headline"><a href="#" title="" itemprop="url">Salads & Veggies Burger</a></h4>
-                                                                                    <span class="price">$85.00</span>
-                                                                                    <p itemprop="description">Lorem Ipsum is simply dummy text of the printing industry</p>
-                                                                                    <ul class="post-meta">
-                                                                                        <li><i class="fa fa-check-circle-o"></i> Min order $50</li>
-                                                                                        <li><i class="flaticon-transport"></i> 30min</li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                                <div class="ord-btn">
-                                                                                    <a class="brd-rd2" href="#" title="Order Now" itemprop="url">Order Now</a>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div> -->
                                                             </div>
                                                             <div class="tab-pane fade" id="tab1-2">
                                                                 <div class="restaurant-gallery">
@@ -310,7 +310,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="tab-pane fade" id="tab1-4">
+                                                            <!-- <div class="tab-pane fade" id="tab1-4">
                                                                 <div class="book-table">
                                                                     <h4 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Book</span> This Restaurant Table</h4>
                                                                     <form>
@@ -349,11 +349,11 @@
                                                                         </div>
                                                                     </form>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="tab-pane fade" id="tab1-5">
                                                                 <div class="restaurant-info-wrapper">
-                                                                    <h3 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Book</span> This Restaurant Table</h3>
-                                                                    <div class="loc-map" id="loc-map"></div>
+                                                                    <!-- <h3 class="title3" itemprop="headline"><span class="sudo-bottom sudo-bg-red">Book</span> This Restaurant Table</h3> -->
+                                                                    <!-- <div class="loc-map" id="loc-map"></div> -->
                                                                     <ul class="restaurant-info-list">
                                                                         <li>
                                                                             <i class="fa fa-map-marker red-clr"></i>
@@ -379,7 +379,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-12 col-lg-4">
+                                        <!-- <div class="col-md-4 col-sm-12 col-lg-4">
                                             <div class="order-wrapper right wow fadeIn" data-wow-delay="0.2s">
                                                 <div class="order-inner gradient-brd">
                                                     <h4 itemprop="headline">Your Order</h4>
@@ -439,7 +439,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
