@@ -6,13 +6,15 @@ ACCEPTED  = 1
 REJECTED  = 2
 DELIVERED = 3
 PLACED    = 4
-#
+PREPARED  = 5
+# 
 ORDER_STATUS =(
     (PENDING,'Pending'),
     (ACCEPTED,'Accepted'),
     (REJECTED,'Rejected'),
+    (PLACED,'Placed'),
     (DELIVERED,'Delivered'),
-    (PLACED,'placed')
+    (PREPARED,'Prepared')
     )
 #Delivery Person
 
@@ -41,3 +43,10 @@ ACTIVE_STATUS = (
     (ACTIVE,'Active'),
     (DEACTIVE,'Deactive'),
 )
+
+REQUEST_STATUS =(
+    
+    (PENDING,'Pending'),
+    (ACCEPTED,'Accepted'),
+    (REJECTED,'Rejected'),
+    ) 

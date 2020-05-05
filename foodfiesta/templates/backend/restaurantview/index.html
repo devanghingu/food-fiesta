@@ -1,6 +1,13 @@
 {% extends 'backend/restaurantview/base.html' %}
 
 {% load static %}
+
+
+{% block psstyle %}
+  <link href="{% static 'backend/restaurantview/assets/css/slick.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/restaurantview/assets/css/datatables.min.css' %}" rel="stylesheet">
+{% endblock psstyle %}
+  
 {% block main %}
 
 <!-- Main Content -->
@@ -11,7 +18,8 @@
   <div class="ms-content-wrapper">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="db-header-title">Welcome, Anny</h1>
+        {% include 'backend/restaurantview/message.html'%}
+        <h1 class="db-header-title">Welcome, {{ user.first_name|title }}</h1>
       </div>
 
       <!-- Food Orders -->
@@ -30,8 +38,8 @@
                   </div>
                   <div class="ms-card-body">
                     <div class="ms-card-heading-title">
-                      <a style="color:black;" href="pages/prebuilt-pages/user-profile.html">
-                        <h6>Categories</h6>
+                      <a style="color:black;" href="{% url 'restaurantview:menu' %}">
+                        <h6>Menu</h6>
                       </a>
                     </div>
                   </div>
@@ -44,8 +52,8 @@
                   </div>
                   <div class="ms-card-body">
                     <div class="ms-card-heading-title">
-                      <a style="color:black;" href="pages/prebuilt-pages/user-profile.html">
-                        <h6>Food</h6>
+                      <a style="color:black;" href="{% url 'restaurantview:orderplaced' %}">
+                        <h6>Order</h6>
                       </a>
                     </div>
                   </div>
@@ -58,7 +66,7 @@
                   </div>
                   <div class="ms-card-body">
                     <div class="ms-card-heading-title">
-                      <a style="color:black;" href="pages/prebuilt-pages/user-profile.html">
+                      <a style="color:black;" href="{% url 'restaurantview:restaurant' %}">
                         <h6>Restaurants</h6>
                       </a>
                     </div>
@@ -72,8 +80,8 @@
                   </div>
                   <div class="ms-card-body">
                     <div class="ms-card-heading-title">
-                      <a style="color:black;" href="pages/prebuilt-pages/user-profile.html">
-                        <h6>Order</h6>
+                      <a style="color:black;" href="{% url 'restaurantview:customer' %}">
+                        <h6>Customer</h6>
                       </a>
                     </div>
                   </div>

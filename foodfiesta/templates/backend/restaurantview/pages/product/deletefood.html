@@ -1,0 +1,31 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+         <div class="col-md-12">
+          <div class="ms-panel">
+            <div class="ms-panel-header">
+              <h6>Food Remove From Menu</h6>
+            </div>
+            <div class="ms-panel-body">    
+                <form method="post">{% csrf_token %}
+                    <p>Are you sure you want to delete "{{ object }}"?</p>
+                    <button type="submit" class="btn btn-secondary">Confirm</button>
+                </form>         
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+{% endblock main %}
