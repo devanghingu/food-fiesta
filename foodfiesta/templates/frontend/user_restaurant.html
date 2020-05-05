@@ -26,7 +26,7 @@
                                                 <div class="restaurant-detail-info">
                                                     <div class="restaurant-detail-thumb">
                                                         <ul class="restaurant-detail-img-carousel">
-                                                            <li><img class="brd-rd3" src="{{restaurant.pic.url}}" alt="restaurant-detail-big-img1-1.jpg' %}" itemprop="image"></li>
+                                                            <li><img class="brd-rd3" src="{% if restaurant.pic %}{{restaurant.pic.url}}{% else %}{% static 'default_image.jpg' %}{% endif %}" alt="restaurant-detail-big-img1-1.jpg' %}" itemprop="image"></li>
                                                         </ul>
                                                         <!-- <ul class="restaurant-detail-thumb-carousel">
                                                             <li><img class="brd-rd3" src="{{restaurant.pic.url}}"  alt="restaurant-detail-small-img1-1.jpg' %}" itemprop="image"></li>
