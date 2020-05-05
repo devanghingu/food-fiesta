@@ -9,7 +9,7 @@ from accounts.models import User
 from restaurantview.models import Restaurant,Delivery
 from django.http import HttpResponse
 from django.contrib import messages
-from foodfiesta.constants import ACCEPTED,PENDING,REJECTED
+from foodfiesta.constants import ACCEPTED,PENDING,REJECTED,ACTIVE
 from django.contrib.auth.decorators import user_passes_test,login_required
 
 # Create your views here.
@@ -52,6 +52,8 @@ class DeliveryList(ListView):
 class AllOrders(ListView):
     model = Order
     template_name = 'adminview/orders/allorders.html'
+    queryset = Order.objects.all().order_by('-id')
+    
 
 
 #OrdderDetails
@@ -97,7 +99,8 @@ class CategoryDelete(DeleteView):
 class RestaurantList(ListView):
     model = Restaurant
     template_name = 'adminview/restaurant/restaurantlist.html'
-
+    queryset = Restaurant.objects.all().order_by('-id')
+    
 
 class Acceptrequest(View):
     def get(self,request,*args,**kwargs):
@@ -118,7 +121,8 @@ class Acceptrequest(View):
 class Cancelequest(ListView):
     model = CancelRestaurantRequest
     template_name = 'adminview/restaurant/cancelrequest.html'
-
+    queryset = CancelRestaurantRequest.objects.all().order_by('-id')
+   
 class AcceptCancelrequest(View):
     def get(self,request,*args,**kwargs):
         id = kwargs['id']
@@ -135,6 +139,9 @@ class Rejectrequest(View):
         id = kwargs['id']
         restaurant = get_object_or_404(CancelRestaurantRequest,id=id)
         restaurant.status = REJECTED
+        res = restaurant.restaurant
+        res.status = ACTIVE
+        res.save()
         restaurant.save()
         messages.success(request,"Rejected")
         print("Rejected")

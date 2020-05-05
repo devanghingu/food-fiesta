@@ -27,7 +27,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'backend/adminview/favicon.ico' %}">
 </head>
 
-<body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+<body class="ms-body ms-aside-left-open ms-primary-theme">
   <!-- Preloader -->
   <div id="preloader-wrap">
     <div class="spinner spinner-8">
@@ -160,29 +160,12 @@
     <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
       <li class="ms-nav-item ms-search-form pb-0 py-0">
         <form class="ms-form" method="post">
-          <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-            <input type="search" class="ms-form-input" name="search" placeholder="Search here..." value="">
-            <i class="flaticon-search text-disabled"></i>
-          </div>
+          
         </form>
       </li>
 
-      <li class="ms-nav-item ms-nav-user dropdown">
-        <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="{% static 'backend/adminview/assets/img/costic/customer-6.jpg' %}" alt="people"> </a>
-        <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-          <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, {{ request.user.username }}</span></h6>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="ms-dropdown-list">
-            <a class="media fs-14 p-2" href="#"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-            <a class="media fs-14 p-2" href="#"> <span><i class="flaticon-gear mr-2"></i> Account Settings</span> </a>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="dropdown-menu-footer">
-            <a class="media fs-14 p-2" href="{% url 'account_logout' %}"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
-          </li>
-        </ul>
+      <li class="ms-nav-item ms-nav-user">
+        <a class="media fs-14 p-2" href="{% url 'account_logout' %}"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
       </li>
     </ul>
 
