@@ -27,7 +27,7 @@ class CustomLoginView(LoginView):
         response=super().post(request,*args,**kwargs)
         if request.user.groups.filter(name='staff_group').exists():
             print('stafffffffffff')
-            return redirect('restaurantview:home')
+            return redirect('restaurantview:selectdashboard')
         elif request.user.groups.filter(name='delivery_group').exists():
             print('deliveryyyyyy')
             return redirect('restaurantview:deliveryhome')

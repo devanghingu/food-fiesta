@@ -14,7 +14,7 @@
         </div>
     {% endif %}
     <table>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
            
             {% for field in form %}

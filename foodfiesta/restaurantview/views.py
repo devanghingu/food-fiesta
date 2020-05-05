@@ -338,7 +338,7 @@ class DeleteRestaurantDeleteView(View):
             #HERE Send Email
             Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
         if res.id == self.request.session.get('restaurant'):
-            return redirect('restaurantview:selectdashboard') # HERE CHANGE
+            return redirect('account_logout') # HERE CHANGE
         return redirect('restaurantview:restaurant')
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
