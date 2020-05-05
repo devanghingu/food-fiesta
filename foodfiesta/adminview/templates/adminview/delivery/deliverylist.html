@@ -1,0 +1,56 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+
+{% if object_list %}
+
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+       <center><h6>Delivery Boy List</h6></center> 
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Restaurant</th>
+                <th scope="col">Status</th>
+                
+            </tr>
+            </thead>
+            
+            {% for del in object_list  %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ del.id }}</th>
+                <td>{{ del.user.username }}</td>
+                <td> {{ del.restaurant.name }}</td>
+                <td>{% if del.status == True %}
+                    <span class="badge badge-success p-2">Availabel</span>
+                    {% else %}
+                    <span class="badge badge-primary p-2">Not Availabel</span>
+                    {% endif %}
+                </td>
+              </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+    </div>
+   </div>
+ </div>
+</div>
+         {% else %}
+         
+         <div class="alert alert-danger w-50" role="alert">
+            <i class="flaticon-alert-1"></i> <strong>Sorry!</strong> No Delivery Persons are there. 
+          </div>
+
+{% endif %}
+
+{% endblock content %}
+    

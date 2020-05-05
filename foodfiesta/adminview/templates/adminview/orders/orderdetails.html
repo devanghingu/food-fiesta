@@ -1,0 +1,94 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+    
+
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-arrow has-gap has-bg">
+          <li class="breadcrumb-item"><a href="{% url 'adminview:adminview_home' %}"><i class="material-icons">home</i> Home</a>
+          </li>
+          <li class="breadcrumb-item"><a href="{% url 'adminview:allorders' %}">All Orders</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+        </ol>
+      </nav>
+      
+      {% for object in order  %}
+        
+      
+        
+      <div class="ms-panel">
+        <div class="ms-panel-header header-mini">
+          <div class="d-flex justify-content-between">
+            <h6>Order Details</h6>
+            <h6>#{{ object.id }}</h6>
+          </div>  
+        </div>
+        <div class="ms-panel-body">
+          <!-- Invoice To -->
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="invoice-address">
+                <h3>Reciever: </h3>
+                <h5>{{ object.user.username }}</h5>
+                <p>{{ object.user.email }}</p>
+                <p class="mb-0">{{ object.address.address }}</p>
+                <p class="mb-0">{{ object.address.city }}</p>
+                <p>{{ object.address.contact }}</p>
+              </div>
+            </div>
+            <div class="col-md-6 text-md-right">
+              <ul class="invoice-date">
+                <li>Order Date :{{ object.date }}</li>
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Invoice Table -->
+          <div class="ms-invoice-table table-responsive mt-5">
+            <table class="table table-hover text-right thead-light">
+              <thead>
+                <tr class="text-capitalize">
+                  <th class="text-center w-5">id</th>
+                  <th class="text-left">description</th>
+                  <th>qty</th>
+                  <th>Unit Cost</th>
+                  <th>total</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {% for object in orderitem %}
+                <tr>
+                  <td class="text-center">{{ object.menu.fooditem_id }}</td>
+                  <td class="text-left">{{ object.menu.fooditem.name }}</td>
+                  <td>{{ object.quantity }}</td>
+                  <td>{% widthratio 1 object.quantity object.price   %}</td>
+                  <td>{{ object.price }}</td>
+                </tr>
+              </tbody>
+              {% endfor %}
+              
+              {% for object in order  %}
+              <tfoot>
+                <tr>
+                  <td colspan="5"><b>Total Cost &nbsp;:&nbsp; {{ object.total_price }}</b></td>
+                </tr>
+              </tfoot>
+              {% endfor %}
+            </table>
+          </div>
+          
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+    

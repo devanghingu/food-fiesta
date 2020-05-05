@@ -1,0 +1,55 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+
+
+{% if object_list %}
+
+<div class="col-xl-12">
+    <div class="ms-panel">
+      <div class="ms-panel-header">
+       <center><h6>All Orders</h6></center> 
+      </div>
+      <div class="ms-panel-body">
+
+        <div class="table-responsive">
+          <table class="table table-hover thead-primary">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Restaurant Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Delivery Boy</th>
+                <th scope="col">Order Details</th>
+            </tr>
+            </thead>
+            
+            {% for ord in object_list  %}
+            <tbody>
+              <tr>
+                <th scope="row">{{ ord.id }}</th>
+                <td>{{ ord.user.username }}</td>
+                <td>{{ ord.restaurant.name }}</td>
+                <td>{{ ord.date }}</td>
+                <td>{{ ord.total_price }}</td>
+                <td>{{ ord.delivery.user.username }}</td>
+                <td><a href="{% url 'adminview:orderdetails' pk=ord.id %}"><i style="font-weight: bold;font-size: 25px;" class="fas fa-info-circle text-info"></i></a></td>
+              </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+    </div>
+   </div>
+ </div>
+</div>
+         {% else %}
+         
+         <div class="alert alert-danger w-50" role="alert">
+            <i class="flaticon-alert-1"></i> <strong>Sorry!</strong> No Orders are there. 
+          </div>
+
+{% endif %}
+
+{% endblock content %}
