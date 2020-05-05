@@ -37,6 +37,7 @@ class SelectDashboard(ListView):
         return Restaurant.objects.filter(user=self.request.user,parent=None,active=ACTIVE)
 
 
+
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
 class AddNewRestaurant(CreateView):
     ''' Add New Restaurent  Create / Add  In Site Using CreateView '''
@@ -56,7 +57,7 @@ class AddNewRestaurant(CreateView):
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Home(View):
-    ''' Render Sub-DashBoard of Home'''
+    ''' Render Sub-DashBoard of Home`'''
     def get(self,request,*args, **kwargs):
         return render(request,TEMPLATE_PATH+'index.html') 
         
@@ -335,9 +336,9 @@ class DeleteRestaurantDeleteView(View):
             reason = form.cleaned_data.get('reason')
             CancelRestaurantRequest.objects.create(restaurant=res,reason=reason,status=PENDING)
             #HERE Send Email
+            Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
         if res.id == self.request.session.get('restaurant'):
-            return redirect('restaurantview:home') # HERE CHANGE
-        Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
+            return redirect('restaurantview:selectdashboard') # HERE CHANGE
         return redirect('restaurantview:restaurant')
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
