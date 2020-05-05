@@ -1,0 +1,62 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          {% include 'backend/restaurantview/message.html'%}
+          <!-- <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> You successfully read this important alert message.
+          </div> -->
+        </div>
+
+
+
+        <div class="col-xl-12 col-md-12">
+          <div class="ms-panel ms-panel-fh">
+            <div class="ms-panel-header">
+              <h6>Add New Branch Form </h6>
+              
+            </div>
+            <div class="ms-panel-body">
+              <form method="POST" class='needs-validation clearfix' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary d-block add-new-branch" type="submit">Add New Branch</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </main>
+
+{% endblock main %}
+
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const addNewBranchBtn   = document.getElementsByClassName('add-new-branch')[0];
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure about This Branch Sending To Admin If they confirm then Create Your Branch Sucessully ?`)
+        if(!result){ event.preventDefault()}
+      } 
+      addNewBranchBtn.addEventListener('click',openAlert);
+  </script>
+{% endblock psscript %}
+  

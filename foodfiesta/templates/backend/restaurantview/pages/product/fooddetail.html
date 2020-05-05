@@ -1,0 +1,113 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+         <div class="col-md-12">
+          <div class="ms-panel">
+            <div class="ms-panel-header">
+              <h6>Food Details</h6>
+            </div>
+            <div class="ms-panel-body">
+
+              <div id="arrowSlider" class="ms-arrow-slider carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                  <div>
+                    <img class="d-block w-100" src="{{ object.fooditem.pic.url }}" alt="{{ object.fooditem.name }}">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h3 class="text-white">{{ object.fooditem.name }}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<div class=" col-md-6">
+          <div class="ms-panel ms-panel-fh">
+            <div class="ms-panel-body">
+              <h4 class="section-title bold">Food Info</h4>
+              <table class="table ms-profile-information">
+                <tbody>
+                  <tr>
+                    <th scope="row">Price</th>
+                    <td>&#8377; {{ object.price}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Food Category</th>
+                    <td>{{ object.fooditem.category }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Availiblity</th>
+                 <td>
+                      {% if obj.available %}
+                        <span class="badge badge-success">In Stock</span>
+                      {% else %}
+                        <span class="badge badge-danger">Not Available</span>
+                      {% endif%}
+                  </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Delivery Charges</th>
+                    <td>Free</td>
+                  </tr>
+
+                 
+
+                </tbody>
+              </table>
+              <div class="new">
+                <a href="{% url 'restaurantview:deletefood'  object.id %}" class="btn btn-primary">Remove</a>
+                <a href="{% url 'restaurantview:editfood'  object.id %}" class="btn btn-secondary">Edit</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class=" col-md-6">
+          <div class="ms-panel ms-panel-fh">
+            <div class="ms-panel-body">
+
+              <h4 class="section-title bold">Food Details </h4>
+              <p class="description">{{ object.fooditem.description }}</p>
+
+
+            </div>
+            <div class="ms-quick-stats">
+                <div class="ms-stats-grid">
+                  <i class="fa fa-bullhorn"></i>
+                  <p class="ms-text-dark">1,033</p>
+                  <span>Today Order</span>
+                </div>
+                <div class="ms-stats-grid">
+                  <i class="fa fa-cutlery"></i>
+                  <p class="ms-text-dark">3,039</p>
+                  <span>Favourite</span>
+                </div>
+              </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+
+  </main>
+{% endblock main %}
+
+
+
+  

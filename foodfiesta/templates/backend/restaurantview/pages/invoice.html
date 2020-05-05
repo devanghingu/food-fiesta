@@ -1,0 +1,108 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="ms-panel">
+            <div class="ms-panel-header header-mini">
+              <div class="d-flex justify-content-between">
+                <h6>Invoice</h6>
+                <h6>#{{ order.id }}</h6>
+              </div>
+            </div>
+            <div class="ms-panel-body">
+              <!-- Invoice To -->
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <div class="invoice-address">
+                    <h3>Customer/Reciever: </h3>
+                    <h5>{{ order.user.first_name|title }} {{ order.user.last_name|title }}</h5>
+                    <p class="mb-0">{{ order.address.address }}</p>
+                    <p class="mb-0">{{ order.address.city }}</p>
+                    <p>{{ order.user.email }}</p>
+                    <p class="mb-0">{{ order.address.contact}}</p>
+                  </div>
+                </div>
+                <div class="col-md-6 text-md-right">
+                  <ul class="invoice-date">
+                    <li>Invoice Date : {{ order.date }}</li>
+                    <li> 
+                      {% if order.delivery %}
+                          Delivery By : {{ order.delivery }}
+                      {% else %}
+                          Delivery By : Not Assign Yet
+                      {% endif %}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Invoice Table -->
+              <div class="ms-invoice-table table-responsive mt-5">
+                <table class="table table-hover text-right thead-light">
+                  <thead>
+                    <tr class="text-capitalize">
+                      <th class="text-center w-5">No.</th>
+                      <th class="text-left">Description</th>
+                      <th>Quantity</th>
+                      <th>Unit Price</th>
+                      <th>total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for object in object_list %}
+                    <tr>
+                      <td class="text-center">{{ forloop.counter }}</td>
+                      <td class="text-left">{{ object.menu }}</td>
+                      <td>{{ object.quantity }}</td>
+                      <td>{% widthratio 1 object.quantity object.price   %}</td>
+                      <td>{{ object.price }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="4">Total Cost:</td>
+                      <td>{{ order.total_price }}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <div class="invoice-buttons text-right"> <a href="#" class="btn btn-secondary mr-2 print-invoice">Print Invoice</a>
+                <!-- <a href="#" class="btn btn-primary">Send Invoice</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock main %}
+
+
+{% block psscript %}
+  <script>
+    'use strict';
+    const printInvoiceBtn = document.getElementsByClassName('print-invoice')[0];
+
+    const printInvoice = function(event){
+     /* const printContents    = document.getElementsByClassName('ms-content-wrapper')[0];
+      const originalContents = document.body.innerHTML;
+      document.body.innerHTML = "<html><head><title></title></head><body>" + printContents + "</body>";
+      document.body.innerHTML = originalContents;
+      event.preventDefault();*/
+      window.print();
+    }
+    printInvoiceBtn.addEventListener('click',printInvoice);
+
+  </script>
+{% endblock psscript %}
+  

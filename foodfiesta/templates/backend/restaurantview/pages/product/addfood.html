@@ -1,0 +1,118 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          {% include 'backend/restaurantview/message.html'%}
+          <!-- <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> You successfully read this important alert message.
+          </div> -->
+        </div>
+
+
+
+        <div class="col-xl-12 col-md-12">
+          <div class="ms-panel ms-panel-fh">
+            <div class="ms-panel-header">
+              <h6>Add Food Form <a class="badge badge-secondary" href="{% url 'restaurantview:addfooditem' %}" style="float:right;">Add New Food Item</a></h6>
+              
+            </div>
+            <div class="ms-panel-body">
+              <!-- <form class="needs-validation clearfix" novalidate>
+                <div class="form-row">
+                  <div class="col-md-12 mb-3">
+                    <label for="validationCustom18">Food Name</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="validationCustom18" placeholder="Food Name" value="Pizza" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <label for="validationCustom22">Select Catagory
+                    </label>
+                    <a href='#' style="float:right;"> Add New Category </a>
+                    <div class="input-group">
+                      <select class="form-control" id="validationCustom22" required>
+                        <option value="">Catagory 1</option>
+                        <option value="">Catagory 2</option>
+                        <option value="">Catagory 3</option>
+                        <option value="">Catagory 4</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Please select a Catagory.
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom24">Quantity</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="validationCustom24" placeholder="01" required>
+                      <div class="invalid-feedback">
+                        Quantity
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationCustom25">Price</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="validationCustom25" placeholder="$10" required>
+                      <div class="invalid-feedback">
+                        Price
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="validationCustom12">Description</label>
+                    <div class="input-group">
+                      <textarea rows="5" id="validationCustom12" class="form-control" placeholder="Message" required></textarea>
+                      <div class="invalid-feedback">
+                        Please provide a Description.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="validationCustom12">Product Image</label>
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="validatedCustomFile">
+                      <label class="custom-file-label" for="validatedCustomFile">Upload Images...</label>
+                      <div class="invalid-feedback">Example invalid custom file feedback</div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </form> -->
+              <form method="POST" class='needs-validation clearfix'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary d-block" type="submit">Add</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </main>
+
+{% endblock main %}

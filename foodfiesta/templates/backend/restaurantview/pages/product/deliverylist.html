@@ -1,0 +1,90 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+
+{% block psstyle %}
+  <style>
+    table i{
+      margin-right:0px !important;
+    }
+  </style>
+{% endblock psstyle %}
+
+{% block main %}
+<!-- Main Content -->
+<main class="body-content">
+
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html' %}
+
+  {% if object_list|length > 0 %}
+  <div class="ms-content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        {% include 'backend/restaurantview/message.html'%}
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <h6>Delivery Person</h6>
+          </div>
+          <div class="ms-panel-body">
+            <div class="table-responsive">
+              <div id="data-table-4_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                <div class="row">
+                  <div class="col-sm-12 table-responsive">
+                    <table class="table table-hover thead-primary">
+                      <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Person Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Total Order</th>
+                          <th scope="col">Avil.. Status</th>
+                          <th scope="col">Detail</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ object.user.username }}</td>
+                          <td>{{ object.user.email }}</td>
+                          <td>{{ object.order_set.count }}</td>
+                          <td>
+                            {% if object.status %}
+                            <span class="badge badge-success">Available</span>
+                            {% else %}
+                            <span class="badge badge-primary">No Available</span>
+                            {% endif%}
+                          </td>
+                          <td>
+                            <a href="{% url 'restaurantview:deliverydetail' object.id %}" title="Order Invoice" class="badge badge-secondary active"><i class="fas fa-info-circle"></i></a>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                  {% include 'backend/restaurantview/pagination.html'%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              There is no <strong>Delivery</strong> Person For You 
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+</main>
+{% endblock main %}

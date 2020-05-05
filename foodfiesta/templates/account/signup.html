@@ -1,0 +1,91 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block extra_head %}
+  <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'assets/css/icons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/red-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/yellow-color.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+  <style>
+      #id_is_staff{
+        float: left;
+        width: 100%;
+        font-size: 10.8px;
+        color: #a2a2a2;
+        background-color: #f6f6f6;
+        height: 50px;
+        margin-bottom: 10px;
+        padding: 10px 28px;
+      }
+  </style>
+{% endblock %}
+{% block body %}
+{% block content %}
+<main>
+<section>
+  <div class="block top-padd30">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-lg-12">
+                  <div class="login-register-wrapper">
+                      <div class="row d-flex justify-content-center">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                          <div class="sign-popup-wrapper brd-rd5">
+                              <div class="sign-popup-inner brd-rd5">
+                                {% if form.errors %}
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="alert alert-error">
+                                                <strong>{{ error|escape }}</strong>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="alert alert-error">
+                                                <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                  <div class="sign-popup-title text-center">
+                                      <h4 itemprop="headline">{% trans "Sign Up" %}</h4>
+                                      <!-- <span>with your social network</span> -->
+                                  </div>
+                                  <!-- <span class="popup-seprator text-center"><i class="brd-rd50">or</i></span> -->
+                                  <form class="sign-form signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                                      {% csrf_token %}
+                                      <div class="row">
+                                        {% for field in form %}
+                                            <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                                {{field}}
+                                            </div>
+                                        {% endfor %}
+                                        {% if redirect_field_value %}
+                                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                        {% endif %}
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                            <button class="red-bg brd-rd3" type="submit">{% trans "Sign Up" %}</button>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                                            <a class="sign-btn" href="{% url 'account_login' %}" title="" itemprop="url">Already Registered? Sign in</a>
+                                        </div>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</section>
+</main>
+{% endblock %}
+{% endblock %}

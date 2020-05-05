@@ -1,0 +1,101 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+
+
+{% block psstyle %}
+  <link href="{% static 'backend/restaurantview/assets/css/slick.css' %}" rel="stylesheet">
+  <link href="{% static 'backend/restaurantview/assets/css/datatables.min.css' %}" rel="stylesheet">
+{% endblock psstyle %}
+  
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+  <div class="ms-content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        {% include 'backend/restaurantview/message.html'%}
+        <h1 class="db-header-title">Welcome, {{ user.first_name|title }}</h1>
+      </div>
+
+      <!-- Food Orders -->
+      <div class="col-md-12">
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <h6>Quick Access</h6>
+          </div>
+          <div class="ms-panel-body">
+            <div class="row">
+
+              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="ms-card no-margin">
+                  <div class="ms-card-img">
+                    <img src="{% static 'backend/restaurantview/assets/img/costic/food-5.jpg' %}" alt="card_img">
+                  </div>
+                  <div class="ms-card-body">
+                    <div class="ms-card-heading-title">
+                      <a style="color:black;" href="{% url 'restaurantview:menu' %}">
+                        <h6>Menu</h6>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="ms-card no-margin">
+                  <div class="ms-card-img">
+                    <img src="{% static 'backend/restaurantview/assets/img/costic/food-2.jpg' %}" alt="card_img">
+                  </div>
+                  <div class="ms-card-body">
+                    <div class="ms-card-heading-title">
+                      <a style="color:black;" href="{% url 'restaurantview:orderplaced' %}">
+                        <h6>Order</h6>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="ms-card no-margin">
+                  <div class="ms-card-img">
+                    <img src="{% static 'backend/restaurantview/assets/img/costic/food-4.jpg' %}" alt="card_img">
+                  </div>
+                  <div class="ms-card-body">
+                    <div class="ms-card-heading-title">
+                      <a style="color:black;" href="{% url 'restaurantview:restaurant' %}">
+                        <h6>Restaurants</h6>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                <div class="ms-card no-margin">
+                  <div class="ms-card-img">
+                    <img src="{% static 'backend/restaurantview/assets/img/costic/food-3.jpg' %}" alt="card_img">
+                  </div>
+                  <div class="ms-card-body">
+                    <div class="ms-card-heading-title">
+                      <a style="color:black;" href="{% url 'restaurantview:customer' %}">
+                        <h6>Customer</h6>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END/Food Orders -->
+    </div>
+  </div>
+</main>
+
+
+{% endblock main %}

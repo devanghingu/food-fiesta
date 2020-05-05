@@ -1,0 +1,58 @@
+{% extends 'backend/restaurantview/base.html' %}
+{% load static %}
+
+{% block main %}
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html' %}
+  {% if object_list|length > 0 %}
+  <div class="ms-content-wrapper box">
+    
+    <div class="row">
+      {% include 'backend/restaurantview/message.html'%}
+      {% for obj in object_list %}
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="ms-card">
+            <div class="ms-card-img">
+              <img src="{{ obj.pic.url }}" alt="Resturant {{ obj.name }}">
+            </div>
+            <div class="ms-card-body ">
+              <div class="wrapper-new2 ">
+                <h6>{{ obj.name }}</h6>
+                <!-- <span class="white">15</span> -->
+              </div>
+              <div class="wrapper-new1">
+                <span>Total Order :<strong class="color-red"> {{ obj.order_set.count }}</strong> </span>
+                <span><a class="badge badge-secondary" href="{% url 'restaurantview:dashboard' obj.id %}">See DashBoard</a></span>
+              </div>
+              <a href="{% url 'restaurantview:restaurantdetail' obj.pk %}" class="btn btn-primary btn-md btn-block">See More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+        <div class="col-xl-12 col-md-12">
+          {% include 'backend/restaurantview/pagination.html'%}
+        </div>
+      </div>
+
+    </div>
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              In You <strong>Restaurant</strong> There is Not any Sub Branch
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </main>
+
+{% endblock main %}
+
+
+ 
+ 

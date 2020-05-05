@@ -1,0 +1,105 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+
+
+
+{% block main %}
+<style>
+  {% if object.pic %}
+  .ms-profile-cover{
+    background-image: url({{ object.pic.url }});
+  }
+  {% endif %}
+</style>
+<main class="body-content">
+
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+
+  <!-- Body Content Wrapper -->
+  <div class="ms-content-wrapper">
+    <div class="ms-profile-overview">
+      <div class="ms-profile-cover">
+        {% if object.user.profile %}
+          <img class="ms-profile-img" src="{{ object.user.profile.url }}" alt="people">
+        {% else %}
+          <img class="ms-profile-img" src="{% static 'backend/restaurantview/assets/img/costic/customer-5.jpg' %}" alt="people">
+        {% endif %}
+        <div class="ms-profile-user-info">
+          <h4 class="ms-profile-username text-white">{{ object.user.first_name|title }} {{ object.user.last_name|title }}</h4>
+          <h2 class="ms-profile-role">Professional Delivery Person</h2>
+        </div>
+      </div>
+      <ul class="ms-profile-navigation nav nav-tabs tabs-bordered" role="tablist">
+        <li role="presentation"><a href="#tab1" aria-controls="tab1" class="active show" role="tab" data-toggle="tab"> Overview </a></li>
+      </ul>
+    </div>
+
+    <div class="row">
+      {% include 'backend/restaurantview/message.html'%}
+      <div class="col-xl-7 col-md-12">
+        <div class="ms-panel ms-panel-fh">
+          <div class="ms-panel-body">
+            <h2 class="section-title">About Me</h2>
+            <p>
+              {{ object.user.first_name|title }} is Delivery Person of {{ object.restaurant.name }} Restaurant  
+            </p>
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-xl-5 col-md-12">
+        <div class="ms-panel ms-panel-fh">
+          <div class="ms-panel-body">
+            <h2 class="section-title">Basic Information</h2>
+            <table class="table ms-profile-information">
+              <tbody>
+                <tr>
+                  <th scope="row">Full Name</th>
+                  <td>{{ object.user.first_name|title }} {{ object.user.last_name|title }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td>{{ object.user.email}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Available Status</th>
+                  <td>
+                    {% if object.status %}
+                      <span class="badge badge-success">Available</span>
+                    {% else %}
+                      <span class="badge badge-danger">Not Available</span>
+                    {% endif%}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+            <div class="ms-quick-stats">
+              <div class="ms-stats-grid">
+                <i class="fa fa-bullhorn"></i>
+                <p class="ms-text-dark">{{ object.order_set.count }}</p>
+                <span>Total Order</span>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock main%}
+
+
+{% block psscript %}
+  <script>
+      'use strict';
+      const openBtn   = document.getElementsByClassName('open')[0] || document.getElementsByClassName('close')[0] ;
+      const openAlert = function(event){
+        const result  = confirm(`Are you sure to ${openBtn.innerHTML} The Resturant`)
+        if(!result){ event.preventDefault()}
+      } 
+      openBtn.addEventListener('click',openAlert);
+  </script>
+{% endblock psscript %}
+  

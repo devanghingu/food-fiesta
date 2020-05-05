@@ -1,0 +1,93 @@
+{% load static %}
+<aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
+
+    <!-- Logo -->
+    <div class="logo-sn ms-d-block-lg">
+      <a class="pl-0 ml-0 text-center" href="{% url 'restaurantview:selectdashboard' %}"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+    </div>
+
+    <!-- Navigation -->
+    <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
+      
+      <!-- Select Dashboard -->
+      <li class="menu-item">
+        <a href="{% url 'restaurantview:selectdashboard' %}">
+          <span><i class="fas fa-mouse-pointer fs-16"></i> Select DashBoard</span>
+        </a>
+      </li>
+      <!-- Select Dahsboard -->
+      <!-- foods -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false"
+          aria-controls="product">
+          <span><i class="fa fa-cookie-bite fs-16"></i>Menus</span>
+        </a>
+        <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+
+          <li> <a href="{% url 'restaurantview:menu' %}">Menus Grid</a> </li>
+          <li> <a href="{% url 'restaurantview:addfood' %}">Add Food Item</a> </li> 
+        </ul>
+      </li>
+      <!-- food end -->
+
+      <!-- Order -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#order" aria-expanded="false"
+          aria-controls="order">
+          <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
+        </a>
+        <ul id="order" class="collapse" aria-labelledby="order" data-parent="#side-nav-accordion">
+
+          <li> <a href="{% url 'restaurantview:orderplaced' %}">Places Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderaccepted' %}">Accepted Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderprepared' %}">Prepared Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderdelivered' %}">Delivered Orders</a> </li>
+          <li> <a href="{% url 'restaurantview:orderrejected' %}">Rejected Orders</a> </li> 
+        </ul>
+      </li>
+      <!-- Order end -->
+
+
+
+      <!-- restaurants -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
+          aria-controls="restaurant">
+          <span><i class="fa fa-utensils fs-16"></i>Restaurants List</span>
+        </a>
+        
+        <ul id="restaurant" class="collapse" aria-labelledby="restaurant" data-parent="#side-nav-accordion">
+          <li> <a href="{% url 'restaurantview:restaurant' %}">Restaurants List</a> </li>
+          <li> <a href="{% url 'restaurantview:addrestaurant' %}">Add Branch </a> </li>
+        </ul>
+      </li>
+      <!-- restaurants end -->
+
+      <!-- customers-->
+
+      <li class="menu-item">
+        <a href="{% url 'restaurantview:customer' %}">
+          <span><i class="fas fa-user-friends fs-16"></i>Customers </span>
+        </a>
+      </li>
+      <!-- Customers  end -->
+
+      <!-- delivery -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#delivery" aria-expanded="false"
+          aria-controls="product">
+          <span><i class="fa fa-briefcase fs-16"></i>Delivery Person</span>
+        </a>
+        <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+
+          <li> <a href="{% url 'restaurantview:delivery' %}">Delivery List</a> </li>
+          <li> <a href="{% url 'restaurantview:adddelivery' %}">Add Delivery Person</a> </li>
+        </ul>
+      </li>
+      <!-- delivery end -->
+
+     
+    </ul>
+
+
+  </aside>
