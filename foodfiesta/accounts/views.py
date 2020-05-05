@@ -34,11 +34,12 @@ class CustomLoginView(LoginView):
         if request.user.groups.filter(name='staff_group').exists():
             if Restaurant.objects.filter(user=request.user,parent=None,active=True):
                 print('stafffffffffff')
-                return redirect('restaurantview:home')
+                return redirect('restaurantview:selectdashboard')
             else:
                 messages.info(request, "Your Restaurant request is in process")
                 return redirect('accounts:index')
                 
+
         elif request.user.groups.filter(name='delivery_group').exists():
             print('deliveryyyyyy')
             return redirect('restaurantview:deliveryhome')

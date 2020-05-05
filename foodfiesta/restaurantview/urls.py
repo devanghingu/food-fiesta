@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import url
-from restaurantview.views import (Home,Profile,Invoice,
+from restaurantview.views import (Home,Profile,Invoice,SelectDashboard,AddNewRestaurant,
                                 OrderPlacedListView,OrderAcceptedListView,ChangeOrderStatus,OrderRejectedListView,OrderDeliveredListView,OrderPreparedListView,
                                 MenuListView,AddFoodCreateView,FoodDetailView,DeleteFoodDeleteView,
                                 EditFoodDeleteView,AddFoodItemCreateView,
@@ -12,6 +12,9 @@ from django.contrib.auth.decorators import user_passes_test
 
 app_name = 'restaurantview'
 urlpatterns = [
+
+    path('selectdashboard',SelectDashboard.as_view(),name='selectdashboard'),
+    path('addnewrestaurant',AddNewRestaurant.as_view(),name='addnewrestaurant'),
     path('home',Home.as_view(),name='home'),
     path('profile',Profile.as_view(),name='profile'),
 

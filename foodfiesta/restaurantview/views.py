@@ -24,15 +24,43 @@ from .decorators            import check_is_restaurant
 #template prefix constant
 TEMPLATE_PATH = 'backend/restaurantview/'
 
+
+#Select Restaurant Dashboard  CRUD --start--
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
+class SelectDashboard(ListView):
+    ''' Menu Of Restaurent Food Listing In Card Using ListView '''
+    model         = Restaurant
+    template_name = TEMPLATE_PATH+'pages/product/selectdashboard.html'
+    paginate_by   = 8
+
+    def get_queryset(self):
+        return Restaurant.objects.filter(user=self.request.user,parent=None,active=ACTIVE)
+
+
+
+@method_decorator([login_required,check_is_restaurant],name='dispatch')
+class AddNewRestaurant(CreateView):
+    ''' Add New Restaurent  Create / Add  In Site Using CreateView '''
+    model         = Restaurant
+    fields        = ('name','address','city','contact','pic')
+    template_name = TEMPLATE_PATH+'addnewrestaurant.html'
+    success_url   = reverse_lazy('restaurantview:selectdashboard')
+    
+    def form_valid(self, form):
+        restaurant        = form.save(commit=False)
+        restaurant.user   = self.request.user 
+        restaurant.save()
+        messages.success(self.request,'New Resturant Added Succefully..!')
+        return super().form_valid(form)
+
+#Select Restaurant Dashboard  CRUD --start--
+
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
 class Home(View):
+    ''' Render Sub-DashBoard of Home`'''
     def get(self,request,*args, **kwargs):
-        res = Restaurant.objects.filter(user=request.user,parent=None)[0]
-        if request.session.get('restaurant') != res.id: 
-            messages.success(request,'Welcome '+res.name+' Dashboard ..!')
-        request.session['restaurant']=res.id
         return render(request,TEMPLATE_PATH+'index.html') 
-
+        
 #Profile / Restaurant CRUD --start--
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')
@@ -308,9 +336,9 @@ class DeleteRestaurantDeleteView(View):
             reason = form.cleaned_data.get('reason')
             CancelRestaurantRequest.objects.create(restaurant=res,reason=reason,status=PENDING)
             #HERE Send Email
+            Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
         if res.id == self.request.session.get('restaurant'):
-            return redirect('restaurantview:home') # HERE CHANGE
-        print(Restaurant.objects.filter(id=res.id).update(active=DEACTIVE))
+            return redirect('account_logout') # HERE CHANGE
         return redirect('restaurantview:restaurant')
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')

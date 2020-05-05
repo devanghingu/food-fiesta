@@ -52,6 +52,8 @@ class DeliveryList(ListView):
 class AllOrders(ListView):
     model = Order
     template_name = 'adminview/orders/allorders.html'
+    queryset = Order.objects.all().order_by('-id')
+    
 
 
 #OrdderDetails
@@ -97,7 +99,8 @@ class CategoryDelete(DeleteView):
 class RestaurantList(ListView):
     model = Restaurant
     template_name = 'adminview/restaurant/restaurantlist.html'
-
+    queryset = Restaurant.objects.all().order_by('-id')
+    
 
 class Acceptrequest(View):
     def get(self,request,*args,**kwargs):
@@ -118,7 +121,8 @@ class Acceptrequest(View):
 class Cancelequest(ListView):
     model = CancelRestaurantRequest
     template_name = 'adminview/restaurant/cancelrequest.html'
-
+    queryset = CancelRestaurantRequest.objects.all().order_by('-id')
+   
 class AcceptCancelrequest(View):
     def get(self,request,*args,**kwargs):
         id = kwargs['id']

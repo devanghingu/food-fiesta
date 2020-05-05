@@ -38,7 +38,7 @@
                         <th scope="col">Order ID</th>
                         <th scope="col">Customer Name</th>
                         <th scope="col">Location</th>
-                        <th scope="col">Contact</th>
+                        <th scope="col">Delivered By</th>
                         <th scope="col">Order Status</th>
                         <th scope="col">Order Time</th>
                         <th scope="col">Price</th>
@@ -51,7 +51,7 @@
                         <th scope="row">{{ object.id }}</th>
                         <td>{{ object.user }}</td>
                         <td>{{ object.address.address|title }}</td>
-                        <td>{{ object.address.contact }}</td>
+                        <td>{{ object.delivery }}</td>
                         <td>
                           <span class="badge badge-secondary">Delivered</span> 
                         </td>
