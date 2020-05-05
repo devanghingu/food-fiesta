@@ -63,8 +63,8 @@
                       <td class="text-center">{{ forloop.counter }}</td>
                       <td class="text-left">{{ object.menu }}</td>
                       <td>{{ object.quantity }}</td>
+                      <td>{% widthratio 1 object.quantity object.price   %}</td>
                       <td>{{ object.price }}</td>
-                      <td>{% widthratio object.quantity 1 object.price %}</td>
                     </tr>
                     {% endfor %}
                   </tbody>

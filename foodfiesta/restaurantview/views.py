@@ -306,11 +306,11 @@ class DeleteRestaurantDeleteView(View):
         if form.is_valid():
             res = get_object_or_404(Restaurant,id=kwargs.get('pk'))
             reason = form.cleaned_data.get('reason')
-            # CancelRestaurantRequest.objects.create(restaurant=res,reason=reason,status=PENDING)
+            CancelRestaurantRequest.objects.create(restaurant=res,reason=reason,status=PENDING)
             #HERE Send Email
         if res.id == self.request.session.get('restaurant'):
             return redirect('restaurantview:home') # HERE CHANGE
-        Restaurant.objects.filter(id=res.id).update(active=DEACTIVE)
+        print(Restaurant.objects.filter(id=res.id).update(active=DEACTIVE))
         return redirect('restaurantview:restaurant')
 
 @method_decorator([login_required,check_is_restaurant],name='dispatch')

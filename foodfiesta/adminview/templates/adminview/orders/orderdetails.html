@@ -66,8 +66,8 @@
                   <td class="text-center">{{ object.menu.fooditem_id }}</td>
                   <td class="text-left">{{ object.menu.fooditem.name }}</td>
                   <td>{{ object.quantity }}</td>
-                  <td>{{ object.price }}</td>
-                  <td>{{  object.total }}</td>
+                  <td>{% widthratio 1 object.quantity object.price   %}</td>
+                  <td>{{  object.price }}</td>
                 </tr>
               </tbody>
               {% endfor %}

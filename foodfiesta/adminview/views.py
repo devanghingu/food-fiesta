@@ -9,7 +9,7 @@ from accounts.models import User
 from restaurantview.models import Restaurant,Delivery
 from django.http import HttpResponse
 from django.contrib import messages
-from foodfiesta.constants import ACCEPTED,PENDING,REJECTED
+from foodfiesta.constants import ACCEPTED,PENDING,REJECTED,ACTIVE
 from django.contrib.auth.decorators import user_passes_test,login_required
 
 # Create your views here.
@@ -135,6 +135,9 @@ class Rejectrequest(View):
         id = kwargs['id']
         restaurant = get_object_or_404(CancelRestaurantRequest,id=id)
         restaurant.status = REJECTED
+        res = restaurant.restaurant
+        res.status = ACTIVE
+        res.save()
         restaurant.save()
         messages.success(request,"Rejected")
         print("Rejected")
