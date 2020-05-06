@@ -3,6 +3,9 @@
 *.pot
 *.pyc
 __pycache__/
+*.json
 db.sqlite3
 db.sqlite3-journal
+media/
 media
+credential.py

@@ -1,0 +1,72 @@
+{% extends 'backend/restaurantview/base.html' %}
+
+{% load static %}
+{% block main %}
+
+<!-- Main Content -->
+<main class="body-content">
+  <!-- Navigation Bar -->
+  {% include 'backend/restaurantview/navbar.html'%}
+  
+{% if object_list|length > 0 %}
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            {% include 'backend/restaurantview/message.html'%}
+            {% for obj in object_list %}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                  <div class="ms-card">
+                    <div class="ms-card-img">
+                      <img src="{{ obj.fooditem.pic.url }}" alt="card_img">
+                    </div>
+                    <div class="ms-card-body">
+
+                        <div class="new">
+                          <h6 class="mb-0"><a href="{% url 'restaurantview:fooddetail'  obj.id %}"" style="color:black;">{{ obj.fooditem }}</a></h6>
+                          <h6 class="ms-text-primary mb-0">&#8377; {{ obj.price}}</h6>
+                        </div>
+                        <div class="new meta">
+                          <p></p>
+                          {% if obj.available %}
+                            <span class="badge badge-success">In Stock</span>
+                          {% else %}
+                            <span class="badge badge-danger">Not Available</span>
+                          {% endif%}
+                      </div>
+                      <p> {{ obj.fooditem.description }}</p>
+                      <div class="new mb-0">
+                        <a href="{% url 'restaurantview:deletefood'  obj.id %}" class="btn grid-btn mt-0 btn-sm btn-primary">Remove</a>
+                        <a href="{% url 'restaurantview:editfood'  obj.id %}" class="btn grid-btn mt-0 btn-sm btn-secondary">Edit</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    {% include 'backend/restaurantview/pagination.html'%}
+
+    {% else %}
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="alert alert-danger" role="alert">
+              In You <strong>Restaurant</strong> There is Not ant Menu Or Food 
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </main>
+
+  {% endblock main %}

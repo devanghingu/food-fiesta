@@ -1,0 +1,72 @@
+{% extends 'adminview/index.html' %}
+
+{% block content %}
+    
+
+
+<div class="ms-content-wrapper">
+    <div class="row">
+
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb pl-0">
+            <li class="breadcrumb-item"><a href="{% url 'adminview:adminview_home' %}"><i class="material-icons">home</i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'adminview:allcategory' %}">Category List</a></li>
+            <li class="breadcrumb-item active" aria-current="page">FoodItem Detail</li>
+          </ol>
+        </nav>
+      </div>
+       <div class="col-md-6">
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <h6>FoodItem Image</h6>
+          </div>
+          <div class="ms-panel-body">
+
+            <div id="arrowSlider" class="ms-arrow-slider carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img style="height: 300px;width: 100%;" class="d-block " src="{{ fooditem.pic.url }}" alt="First slide">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<div class=" col-md-6">
+        <div class="ms-panel ms-panel-fh">
+          <div class="ms-panel-body">
+            <center><h4 class="section-title bold">Category Info</h4></center>
+            <table class="table ms-profile-information">
+              <tbody>
+
+                <tr>
+                  <th scope="row">FoodItem</th>
+                  <td>{{ fooditem.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Category</th>
+                    <td>{{ fooditem.category.name }}</td>
+                  </tr>
+                <tr>
+                  <th scope="row">Description</th>
+                  <td>{{ fooditem.description }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="new">
+              <a class="btn btn-primary mt-4 d-block w-50" href="{% url 'adminview:fooditem_update' pk=fooditem.pk %}">Update</a>  
+              <a class="btn btn-secondary mt-4 d-block w-50" href="{% url 'adminview:fooditem_delete' pk=fooditem.pk %}">Delete</a>  
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+
+{% endblock content %}
+    
