@@ -2,15 +2,11 @@ from accounts.models import User
 from adminview.models import City
 from allauth.account.forms import SignupForm
 from allauth.account.views import LoginView
-from allauth.account.views import SignupView
 from django.contrib import messages
-from django.contrib.auth import login
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.views.generic import View

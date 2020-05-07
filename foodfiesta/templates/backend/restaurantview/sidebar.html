@@ -3,86 +3,87 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="index.html"> <img src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
+        <a class="pl-0 ml-0 text-center" href="index.html"> <img
+                src="{% static 'backend/restaurantview/assets/img/costic/Food_fiesta.png' %}" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
 
-      <!-- foods -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false"
-          aria-controls="product">
-          <span><i class="fa fa-archive fs-16"></i>Menus</span>
-        </a>
-        <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+        <!-- foods -->
+        <li class="menu-item">
+            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#product" aria-expanded="false"
+               aria-controls="product">
+                <span><i class="fa fa-archive fs-16"></i>Menus</span>
+            </a>
+            <ul id="product" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
-          <li> <a href="{% url 'restaurantview:menu' %}">Menus Grid</a> </li>
-          <li> <a href="{% url 'restaurantview:addfood' %}">Add Food Item</a> </li>
-          <li> <a href="{% url 'restaurantview:fooddetail' %}">Food Detail</a> </li>
-        </ul>
-      </li>
-      <!-- food end -->
+                <li><a href="{% url 'restaurantview:menu' %}">Menus Grid</a></li>
+                <li><a href="{% url 'restaurantview:addfood' %}">Add Food Item</a></li>
+                <li><a href="{% url 'restaurantview:fooddetail' %}">Food Detail</a></li>
+            </ul>
+        </li>
+        <!-- food end -->
 
-      <!-- orders -->
-      <li class="menu-item">
-        <a href="{% url 'restaurantview:order' %}">
-          <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
-        </a>
-      </li>
-      <!-- orders end -->
+        <!-- orders -->
+        <li class="menu-item">
+            <a href="{% url 'restaurantview:order' %}">
+                <span><i class="fas fa-clipboard-list fs-16"></i>Orders</span>
+            </a>
+        </li>
+        <!-- orders end -->
 
-      <!-- restaurants -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
-          aria-controls="product">
-          <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
-        </a>
-        <ul id="restaurant" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+        <!-- restaurants -->
+        <li class="menu-item">
+            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#restaurant" aria-expanded="false"
+               aria-controls="product">
+                <span><i class="fa fa-tasks fs-16"></i>Restaurants List</span>
+            </a>
+            <ul id="restaurant" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
 
-          <li> <a href="pages/product/restaurantlist.html">Restaurants List</a> </li>
-          <li> <a href="pages/product/addrestaurant.html">Add Restaurant</a> </li>
-          <li> <a href="pages/product/restaurantdetail.html">Restaurant Detail</a> </li>
-        </ul>
-      </li>
-      <!-- restaurants end -->
+                <li><a href="pages/product/restaurantlist.html">Restaurants List</a></li>
+                <li><a href="pages/product/addrestaurant.html">Add Restaurant</a></li>
+                <li><a href="pages/product/restaurantdetail.html">Restaurant Detail</a></li>
+            </ul>
+        </li>
+        <!-- restaurants end -->
 
-      <!-- customers-->
+        <!-- customers-->
 
-      <li class="menu-item">
-        <a href="pages/customer/customerlist.html">
-          <span><i class="fas fa-user-friends fs-16"></i>Customers </span>
-        </a>
-      </li>
-      <!-- Customers  end -->
-
-
-      <!-- delivery -->
-      <li class="menu-item">
-        <a href="pages/sales.html">
-          <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
-        </a>
-      </li>
-      <!-- delivery-->
+        <li class="menu-item">
+            <a href="pages/customer/customerlist.html">
+                <span><i class="fas fa-user-friends fs-16"></i>Customers </span>
+            </a>
+        </li>
+        <!-- Customers  end -->
 
 
-      <!-- delivery -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#delivery" aria-expanded="false"
-          aria-controls="product">
-          <span><i class="fa fa-tasks fs-16"></i>Delivery Person</span>
-        </a>
-        <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+        <!-- delivery -->
+        <li class="menu-item">
+            <a href="pages/sales.html">
+                <span><i class="fa fa-briefcase fs-16"></i>Delevery Persons</span>
+            </a>
+        </li>
+        <!-- delivery-->
 
-          <li> <a href="pages/product/deliverylist.html">Delivery List</a> </li>
-          <li> <a href="pages/product/adddelivery.html">Add Delivery Person</a> </li>
-          <li> <a href="pages/product/deliverydetail.html">Person Detail</a> </li>
-        </ul>
-      </li>
-      <!-- delivery end -->
 
-     
+        <!-- delivery -->
+        <li class="menu-item">
+            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#delivery" aria-expanded="false"
+               aria-controls="product">
+                <span><i class="fa fa-tasks fs-16"></i>Delivery Person</span>
+            </a>
+            <ul id="delivery" class="collapse" aria-labelledby="product" data-parent="#side-nav-accordion">
+
+                <li><a href="pages/product/deliverylist.html">Delivery List</a></li>
+                <li><a href="pages/product/adddelivery.html">Add Delivery Person</a></li>
+                <li><a href="pages/product/deliverydetail.html">Person Detail</a></li>
+            </ul>
+        </li>
+        <!-- delivery end -->
+
+
     </ul>
 
 
-  </aside>
+</aside>

@@ -3,21 +3,21 @@
 {% block content %}
 <div class="col-md-12">
     <center>
-    <hr>
-    <h3>Add Restaurant</h3>
-    <hr>
-    {% if messages %}
+        <hr>
+        <h3>Add Restaurant</h3>
+        <hr>
+        {% if messages %}
         <div class="messages  text-center">
             {% for message in messages %}
-            <div {% if message.tags %} class="alert {{ message.tags }}"{% endif %}>{{ message }}</div>
+            <div {% if message.tags %} class="alert {{ message.tags }}" {% endif %}>{{ message }}</div>
             {% endfor %}
         </div>
-    {% endif %}
-    <table>
-    <form method="POST">
-        {% csrf_token %}
+        {% endif %}
+        <table>
+            <form method="POST">
+                {% csrf_token %}
 
-            {% for field in form %}
+                {% for field in form %}
                 <tr>
                     <td>
                         {{ field.label}}
@@ -29,15 +29,17 @@
                         {{ field.errors }}
                     </td>
                 </tr>
-            {% endfor%}
-        <tr>
-            <td colspan="3">
-                <center><button type="submit" class="btn btn-primary">Add Restaurant</button></center>
-            </td>
-        </tr>
-    </form>
-    </table>
+                {% endfor%}
+                <tr>
+                    <td colspan="3">
+                        <center>
+                            <button type="submit" class="btn btn-primary">Add Restaurant</button>
+                        </center>
+                    </td>
+                </tr>
+            </form>
+        </table>
     </center>
-    </div>
+</div>
 
 {% endblock content %}

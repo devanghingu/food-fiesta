@@ -1,5 +1,4 @@
 from accounts import views
-from django.urls import include
 from django.urls import path
 
 app_name = "accounts"
