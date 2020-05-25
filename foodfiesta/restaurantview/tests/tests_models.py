@@ -1,11 +1,11 @@
 from django.test import TestCase
-from .models import Restaurant
+from restaurantview.models import Restaurant
 from  accounts.models import User
 from  adminview.models import City
 from foodfiesta.constants import OPEN,CLOSE,ACTIVE,DEACTIVE
 # Create your tests here.
 
-class   RestaurantModelTestCase(TestCase):
+class RestaurantModelTestCase(TestCase):
 
     def setUp(self):
         self.user = User.objects.create_user(username='user')      

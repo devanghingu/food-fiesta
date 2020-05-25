@@ -19,6 +19,9 @@ class Restaurant(models.Model):
     Restaurant = models.Manager()
     objects = RestaurantManager()
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return self.name
 
@@ -28,6 +31,9 @@ class Menu(models.Model):
     price       = models.PositiveIntegerField(default=0)
     available   = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ['id']
+        
     def __str__(self):
         return self.fooditem.name    
 
