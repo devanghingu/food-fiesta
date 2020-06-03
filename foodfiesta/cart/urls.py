@@ -4,10 +4,10 @@ from . import views
 
 app_name = "cart"
 urlpatterns = [
+     path('demo/',views.demo.as_view(),name='demo'),
     path("cart/", views.cart.as_view(), name="cart"),
     path("addtocart", views.cart.as_view(), name="addtocart"),
     path("restaurant/", views.restaurant.as_view(), name="restaurant"),
-
     path("restaurant/<int:rest_id>", views.restaurant.as_view(),
          name="restaurant"),
 

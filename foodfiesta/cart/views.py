@@ -53,6 +53,7 @@ class restaurant(View):
         return redirect('login')
 
     def post(self, request, *args, **kwargs):
+        
         if request.is_ajax() and self.request.user.is_authenticated:
             cart = Order.objects.get_user_item_from_cart(
                 self.request.user.id)  # get user item from cart
@@ -167,3 +168,16 @@ class OrderList(ListView):
         context = super(OrderList, self).get_context_data(**kwargs)
         context["user"] = self.request.user
         return context
+class demo(View):
+    def get(self,request):
+        return render(request, 'frontend/demo.html')
+
+    def post(self,request):
+        countries={"Austria":"frontend/austria.html","China":"frontend/china.html","Italy":"italy.html","United Kingdom":'frontend/uk.html',"United States":"frontend/us.html"}     
+        country=request.POST.get('country')
+        if country in countries.keys():
+            return render(request,countries[country])
+        return render(request, 'frontend/demo.html')
+
+        # return render(request, 'frontend/demo.html')
+

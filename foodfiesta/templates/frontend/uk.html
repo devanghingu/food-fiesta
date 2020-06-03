@@ -1,0 +1,33 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form name="form1" id="form1" method="POST">
+        {% csrf_token %}
+        <select id="country" name="country" class="form-control no-search select2-hidden-accessible" tabindex="-1" aria-hidden="true" data-select2-id="37">
+            <option data-select2-id="45">Austria</option>
+            <option data-select2-id="46">China</option>
+            <option data-select2-id="39">Italy</option>
+            <option selected="selected" data-select2-id="47">United Kingdom</option>
+            <option data-select2-id="48">United States</option>
+          </select>
+    </form>
+    <h2>uk</h2>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+
+    <script>
+        $('#country').on('change',function (){
+            $('form select').on('change', function(){
+                $(this).closest('form').submit();
+            });
+    });
+        
+    </script>
+</body>
+</html>
